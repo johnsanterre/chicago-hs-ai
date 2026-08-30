@@ -173,7 +173,9 @@ print(ask(f&quot;Answer using ONLY the document below. If the answer is not in i
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
+      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
+        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -194,5 +196,6 @@ print(ask(f&quot;Answer using ONLY the document below. If the answer is not in i
   render();
 })();
 </script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

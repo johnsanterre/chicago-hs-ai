@@ -178,7 +178,9 @@ response = client.messages.create(model=MODEL, max_tokens=300,
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
+      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
+        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -199,5 +201,6 @@ response = client.messages.create(model=MODEL, max_tokens=300,
   render();
 })();
 </script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
