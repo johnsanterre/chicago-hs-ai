@@ -60,13 +60,34 @@ level? Knowing where the machine is blind is half of using it well.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Chunks, not letters; a desk, not a memory</h2>
 
   <p>Before the model sees your message, a pre-processor chops it into <b>tokens</b> —
   chunks of text. Common short words are usually one token each. Longer or rarer words
   get split: <i>strawberry</i> might be <i>straw</i>+<i>berry</i>. The model receives
   numbered IDs for those chunks. <b>It never sees the letters inside them.</b></p>
+
+  <p>Feed it something and watch the chopping happen:</p>
+
+  <!-- ============ FIGURE 1: The token chopper ============ -->
+  <div class="fig" id="figtok">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The token chopper</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Type anything. The top row is how the
+    text gets chopped; the bottom row is what the model actually receives.</p>
+    <div class="guessrow">
+      <input type="text" id="tkin" maxlength="60" value="The strawberry problem"
+             aria-label="Text to chop into tokens" autocomplete="off">
+      <button class="wbtn" id="tkgo">Chop</button>
+    </div>
+    <div class="tokstream" id="tkout" aria-live="polite"></div>
+    <p style="font-size:14px;margin:.7em 0 .2em;color:var(--ink2)"><b>WHAT THE MODEL SEES:</b></p>
+    <div class="tokstream" id="tkids" style="min-height:2.4em"></div>
+    <p class="fignote">Try: <i>Mississippi</i> · <i>bookkeeper</i> · your own name ·
+    <i>brontofraggle</i>. Notice the bottom row every time — where did the letters go?</p>
+  </div>
+
   <p>That's why letter-level tasks trip it: counting letters, reversing words, precise
   acrostics. You're asking about detail that exists below its vision. There's a
   workaround — make it spell the word letter by letter first (each letter becomes its
@@ -76,6 +97,29 @@ level? Knowing where the machine is blind is half of using it well.</p>
   pasted documents, its own replies — all of it must fit on the desk. When a chat gets
   long, the earliest material slides off the edge and is simply gone. The model isn't
   ignoring you; it literally no longer has the beginning.</p>
+
+  <p>Here is that desk, small enough to watch:</p>
+
+  <!-- ============ FIGURE 2: The desk ============ -->
+  <div class="fig" id="figdesk">
+    <div class="figlabel">Interactive · Figure 2</div>
+    <h3>The desk</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">This model's desk holds <b>26 tokens</b> —
+    that is its entire memory. Send the conversation one message at a time and watch the
+    edge.</p>
+    <div class="guessrow">
+      <button class="wbtn" id="dsend">Send the first message</button>
+      <button class="wbtn alt" id="dreset">Reset</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700">ON THE DESK
+    (<span id="dcount">0</span> / 26 tokens):</p>
+    <div class="tokstream" id="ddesk"></div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700" id="dgonehead" hidden>FALLEN OFF THE EDGE (gone — not stored anywhere):</p>
+    <div class="tokstream" id="dgone" hidden style="opacity:.8;min-height:2.4em"></div>
+    <div id="dans" hidden style="background:var(--card);border:1px solid var(--hair);border-left:4px solid var(--star);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:12px;font-size:15px"></div>
+    <p class="fignote" id="dnote">The first message contains something that will matter later.</p>
+  </div>
+
   <p>Two practical habits fall out of this. <b>Restate what matters:</b> in a long
   session, re-paste the key facts instead of trusting the desk. <b>Diagnose weird
   failures at the right level:</b> if the task lives in letters, expect trouble and
@@ -207,6 +251,95 @@ level? Knowing where the machine is blind is half of using it well.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 2 figures ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+
+  /* Figure 1: token chopper */
+  const COMMON=new Set(("the a an in on is are of and to it you i my we for at was be not this that "+
+    "with have do what how why can name problem school essay help time day good best thing about "+
+    "was were will would my your our his her they them so if or but as up out no yes one two").split(" "));
+  const CHUNKS=("straw berry miss iss ippi book keep bront frag gle tion sion ing ness ment er ed es ly "+
+    "un re pre dict ex am ple chic ago prob lem con text win dow tok en chunk ter ver anti dis "+
+    "ation ity able ful est ance ence").split(" ").sort((a,b)=>b.length-a.length);
+  function hashId(s){let h=7;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))%96491}return 1009+h}
+  function chopWord(w){
+    if(COMMON.has(w.toLowerCase()))return [w];
+    const parts=[];let i=0;const lw=w.toLowerCase();
+    while(i<lw.length){
+      let hit=null;
+      for(const c of CHUNKS){if(lw.startsWith(c,i)&&c.length>1){hit=c;break}}
+      if(hit){parts.push(w.slice(i,i+hit.length));i+=hit.length}
+      else{const take=Math.min(3,lw.length-i);parts.push(w.slice(i,i+take));i+=take}
+    }
+    return parts;
+  }
+  function chop(){
+    const text=$('tkin').value.trim()||'The strawberry problem';
+    const words=text.match(/[A-Za-z']+|[^A-Za-z\s]/g)||[];
+    const toks=[];
+    words.forEach(w=>{ (/[A-Za-z]/.test(w)?chopWord(w):[w]).forEach(p=>toks.push(p)) });
+    $('tkout').innerHTML=toks.map((t,i)=>'<span class="tok'+(i%2?' t2':'')+'">'+
+      t.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>').join(' ');
+    $('tkids').innerHTML=toks.map((t,i)=>'<span class="tok'+(i%2?' t2':'')+'">'+
+      hashId(t.toLowerCase())+'</span>').join(' ');
+  }
+  $('tkgo').addEventListener('click',chop);
+  $('tkin').addEventListener('keydown',e=>{if(e.key==='Enter')chop()});
+  chop();
+
+  /* Figure 2: the desk */
+  const CAP=26;
+  const MSGS=[
+    ["My","name","is","Amara","and","I","need","help","with","my","essay","."],
+    ["Can","you","make","the","intro","shorter","?"],
+    ["Now","check","my","topic","sentences","."],
+    ["Make","the","ending","stronger","please","."],
+    ["Also","fix","the","commas","."],
+    ["What","is","my","name","?"]
+  ];
+  const LABELS=["Send the first message",
+    'Send: "Can you make the intro shorter?"',
+    'Send: "Now check my topic sentences."',
+    'Send: "Make the ending stronger."',
+    'Send: "Also fix the commas."',
+    'Ask it: "What is my name?"'];
+  let all=[],step=0;
+  function render(){
+    const desk=all.slice(-CAP),gone=all.slice(0,Math.max(0,all.length-CAP));
+    $('ddesk').innerHTML=desk.map(t=>'<span class="tok'+(t==='Amara'?' hot':'')+'">'+t+'</span>').join(' ');
+    $('dcount').textContent=desk.length;
+    const gh=$('dgonehead'),gd=$('dgone');
+    gh.hidden=gd.hidden=gone.length===0;
+    gd.innerHTML=gone.map(t=>'<span class="tok gone">'+t+'</span>').join(' ');
+    const amaraGone=gone.includes('Amara');
+    if(step===0)$('dnote').textContent='The first message contains something that will matter later.';
+    else if(!gone.length)$('dnote').textContent='Everything still fits. The model can see the whole conversation — including the name.';
+    else if(amaraGone&&step<6)$('dnote').innerHTML='<b>Watch the fallen row: "Amara" just slid off the desk.</b> The model no longer has the name — it is not stored anywhere else. Nothing was "forgotten"; it simply is not on the desk.';
+    else $('dnote').textContent='Over capacity — the oldest tokens fall off the left edge, one for one.';
+    if(step<MSGS.length){$('dsend').textContent=LABELS[step];$('dsend').disabled=false}
+    else $('dsend').disabled=true;
+  }
+  $('dsend').addEventListener('click',()=>{
+    if(step>=MSGS.length)return;
+    all=all.concat(MSGS[step]);step++;
+    if(step===MSGS.length){
+      const gone=all.slice(0,Math.max(0,all.length-CAP));
+      const ans=$('dans');ans.hidden=false;
+      ans.innerHTML='<b>You:</b> "What is my name?"<br><b>Model:</b> "'+
+        (gone.includes('Amara')?
+         'You haven’t told me your name in this conversation."<br><span style="color:var(--ink2);font-size:14px">It is not being difficult. Amara fell off the desk three messages ago — look at the fallen row.</span>':
+         'Your name is Amara." (Everything still fit — try a longer conversation.)');
+    }
+    render();
+  });
+  $('dreset').addEventListener('click',()=>{all=[];step=0;$('dans').hidden=true;render()});
+  render();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

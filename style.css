@@ -125,3 +125,17 @@ select.wsel{font-family:var(--sans);font-size:16px;padding:.4em .6em;border:1px 
   border-radius:6px;background:var(--card);color:var(--navy);font-weight:700}
 @media (prefers-reduced-motion:reduce){.bar .bfill{transition:none}.tok{animation:none}}
 [hidden]{display:none!important}
+/* widget variants for lessons 2-8 */
+.tok.t2{background:#EFE6D8}
+.tok.gone{background:transparent;border:1px dashed var(--hair);text-decoration:line-through;color:var(--ink2)}
+.tok.hot{background:var(--star);color:#fff}
+.figtabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+.qcard{background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:12px 16px;margin:10px 0}
+.qcard .qq{font-weight:600;margin-bottom:8px}
+.qcard .qbtns{display:flex;gap:8px;flex-wrap:wrap}
+.qcard .qfb{font-size:14px;color:var(--ink2);margin-top:8px}
+.qcard.good{border-color:#9CC7AB;background:#F6FBF7}
+.qcard.bad{border-color:var(--star)}
+.convo{background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:4px 16px;margin:10px 0}
+.convo .you{color:var(--navy);font-weight:600;margin:10px 0 2px;font-size:14px}
+.convo .resp{margin:2px 0 12px;font-size:15px}

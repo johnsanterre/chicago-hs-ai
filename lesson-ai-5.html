@@ -58,7 +58,7 @@ Be the editor.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The editor's moves</h2>
 
   <p>Beginners send one message and take what comes back. That's like a coach watching
@@ -76,6 +76,25 @@ Be the editor.</p>
   <p><b>Ask for options.</b> One safe, one bold, one weird. Options move you from
   accepting or rejecting to <i>choosing</i> — and choosing is where your taste shows
   up. Your taste is the part the machine doesn't have.</p>
+
+  <p>Run the loop once, move by move:</p>
+
+  <!-- ============ FIGURE 1: The editor's loop ============ -->
+  <div class="fig" id="figed">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The editor&rsquo;s loop</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">One draft, four moves. Send each editor&rsquo;s
+    message and watch the draft answer back.</p>
+    <div class="guessrow">
+      <button class="wbtn" id="edgo">Ask for the first draft</button>
+      <button class="wbtn alt" id="edreset">Start over</button>
+    </div>
+    <div class="convo" id="edlog" hidden></div>
+    <p style="font-size:13px;color:var(--ink2);margin:12px 0 4px;font-weight:700" id="edhead" hidden>THE DRAFT NOW:</p>
+    <div class="prefix" id="eddraft" hidden style="line-height:1.6"></div>
+    <p class="fignote" id="ednote">Messages sent: 0.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -197,6 +216,52 @@ Be the editor.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const STEPS=[
+   ["Write a paragraph arguing our school should start later.",
+    "School should start later because teenagers are tired. Studies show that sleep is important for teenagers. In conclusion, schools should consider changing their start times.",
+    "A first draft. Most people stop here."],
+   ["Shorter, less formal, and give it a stronger ending. — <i>iterate</i>",
+    "Teenagers are running on empty. Teen brains want nine hours of sleep and first-period math at 8 a.m. fights biology itself. Start at 9 and watch what happens to the grades.",
+    "Move 1, iterate: coach the intern. Ten seconds to type, and the draft tightened."],
+   ["Match the voice of the two openers I pasted. — <i>show examples</i>",
+    "Nobody learns algebra half-asleep. Chicago teens average six hours of sleep on school nights; their brains are asking for nine. Start at 9 and watch what happens to the grades.",
+    "Move 2, show examples: two pasted samples beat any description of “voice.”"],
+   ["What are the three weakest points in what you just wrote? — <i>flip the critic</i>",
+    "Nobody learns algebra half-asleep. When Seattle pushed high-school start times back in 2017, students slept more and final grades rose about 4.5 percent. Buses are a real cost — and still cheaper than teaching biology to sleeping students. Start at 9.",
+    "Move 3, flip the critic: it found its own vague claims (“studies show” named no study; the counterargument was missing) — then fixed exactly those."],
+   ["Give me a safe, a bold, and a weird version. I pick bold. — <i>ask for options</i>",
+    "Every 8 a.m. first period is an experiment in teaching biology to the unconscious. Seattle ran the real experiment in 2017: later starts, more sleep, grades up 4.5 percent. The buses can move. Biology won’t. Start at 9.",
+    "Move 4, options: safe, bold, weird — choosing is where your taste shows up. You chose bold."]];
+  let step=0;
+  const LBL=["Ask for the first draft","Send move 1: iterate","Send move 2: show examples",
+             "Send move 3: flip the critic","Send move 4: ask for options"];
+  function render(){
+    $('ednote').textContent=step===0?'Messages sent: 0.':
+      'Messages sent: '+step+'. '+STEPS[step-1][2]+(step===5?' Compare this to the first draft — four extra messages, about three minutes.':'');
+    if(step<STEPS.length){$('edgo').textContent=LBL[step];$('edgo').disabled=false}
+    else{$('edgo').textContent='Loop complete';$('edgo').disabled=true}
+  }
+  $('edgo').addEventListener('click',()=>{
+    if(step>=STEPS.length)return;
+    const s=STEPS[step];
+    $('edlog').hidden=false;$('edhead').hidden=false;$('eddraft').hidden=false;
+    const p=document.createElement('p');p.className='you';p.innerHTML='You: '+s[0];
+    $('edlog').appendChild(p);
+    $('eddraft').textContent=s[1];
+    step++;render();
+  });
+  $('edreset').addEventListener('click',()=>{step=0;
+    $('edlog').innerHTML='';$('edlog').hidden=true;
+    $('edhead').hidden=true;$('eddraft').hidden=true;render()});
+  render();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

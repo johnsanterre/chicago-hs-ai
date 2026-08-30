@@ -60,7 +60,7 @@ won&#x27;t. Finding it changes how you read AI forever.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Plausible is not true</h2>
 
   <p><b>Hallucination</b> is the industry's word for confident invention: the model
@@ -75,6 +75,21 @@ won&#x27;t. Finding it changes how you read AI forever.</p>
   <p>What makes this dangerous is that <b>the wrongness has no flavor.</b> Human lies
   have tells. A hallucination reads exactly like the truths around it — same
   confidence, same polish. You cannot detect it by tone. Ever.</p>
+
+  <p>Prove it to yourself. Every card below is written in the same confident voice:</p>
+
+  <!-- ============ FIGURE 1: Spot the hallucination ============ -->
+  <div class="fig" id="fighal">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Spot the hallucination</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Two rounds. In each, three claims are
+    true and one is invented. Click the invented one.</p>
+    <p style="font-size:14px;color:var(--ink2);font-weight:700;margin:.4em 0" id="haltopic"></p>
+    <div id="halcards"></div>
+    <p class="fignote" id="halnote"></p>
+    <div class="guessrow" id="halnextrow" hidden><button class="wbtn alt" id="halnext">Next round</button></div>
+  </div>
+
   <p>So the rule, for the rest of your life with these tools: <b>if it's checkable
   and it matters, check it.</b> Names, quotes, numbers, citations, medical claims,
   legal claims — a minute of searching before you repeat it. You can also reduce
@@ -210,6 +225,58 @@ won&#x27;t. Finding it changes how you read AI forever.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 6 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const ROUNDS=[
+   {topic:"Round 1 · The Great Chicago Fire, 1871",
+    claims:[
+     ["It began on October 8, 1871, near the O’Leary family’s barn on the Near West Side.",true,""],
+     ["The Chicago Water Tower survived the fire and still stands on Michigan Avenue.",true,""],
+     ["Firefighters finally stopped the blaze by dynamiting a firebreak along Wacker Drive.",false,
+      "Invented — and it sounded exactly as solid as the others. Wacker Drive didn’t exist until the 1920s; the fire mostly burned until rain and the lake shore stopped it."],
+     ["Roughly 100,000 people — about a third of the city — lost their homes.",true,""]]},
+   {topic:"Round 2 · Deep-dish pizza",
+    claims:[
+     ["Pizzeria Uno in Chicago claims to have invented deep-dish in 1943.",true,""],
+     ["The dish took the gold medal for “best new recipe” at the 1933 Chicago World’s Fair.",false,
+      "Invented. Deep-dish didn’t exist until about 1943 — a decade after that fair closed. Plausible year, plausible city, pure fiction."],
+     ["The crust rises up the side of the pan — closer to a pie than a flatbread.",true,""],
+     ["Locals typically eat it with a knife and fork.",true,""]]}];
+  let r=0,score=0;
+  function show(){
+    const R=ROUNDS[r];
+    $('haltopic').textContent=R.topic;
+    $('halnote').textContent='';$('halnextrow').hidden=true;
+    const wrap=$('halcards');wrap.innerHTML='';
+    R.claims.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='choice';b.textContent=c[0];
+      b.addEventListener('click',()=>{
+        if(wrap.dataset.done)return;wrap.dataset.done=1;
+        [...wrap.children].forEach((x,j)=>{
+          x.classList.add(R.claims[j][1]?'right':'wrong');
+          x.disabled=true;
+          if(!R.claims[j][1])x.textContent='INVENTED: '+R.claims[j][0];
+        });
+        const hit=!c[1];if(hit)score++;
+        const fake=R.claims.find(x=>!x[1]);
+        $('halnote').innerHTML=(hit?'<b>Caught it.</b> ':'<b>It got you — you picked a true one.</b> ')+fake[2]+
+          ' Notice what your ear was doing: nothing. The wrongness has no flavor.';
+        if(r<ROUNDS.length-1)$('halnextrow').hidden=false;
+        else $('halnote').innerHTML+=' <br><b>Score '+score+' of 2.</b> Now set the same trap for the real AI in the Try segment — with a topic you know cold.';
+      });
+      wrap.appendChild(b);
+    });
+    delete wrap.dataset.done;
+  }
+  $('halnext').addEventListener('click',()=>{r++;show()});
+  show();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

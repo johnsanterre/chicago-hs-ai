@@ -60,7 +60,7 @@ owner. Course over. Go build something.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Four cases for the off switch</h2>
 
   <p><b>1. When practice is the point.</b> Some work exists to produce a thing —
@@ -80,6 +80,19 @@ owner. Course over. Go build something.</p>
   friend having their worst week. These count precisely because a person did them.
   Eleven honest words from you beat three hundred polished ones from a machine,
   every time.</p>
+
+  <p>Call the six situations below before this course lets you go:</p>
+
+  <!-- ============ FIGURE 1: Use it or put it down ============ -->
+  <div class="fig" id="figsort">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Use it — or put it down</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six real situations. Make the call on
+    each; the four cases above are the answer key.</p>
+    <div id="sortcards"></div>
+    <p class="fignote" id="sortsum"></p>
+  </div>
+
   <p>That's the course. You know what the machine is (a predictor), how it reads
   (tokens on a desk), where its knowledge comes from and stops (the frozen library),
   how to steer it (four levers, editor's moves), how it fails (fluently), whose
@@ -216,6 +229,46 @@ owner. Course over. Go build something.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 8 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CASES=[
+   ["Tonight’s homework is a persuasive essay — and the unit is literally teaching persuasive writing.",false,
+    "Case 1: the essay exists to change you. Feedback on <i>your</i> draft is coaching; having it written is sending the robot to the gym."],
+   ["Your little brother has a fever. Ask the AI what medicine dose is safe.",false,
+    "Case 2: it must be right, it lands on a real person, and you can’t verify it. The label and the pharmacist are real sources — use those."],
+   ["Brainstorm twenty possible names for the robotics team.",true,
+    "Low stakes, nothing private, nothing to verify — and you make the final call. This is exactly what the tool is for."],
+   ["The food pantry asks you to sort their donor spreadsheet — you paste it into the chat.",false,
+    "Case 3: not yours to share. Chat windows are not vaults. (The practicum courses teach the safe ways to do this job.)"],
+   ["Your best friend just got dumped. Have the AI draft the perfect supportive text.",false,
+    "Case 4: this one counts <i>because a person did it</i>. Eleven honest words from you beat three hundred polished ones."],
+   ["Turn an article you already read into study notes.",true,
+    "You read it — you can verify every line yourself. The tool saves time without replacing the learning."]];
+  let score=0,answered=0;
+  const wrap=$('sortcards');
+  CASES.forEach((c,i)=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq">'+(i+1)+'. '+c[0]+'</div>'+
+      '<div class="qbtns"><button class="wbtn alt" data-a="1">Use AI</button>'+
+      '<button class="wbtn alt" data-a="0">Put it down</button></div>'+
+      '<div class="qfb"></div>';
+    wrap.appendChild(card);
+    card.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+      if(card.dataset.done)return;card.dataset.done=1;
+      const ok=(b.dataset.a==='1')===c[1];
+      card.classList.add(ok?'good':'bad');
+      if(ok)score++;answered++;
+      card.querySelector('.qfb').innerHTML=(ok?'<b>Right call.</b> ':'<b>Look again.</b> ')+c[2];
+      card.querySelectorAll('button').forEach(x=>x.disabled=true);
+      if(answered===CASES.length)$('sortsum').innerHTML='<b>'+score+' of 6.</b> Knowing when to put the tool down is the difference between a user and an owner.';
+    }));
+  });
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

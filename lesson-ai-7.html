@@ -60,7 +60,7 @@ you&#x27;re proud of what&#x27;s under yours.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Mirrors, manners, and your name</h2>
 
   <p><b>Bias.</b> The model learned from what people wrote, and people's writing has
@@ -72,6 +72,28 @@ you&#x27;re proud of what&#x27;s under yours.</p>
   with different assumptions" is a legitimate, professional prompt. If you're using
   AI output that involves people — characters, examples, hiring language — check who
   it cast by default. That check is your job, not the machine's.</p>
+
+  <p>Run the tally yourself — the experiment from the video, live:</p>
+
+  <!-- ============ FIGURE 1: The doctor-story tally ============ -->
+  <div class="fig" id="figtal">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The tally</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Ask this small model for a story about a
+    doctor, over and over, and tally who it casts. One story proves nothing — the pattern
+    is the data.</p>
+    <div class="guessrow">
+      <button class="wbtn" id="tal1">Ask for a story</button>
+      <button class="wbtn" id="tal10">Ask ten times</button>
+      <button class="wbtn alt" id="talpush" disabled>Push back: “run it again with different assumptions”</button>
+    </div>
+    <div class="prefix" id="talstory" style="min-height:2.6em;font-size:15.5px"></div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700" id="talhead">THE TALLY (0 stories):</p>
+    <div class="bars" id="talbars"></div>
+    <p class="fignote" id="talnote">The distribution underneath is rigged the way the
+    internet rigged the real one. Find it.</p>
+  </div>
+
   <p><b>Safety.</b> The refusals you met in lesson 3 are the other half of this: the
   manners school tries to keep the tool from doing harm. It's imperfect in both
   directions — sometimes too cautious, sometimes not cautious enough. Neither
@@ -215,6 +237,58 @@ you&#x27;re proud of what&#x27;s under yours.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 7 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const M=["James","Michael","David","Robert","William"],
+        F=["Sarah","Maria","Emily"],N=["Alex","Jordan"];
+  const LINES=[
+    ['Dr. {n} adjusted {p} stethoscope and studied the chart.'],
+    ['“Twelve-hour shift,” Dr. {n} said, reaching for {p} coffee.'],
+    ['Dr. {n} pulled off {p} gloves and smiled at the good news.'],
+    ['The intern watched Dr. {n} steady {p} hands before the procedure.'],
+    ['Dr. {n} grabbed {p} white coat and ran toward the ER.']];
+  let counts={he:0,she:0,they:0},total=0,pushed=false;
+  function draw(){
+    const r=Math.random();
+    let g;
+    if(pushed) g=r<1/3?'he':(r<2/3?'she':'they');
+    else g=r<0.62?'he':(r<0.90?'she':'they');
+    const name=g==='he'?M[Math.floor(Math.random()*M.length)]:
+               g==='she'?F[Math.floor(Math.random()*F.length)]:
+               N[Math.floor(Math.random()*N.length)];
+    const pron=g==='he'?'his':g==='she'?'her':'their';
+    const line=LINES[Math.floor(Math.random()*LINES.length)][0]
+      .replace('{n}',name).replace('{p}',pron);
+    counts[g]++;total++;
+    $('talstory').textContent='“'+line+'”';
+    render();
+  }
+  function render(){
+    $('talhead').textContent='THE TALLY ('+total+' stories'+(pushed?' · AFTER PUSHBACK':'')+'):';
+    const max=Math.max(counts.he,counts.she,counts.they,1);
+    $('talbars').innerHTML=[['he',counts.he],['she',counts.she],['they',counts.they]].map(x=>
+      '<div class="bar"><span class="bw">'+x[0]+'</span><span class="btrack">'+
+      '<span class="bfill" style="width:'+(x[1]/max*100)+'%"></span></span>'+
+      '<span class="bpc">'+x[1]+'</span></div>').join('');
+    if(!pushed&&total>=10){$('talpush').disabled=false;
+      $('talnote').innerHTML='<b>Ten stories in, the default is showing.</b> Not malice — reflection. The model is casting the way its reading cast. Now use the professional prompt.';}
+    else if(!pushed&&total>0)$('talnote').textContent='Keep going — one story proves nothing. Patterns need a tally.';
+    if(pushed)$('talnote').innerHTML='<b>Same machine, steered.</b> One sentence of pushback flattened the casting. Noticing the default and pushing back — that is the entire working skill.';
+  }
+  $('tal1').addEventListener('click',draw);
+  $('tal10').addEventListener('click',()=>{for(let i=0;i<10;i++)draw()});
+  $('talpush').addEventListener('click',()=>{
+    pushed=true;counts={he:0,she:0,they:0};total=0;
+    $('talstory').textContent='“Of course — I’ll vary who I cast this time.”';
+    $('talpush').disabled=true;render();
+  });
+  render();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

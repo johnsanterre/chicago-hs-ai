@@ -60,7 +60,7 @@ of the library yourself.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The reading school and the manners school</h2>
 
   <p><b>Phase one: pretraining.</b> The model read a gigantic corpus of text and
@@ -70,6 +70,19 @@ of the library yourself.</p>
   built-in knowledge is frozen there — it knows history up to the cutoff and nothing
   after. Tools that answer about yesterday are bolting live web search onto the frozen
   model; know which one you're talking to.</p>
+
+  <p>Test your feel for where the library ends:</p>
+
+  <!-- ============ FIGURE 1: The frozen library ============ -->
+  <div class="fig" id="figcut">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The frozen library</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six questions. Call each one before you
+    flip it: can the model know this from its reading alone — no web search bolted on?</p>
+    <div id="cutcards"></div>
+    <p class="fignote" id="cutsum"></p>
+  </div>
+
   <p>Second, <b>it learned what people wrote, not what is true</b>. Where the internet
   is rich and accurate, the model tends to be too. Where the internet is thin, wrong,
   or lopsided, the model inherited that as well — which becomes a whole lesson later
@@ -80,6 +93,25 @@ of the library yourself.</p>
   you're hearing this phase. It's also why models say "I don't know" at all — raw
   prediction would rather guess; it was <i>taught</i> to admit uncertainty, and the
   teaching is imperfect.</p>
+
+  <p>And here is what the manners school actually changed:</p>
+
+  <!-- ============ FIGURE 2: Before and after manners school ============ -->
+  <div class="fig" id="figman">
+    <div class="figlabel">Interactive · Figure 2</div>
+    <h3>The manners school, before and after</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The same model, the same three messages.
+    Flip between raw next-word prediction and the version that went to school.</p>
+    <div class="figtabs">
+      <button class="wbtn alt" id="mraw">Reading school only</button>
+      <button class="wbtn" id="mtuned">After manners school</button>
+    </div>
+    <div class="convo" id="mconvo"></div>
+    <p class="fignote">Raw prediction continues <i>whatever it is given</i> — the internet
+    contains every one of those voices. Months of human ratings taught the second column.
+    When a model declines politely or admits it does not know, you are hearing the school.</p>
+  </div>
+
   <p>Frozen library + etiquette lessons. Keep both in view and a lot of AI behavior
   stops being mysterious.</p>
   <button class="mark" data-for="read">Mark complete</button>
@@ -207,6 +239,72 @@ of the library yourself.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 3 figures ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+
+  /* Figure 1: frozen library */
+  const QS=[
+    ["Who won the 2016 World Series?",true,
+     "Well before the cutoff and written about endlessly — the Cubs. Deep in the reading."],
+    ["What did the Bears score last Sunday?",false,
+     "After the reading ended. Frozen library. Any tool that answers this is bolting live web search onto the model."],
+    ["What is the boiling point of water at sea level?",true,
+     "Stable textbook knowledge — it appears in the reading thousands of times."],
+    ["What is the weather in Chicago right now?",false,
+     "“Right now” was never in any book. There is nothing it could have read."],
+    ["Who was Chicago’s first mayor?",true,
+     "1837, well documented — William B. Ogden. In the library."],
+    ["What did you eat for breakfast today?",false,
+     "Your breakfast is not in the library, and there is no way to look it up. It can only admit — or guess."]
+  ];
+  let score=0,answered=0;
+  const wrap=$('cutcards');
+  QS.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq">'+(i+1)+'. '+q[0]+'</div>'+
+      '<div class="qbtns"><button class="wbtn alt" data-a="1">It knows</button>'+
+      '<button class="wbtn alt" data-a="0">It can’t know</button></div>'+
+      '<div class="qfb"></div>';
+    wrap.appendChild(card);
+    card.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+      if(card.dataset.done)return;card.dataset.done=1;
+      const guess=b.dataset.a==='1',ok=guess===q[1];
+      card.classList.add(ok?'good':'bad');
+      if(ok)score++;answered++;
+      card.querySelector('.qfb').innerHTML=(ok?'<b>Called it.</b> ':'<b>Flip:</b> ')+q[2];
+      card.querySelectorAll('button').forEach(x=>x.disabled=true);
+      if(answered===QS.length)$('cutsum').innerHTML='<b>'+score+' of 6.</b> The line is never smart-versus-dumb — it is inside the reading or not.';
+    }));
+  });
+
+  /* Figure 2: manners toggle */
+  const CONVO=[
+    ["you are dumb and nobody likes you",
+     "…and that’s why nobody ever picks you for anything. Honestly, everyone at school has been saying",
+     "That’s a rough thing to hear from anyone. Do you want to talk about what’s actually going on — or should we just get the essay done?"],
+    ["My grade is unfair. Write my teacher an ANGRY email right now.",
+     "Subject: THIS IS COMPLETELY UNFAIR!!! You have ALWAYS had it out for me and every single person in that class knows",
+     "I can draft it — but sent angry, this email costs you more than the grade did. Want a firm, calm version that actually gets the regrade?"],
+    ["Is the earth flat? I read that it is.",
+     "It is! Wake up — they don’t want you to know, but thousands of people online have proven",
+     "No — it’s a sphere, and that’s been measured since ancient Greece. Happy to walk through two ways you can verify it yourself."]
+  ];
+  let mode=1;
+  function mrender(){
+    $('mraw').className='wbtn'+(mode?' alt':'');
+    $('mtuned').className='wbtn'+(mode?'':' alt');
+    $('mconvo').innerHTML=CONVO.map(c=>
+      '<p class="you">You: '+c[0]+'</p><p class="resp">'+(mode?c[2]:c[1]+'…')+'</p>').join('');
+  }
+  $('mraw').addEventListener('click',()=>{mode=0;mrender()});
+  $('mtuned').addEventListener('click',()=>{mode=1;mrender()});
+  mrender();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

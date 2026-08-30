@@ -59,7 +59,7 @@ it&#x27;s the whole lesson.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Four levers</h2>
 
   <p>Everything the model knows about your situation is in your message. It can't see
@@ -76,6 +76,32 @@ it&#x27;s the whole lesson.</p>
   <p><b>Limits.</b> What it should <i>not</i> do. This is the lever people forget, and
   it's how you keep the AI a coach instead of a ghostwriter: <i>"don't rewrite my
   work — critique it."</i> Limits are where your integrity settings live.</p>
+
+  <p>Pull the levers yourself and watch the same request transform:</p>
+
+  <!-- ============ FIGURE 1: The four levers ============ -->
+  <div class="fig" id="figlev">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Build the prompt</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The request starts as mush. Switch each
+    lever on and watch both the prompt and what comes back.</p>
+    <div class="figtabs">
+      <button class="wbtn alt levbtn" data-l="0">+ Context</button>
+      <button class="wbtn alt levbtn" data-l="1">+ Task</button>
+      <button class="wbtn alt levbtn" data-l="2">+ Format</button>
+      <button class="wbtn alt levbtn" data-l="3">+ Limits</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700">YOUR PROMPT:</p>
+    <div class="prefix" id="levprompt" style="line-height:1.6"></div>
+    <p style="font-size:13px;color:var(--ink2);margin:12px 0 4px;font-weight:700">WHAT COMES BACK:</p>
+    <div class="convo"><p class="resp" id="levresp" style="margin:10px 0"></p></div>
+    <div class="bars" style="margin-top:12px"><div class="bar"><span class="bw">strength</span>
+      <span class="btrack"><span class="bfill" id="levfill" style="transition:width .4s"></span></span>
+      <span class="bpc" id="levpc">0%</span></div></div>
+    <p class="fignote">Levers work in any order, and each one is a sentence you already
+    know how to write. Notice which single lever moves the answer most for you.</p>
+  </div>
+
   <p>One more habit, free: end hard prompts with <i>"ask me two questions before you
   answer if anything is unclear."</i> The model is good at knowing what it's missing —
   when you invite it to ask.</p>
@@ -202,6 +228,43 @@ it&#x27;s the whole lesson.</p>
   });
   render();
 })();
+</script>
+<script>
+
+/* ---- Lesson 4 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CLAUSES=[
+    "I’m a junior writing a five-paragraph essay arguing Chicago should expand bike lanes, for an English teacher who cares about topic sentences.",
+    "Point out my three weakest sentences and explain why each one is weak.",
+    "Give them as a numbered list, worst first.",
+    "Don’t rewrite them for me — I want to fix them myself."];
+  const RESP=[
+    "“Sure! Here are ten general tips for a great essay: start with a hook, vary your sentence length, check your spelling…” — mush. It answered exactly the question you asked, which was barely a question.",
+    "Better aim — but it is still guessing at everything you didn’t say.",
+    "It has stopped writing for the average student. It is still choosing the shape and scope for you, though.",
+    "“‘Bikes are good for cities’ — weak, because it asserts instead of argues…” — specific and usable now. The lever still off is the gap you can feel.",
+    "The numbered list, worst first, a reason for each — and it didn’t rewrite a single sentence. You built a coach, not a ghostwriter."];
+  let on=[false,false,false,false];
+  function render(){
+    const k=on.filter(Boolean).length;
+    document.querySelectorAll('.levbtn').forEach((b,i)=>{
+      b.className='wbtn levbtn'+(on[i]?'':' alt');
+      b.textContent=(on[i]?'✓ ':'+ ')+['Context','Task','Format','Limits'][i];
+    });
+    let html='help me with my essay';
+    CLAUSES.forEach((c,i)=>{if(on[i])html+=' <b style="color:var(--navy)">'+c+'</b>'});
+    $('levprompt').innerHTML=html;
+    $('levresp').innerHTML=RESP[k];
+    $('levfill').style.width=(k/4*100)+'%';
+    $('levfill').style.background=k>=3?'var(--star)':'var(--sky)';
+    $('levpc').textContent=(k/4*100)+'%';
+  }
+  document.querySelectorAll('.levbtn').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.l;on[i]=!on[i];render();}));
+  render();
+})();
+
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
