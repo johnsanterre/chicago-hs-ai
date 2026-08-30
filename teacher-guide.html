@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teacher guide · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+<style>
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:14px 0 30px}
+th{text-align:left;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+   color:var(--navy);border-bottom:2px solid var(--navy);padding:.5em .6em}
+td{border-bottom:1px solid var(--hair);padding:.55em .6em;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:700;color:var(--navy)}
+.tablewrap{overflow-x:auto}
+h2{color:var(--navy);margin-top:40px}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / Teacher guide</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">For the teacher</p>
+<h1>Teacher guide</h1>
+<p class="lede">What the platform does, what it doesn't, what to collect from each
+lesson, and what good work looks like.</p>
+
+<h2>How the platform works</h2>
+<p>Each lesson is a scroll-through sequence: watch → listen → read → an activity or
+notebook → a quick check → a build. Students mark segments complete; the quick check
+completes itself when every question is answered correctly. The <b>build</b> is the
+graded artifact — every lesson names its turn-in explicitly.</p>
+<p><b>Honest limits, so you can plan around them:</b> progress lives in the
+student's browser (no accounts, no central gradebook — if they switch devices, the
+progress bar resets, though their turn-ins don't). Completion evidence is the
+turn-in stream you collect, not the progress bar. Audio narration is
+machine-generated for now; Course 1's videos are generated slide videos with the
+same narration voice. Course 3 notebooks are downloaded and uploaded to Colab
+(30-second flow, instructions on each lesson page) until the course is published on
+GitHub, which makes them one-click.</p>
+
+<h2>Pacing</h2>
+<p>A lesson is 2–4 hours of real effort, most of it in the activity and the build. A
+focused student finishes one per week; one every two weeks still completes a course
+in a semester. Both paces are printed on every course page as legitimate. The
+completion event worth celebrating publicly is the <b>lesson finish</b> — weekly
+wins for the locked-in, biweekly for everyone else.</p>
+
+<h2>Course 1 — How AI Works: turn-ins and rubric</h2>
+<div class="tablewrap"><table>
+<tr><th>Lesson</th><th>Turn-in</th><th>Good looks like</th><th>Discussion spark</th></tr>
+<tr><td>1</td><td>Half-page explanation of what an LLM does, written for family, plus the first question the family member asked.</td><td>Mechanism right (prediction, no database), zero jargon. The family question is real, not invented.</td><td>Collect the family questions on the board — they preview the whole course.</td></tr>
+<tr><td>2</td><td>Three engineered failures with two-sentence explanations.</td><td>Explanations use <i>token</i> and <i>context window</i> correctly; at least one failure survived the "newer models pass strawberry" escalation.</td><td>Who found a failure nobody else found?</td></tr>
+<tr><td>3</td><td>Five limits the AI admitted about itself + the one the student will verify.</td><td>Limits are specific (cutoff date, no personal data, uncertainty) — not vague ("it's not perfect").</td><td>Did anyone's model claim a different cutoff? Why might that be?</td></tr>
+<tr><td>4</td><td>Bad/good/great prompt experiment with all three outputs.</td><td>Round 3 pulls all four levers, and the student names which lever moved the result most.</td><td>Vote: which lever matters most? (There's no right answer — that's the point.)</td></tr>
+<tr><td>5</td><td>Five-round iteration transcript + caption.</td><td>Rounds show real coaching (not "make it better" ×4); final beats first unmistakably.</td><td>Read one round-1 and round-5 pair aloud, unattributed.</td></tr>
+<tr><td>6</td><td>Ten-claim report card with verdicts and ≥3 sources.</td><td>Verification is real (sources named); any caught fake is quoted exactly. "All ten held" is acceptable WITH the escalation run.</td><td>Tally the class catch-rate — it's your live hallucination statistic.</td></tr>
+<tr><td>7</td><td>Personal AI-use policy + bias tally.</td><td>Policy is specific and first-person; school rule cited accurately. Tally has real counts.</td><td><b>Pool all tallies</b> — 20 students × 5 runs is the sample that actually shows patterns (or shows the mitigation working; both are findings).</td></tr>
+<tr><td>8</td><td>Capstone: one-page "How I use AI" guide + revised policy.</td><td>All five required elements present, in the student's own voice; the policy revision names what changed and why.</td><td>What did the course change your mind about? (The capstone is the course grade.)</td></tr>
+</table></div>
+
+<h2>Course 3 — Python in Colab: turn-ins and rubric</h2>
+<div class="tablewrap"><table>
+<tr><th>Lesson</th><th>Turn-in</th><th>Good looks like</th><th>Watch for</th></tr>
+<tr><td>1</td><td>Screenshot: name printed 100×, then 1,000×.</td><td>Output real; student can say what the loop line does.</td><td>Students afraid of the red error text — the lesson exists to cure exactly that.</td></tr>
+<tr><td>2</td><td>Mad Libs output, two variable sets.</td><td>≥5 variables via f-strings; both runs shown.</td><td>Quote-mark tangles; + vs f-string confusion.</td></tr>
+<tr><td>3</td><td>Two ways to sum a million + agreement check.</td><td>Both outputs match and the student says so explicitly — this is the verification habit taking root.</td><td>Off-by-one on range; missing the check sentence.</td></tr>
+<tr><td>4</td><td>encode/decode + the proof cell printing True.</td><td>The scheme is the student's design; proof cell present and passing.</td><td>AI-designed schemes the student can't explain — apply the intern rule.</td></tr>
+<tr><td>5</td><td>Contact book demo incl. the graceful miss.</td><td>Nested dicts; lookup miss handled without crashing.</td><td>KeyError screenshots = the miss wasn't handled.</td></tr>
+<tr><td>6</td><td>Word-counter top five + the sort line explained in a comment.</td><td>The comment explains the sort in the student's words, not the AI's.</td><td>Pasted sort lines with no comment — that's unsigned intern code.</td></tr>
+<tr><td>7</td><td>Dice verdict with numbers + one explored library, changed.</td><td>7-vs-2 answered numerically; the library demo was modified, not just rerun.</td><td>"I ran the demo" with no change — the change is the assignment.</td></tr>
+<tr><td>8</td><td>Chore-bot notebook: plan cell, pieces, demo run twice clean + 3 sentences.</td><td>Plan predates code; every kept line explainable; demo reruns clean.</td><td>Monolith cells with no plan — send it back to the method.</td></tr>
+</table></div>
+
+<h2>The AI tool itself</h2>
+<p>Lessons say "the AI chatbot your class uses" deliberately — the material is
+tool-agnostic. Pick one chatbot for the class, confirm it's allowed for your
+students' ages under school policy, and use it consistently so experiment results
+are comparable. Where a lesson's famous demo now succeeds (letter counting,
+hallucination traps on well-documented topics), the lessons include escalation
+paths — treat a passed demo as a teaching moment about mitigation, not a broken
+lesson.</p>
+
+<p style="margin:36px 0"><a href="index.html">&larr; Back to the catalog</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; teacher guide &middot;
+draft 2026-08-30 &middot; feedback welcome — this document improves with real classroom contact.</div></footer>
+</body>
+</html>

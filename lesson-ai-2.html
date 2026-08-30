@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tokens — how AI reads · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="how-ai-works.html">How AI Works</a> / Lesson 2</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">How AI Works · Lesson 2 of 8 · about 2–4 hours</p>
+<h1>Tokens — how AI reads</h1>
+<p class="lede">The model never sees letters, and its memory is a desk with edges. Once you know both, its weirdest failures start making sense.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Why it can't count the R's in strawberry</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ai-2-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Planned: ~4 minutes. Screencast: chopping sentences into tokens, then watching a letter-counting fail live.
+  <span style="color:var(--ink2)">(Generated slide video with narration; a recorded
+  version can replace it later.)</span></p>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script (for a future recording session)</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on the word &quot;strawberry&quot; full screen.<br>
+Ask an AI how many R&#x27;s are in this word. Sometimes it says two. A machine that writes<br>
+poetry, wrong about counting to three. Today: why.<br>
+SCREENCAST: a tokenizer view, sentence chopping into colored chunks.<br>
+Before your message reaches the model, it&#x27;s split into tokens — chunks. Short common<br>
+words are one chunk. &quot;Strawberry&quot; might be &quot;straw&quot; + &quot;berry&quot;. The model receives chunk<br>
+IDs — numbers. It never sees the letters inside.<br>
+VISUAL: photo-of-a-shirt metaphor — asking it to count letters is asking someone to<br>
+count threads in a shirt they see in a photograph.<br>
+SECOND IDEA — the desk: every model has a context window, a maximum number of tokens<br>
+it can hold at once. Your whole conversation must fit on that desk. Long chat →<br>
+earliest pages slide off the edge → the AI &quot;forgets&quot; what you said an hour ago.<br>
+DEMO: letter-count fail, live, plus a fix — &quot;spell it out one letter per line, then<br>
+count&quot; — forcing the letters into tokens it CAN see.<br>
+CLOSE: when the AI fails at something weirdly simple, ask: is this below the token<br>
+level? Knowing where the machine is blind is half of using it well.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Tokens, the context window, and the shirt-in-a-photograph problem — where the machine is blind and why. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ai-2-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Chunks, not letters; a desk, not a memory</h2>
+
+  <p>Before the model sees your message, a pre-processor chops it into <b>tokens</b> —
+  chunks of text. Common short words are usually one token each. Longer or rarer words
+  get split: <i>strawberry</i> might be <i>straw</i>+<i>berry</i>. The model receives
+  numbered IDs for those chunks. <b>It never sees the letters inside them.</b></p>
+  <p>That's why letter-level tasks trip it: counting letters, reversing words, precise
+  acrostics. You're asking about detail that exists below its vision. There's a
+  workaround — make it spell the word letter by letter first (each letter becomes its
+  own token, now visible) — and the workaround proves the diagnosis.</p>
+  <p>Tokens also set the model's memory. Every model has a <b>context window</b>: the
+  maximum tokens it can consider at once — its desk size. Your conversation, your
+  pasted documents, its own replies — all of it must fit on the desk. When a chat gets
+  long, the earliest material slides off the edge and is simply gone. The model isn't
+  ignoring you; it literally no longer has the beginning.</p>
+  <p>Two practical habits fall out of this. <b>Restate what matters:</b> in a long
+  session, re-paste the key facts instead of trusting the desk. <b>Diagnose weird
+  failures at the right level:</b> if the task lives in letters, expect trouble and
+  force the spelling trick.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Find its blind spots</h2>
+
+  <p><b>1. The count.</b> Ask it to count letters in five words — try <i>strawberry,
+  Mississippi, bookkeeper</i>, and two of your own. Score it.</p>
+  <p><b>2. The fix.</b> For any miss, say: <i>"Spell the word one letter per line, then
+  count."</i> Watch the accuracy change, and explain to yourself why.</p>
+  <p><b>3. The reversal.</b> Ask it to spell a long word backwards, fast. Then ask
+  the same with the one-letter-per-line trick.</p>
+  <p><b>If it gets everything right:</b> newer models have been specifically trained
+  around these famous failures — that's not vision, it's memorized workarounds. Push
+  harder: invent a word it has never seen (<i>brontofraggle</i>), ask it to count
+  letters across a whole sentence at once, or ask which is alphabetically first among
+  five made-up words. The blindness is still there; the workarounds only cover the
+  famous cases.</p>
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why does an AI sometimes fail to count the letters in a word?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">It sees the word as chunks (tokens), never the letters inside</button>
+    <button class="choice" data-ok="0">Words like 'strawberry' were left out of its training data</button>
+    <button class="choice" data-ok="0">Counting requires a separate calculator tool</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. A very long chat 'forgets' its beginning. What happened?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The conversation exceeded the context window, so the earliest tokens no longer fit</button>
+    <button class="choice" data-ok="0">The AI summarizes and discards old messages to save money</button>
+    <button class="choice" data-ok="0">Chats are automatically trimmed after one hour</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — when the model answers a question, where does the answer come from?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">A database of answers built during training</button>
+    <button class="choice" data-ok="1">It is generated as a plausible continuation, piece by piece</button>
+    <button class="choice" data-ok="0">A live search of the internet</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The blind-spot report</h2>
+  <div class="buildtask">
+
+  <p>Collect three failures you caused on purpose and can explain: at least one
+  letter-level task, plus any others you discover. For each, write two sentences —
+  what failed, and <i>why</i>, using the words token or context window correctly.</p>
+  <p><b>Turn-in:</b> screenshots of the three failures plus your explanations.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 2</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ai-1.html">&larr; Lesson 1</a> <a href="lesson-ai-3.html">Lesson 3 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; How AI Works, lesson 2 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ai-2';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 2 complete';
+      document.getElementById('doneHead').textContent='Lesson 2 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

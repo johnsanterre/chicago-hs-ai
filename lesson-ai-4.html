@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prompting I — instructions and context · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="how-ai-works.html">How AI Works</a> / Lesson 4</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">How AI Works · Lesson 4 of 8 · about 2–4 hours</p>
+<h1>Prompting I — instructions and context</h1>
+<p class="lede">The model sees exactly what you type and nothing else. Context, task, format, limits — four levers that turn a vague helper into a sharp one.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The same question, asked three ways</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ai-4-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Planned: ~5 minutes. Live side-by-side: one task, three prompts, three wildly different results.
+  <span style="color:var(--ink2)">(Generated slide video with narration; a recorded
+  version can replace it later.)</span></p>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script (for a future recording session)</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a split screen, three empty chat windows.<br>
+One task, three prompts, watch what happens.<br>
+WINDOW 1: &quot;help me with my essay&quot; — generic mush arrives. The machine didn&#x27;t fail;<br>
+that was barely a question.<br>
+WINDOW 2: add context — the school year, the assignment, the topic. Better.<br>
+WINDOW 3: the full ask — who I am, exactly what I want, the format I want it in, and<br>
+one limit: &quot;don&#x27;t rewrite it for me — point at my three weakest sentences and explain<br>
+why.&quot; Watch it become a writing coach.<br>
+FREEZE FRAME, label the four levers on the prompt: CONTEXT (who/what situation),<br>
+TASK (precisely what to do), FORMAT (what the answer looks like), LIMITS (what NOT to<br>
+do).<br>
+KEY LINE to camera: the model cannot see your screen, your teacher, or your deadline.<br>
+It knows what&#x27;s in the message. Nothing else.<br>
+CLOSE: vague in, vague out. Specific in, sharp out. Go run the experiment yourself —<br>
+it&#x27;s the whole lesson.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Why 'help me with my essay' gets mush, and the four levers — context, task, format, limits — that fix it. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ai-4-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Four levers</h2>
+
+  <p>Everything the model knows about your situation is in your message. It can't see
+  the assignment sheet, the rubric, or the three things you already tried. So the
+  quality of the answer tracks the quality of the ask — almost mechanically.</p>
+  <p><b>Context.</b> Who you are, what the situation is, who the audience is.
+  <i>"I'm a junior writing for an English teacher who cares about topic sentences"</i>
+  changes everything downstream.</p>
+  <p><b>Task.</b> Say precisely what you want done. "Help me" is not a task.
+  "Point out my three weakest sentences and explain why they're weak" is.</p>
+  <p><b>Format.</b> Shape the output: a bulleted list, a table, three options, one
+  paragraph, under 100 words. If you don't choose a shape, the model picks one — and
+  its default is longer than anyone wants.</p>
+  <p><b>Limits.</b> What it should <i>not</i> do. This is the lever people forget, and
+  it's how you keep the AI a coach instead of a ghostwriter: <i>"don't rewrite my
+  work — critique it."</i> Limits are where your integrity settings live.</p>
+  <p>One more habit, free: end hard prompts with <i>"ask me two questions before you
+  answer if anything is unclear."</i> The model is good at knowing what it's missing —
+  when you invite it to ask.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>The three-prompt experiment</h2>
+
+  <p>Pick a real task from your actual life this week — an email, a study plan, a
+  caption, a review. Run it three times in three separate chats:</p>
+  <p><b>Round 1:</b> one vague sentence, the way most people ask.</p>
+  <p><b>Round 2:</b> add real context (who you are, the situation, the audience).</p>
+  <p><b>Round 3:</b> all four levers — context, exact task, output format, and at
+  least one limit.</p>
+  <p>Put the three outputs side by side. The distance between round 1 and round 3 is
+  the skill you just learned.</p>
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why does 'help me with my essay' produce a generic answer?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">The model only knows what's in the message, and that message says almost nothing</button>
+    <button class="choice" data-ok="0">The model saves its best effort until you insist</button>
+    <button class="choice" data-ok="0">Essay help is restricted for students</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Which prompt uses a limit — the most-forgotten lever?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">“Write my conclusion for me, make it long”</button>
+    <button class="choice" data-ok="1">“Critique my conclusion, but do not rewrite it — explain what's weak”</button>
+    <button class="choice" data-ok="0">“What do you think about conclusions?”</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lessons 1 and 3 — you ask about last night's game and get a confident, detailed description. Most likely you're reading…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">…proof the model watches sports coverage live</button>
+    <button class="choice" data-ok="1">…a plausible invention — verify before repeating any of it</button>
+    <button class="choice" data-ok="0">…archived footage the model stores for a week</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Bad, good, great</h2>
+  <div class="buildtask">
+
+  <p>Document your three-prompt experiment: the three prompts, the three outputs, and
+  a short paragraph — which lever moved the result most, and how you can tell.</p>
+  <p><b>Turn-in:</b> the write-up. You'll reuse round 3's prompt style in every course
+  on this site.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 4</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ai-3.html">&larr; Lesson 3</a> <a href="lesson-ai-5.html">Lesson 5 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; How AI Works, lesson 4 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ai-4';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 4 complete';
+      document.getElementById('doneHead').textContent='Lesson 4 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

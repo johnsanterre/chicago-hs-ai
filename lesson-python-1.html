@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colab — code in your browser · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="python-in-colab.html">Python in Colab</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Python in Colab · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>Colab — code in your browser</h1>
+<p class="lede">Scroll straight down. Watch, listen, read, run real code, answer the check, build one thing. When the bar hits 100%, the lesson is complete.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>What Colab is, in four minutes</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. What a notebook is, what a cell is, pressing play for the first time.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a browser. Type colab.research.google.com. A notebook opens.<br>
+This is a notebook — a page made of cells. Text cells explain. Code cells RUN.<br>
+DEMO: click a code cell, press the play button. print(&quot;hello&quot;) → hello appears<br>
+underneath, about a second later.<br>
+KEY IDEA: the code didn&#x27;t run on this laptop. It ran on a Google computer far away,<br>
+which sent the result back. Nothing to install, nothing you can break.<br>
+DEMO: break it on purpose — prnt(&quot;hello&quot;) → red error text. READ it out loud: the<br>
+computer reporting exactly what stopped it. Fix, rerun, green.<br>
+DEMO: Runtime → Restart and run all — the exorcism for haunted notebooks.<br>
+CLOSE: open the lesson notebook and run your first five cells. That&#x27;s the assignment.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>What actually happens when you press play — and who's the boss when you work with an AI pair. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-python-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Cells, and the play button</h2>
+
+  <p>A Colab notebook is a page made of <b>cells</b>. A cell holds either text or code.
+  Code cells have a play button on their left edge. Press it and the code runs on a
+  Google computer far away; the result appears right under the cell about a second
+  later.</p>
+  <p>Three facts that will save you frustration:</p>
+  <p><b>Cells run in the order you run them</b>, not the order they sit on the page.
+  If the notebook acts haunted, <i>Runtime → Restart and run all</i> reruns everything
+  top to bottom — the exorcism.</p>
+  <p><b>Nothing you do can break your computer.</b> The code runs on Google's machine,
+  not yours. Experiment freely.</p>
+  <p><b>Errors are reports, not judgments.</b> Red text is the computer telling you
+  exactly what stopped it. Your AI assistant translates those reports well — paste
+  the error and ask it to explain, not just fix.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p>The notebook for this lesson walks you through everything above, live, with
+  your-turn cells and the build at the end.</p>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/py1-colab-basics.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/py1-colab-basics.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+    <p style="font-size:13px;color:var(--ink2)">Offline or blocked? Use the download link and
+    <b>File &rarr; Upload notebook</b> in Colab instead.</p>
+  </details>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">print(&quot;Hello from a Google computer&quot;)
+
+2026 - 2011          # how old is someone born in 2011?
+
+name = &quot;YOUR NAME&quot;
+print(&quot;This code belongs to &quot; + name)</pre>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Where does your code actually run when you press play in Colab?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">On your laptop or Chromebook</button>
+    <button class="choice" data-ok="1">On a computer in a Google data center</button>
+    <button class="choice" data-ok="0">Inside the AI assistant</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. A cell prints red error text. What does that mean?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">You broke the computer</button>
+    <button class="choice" data-ok="0">You should start the lesson over</button>
+    <button class="choice" data-ok="1">The computer is reporting exactly what stopped it — read it and fix</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. The notebook is acting haunted — cells disagree with each other. First move?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Runtime → Restart and run all, so everything reruns in order</button>
+    <button class="choice" data-ok="0">Delete the notebook and start over</button>
+    <button class="choice" data-ok="0">Run every cell twice</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Make the computer do something 100 times</h2>
+  <div class="buildtask">
+
+  <p>In the notebook, make a new cell that prints your name 100 times. You have not
+  been taught how — that's on purpose: ask your AI assistant, run what it gives you,
+  and make sure you understand every word before moving on. Then change it to 1,000
+  times.</p>
+  <p><b>Turn-in:</b> a screenshot of your cell and its output.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="python-in-colab.html">&larr; Course page</a> <a href="lesson-python-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Python in Colab, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-python-1';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 1 complete';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

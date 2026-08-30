@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prompting II — iteration and examples · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="how-ai-works.html">How AI Works</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">How AI Works · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Prompting II — iteration and examples</h1>
+<p class="lede">The first answer is a first draft. Iterate, show examples, flip the critic, ask for options — the editor's moves that separate pros from one-shot askers.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Six messages beat one</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ai-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Planned: ~5 minutes. A live before/after: one-shot output vs the same task pushed through five rounds.
+  <span style="color:var(--ink2)">(Generated slide video with narration; a recorded
+  version can replace it later.)</span></p>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script (for a future recording session)</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a mediocre AI-written paragraph, full screen.<br>
+This is what one message gets you. Watch what six get you.<br>
+LIVE SEQUENCE, real time:<br>
+Round 2 — &quot;shorter, and warmer.&quot;<br>
+Round 3 — &quot;the second sentence is a cliché; replace it.&quot;<br>
+Round 4 — paste two examples: &quot;match the voice of these.&quot;<br>
+Round 5 — &quot;critique your own draft: three weakest points.&quot;<br>
+Round 6 — &quot;fix exactly those three. give me two versions — one safe, one bold.&quot;<br>
+SIDE BY SIDE: round 1 vs round 6. Same machine. The difference is you.<br>
+NAME THE MOVES on screen: ITERATE (push the draft), SHOW EXAMPLES (showing beats<br>
+telling), FLIP THE CRITIC (it critiques sharper than it writes), ASK FOR OPTIONS<br>
+(choosing beats accepting).<br>
+CLOSE: four extra minutes, excellent instead of average. The intern is tireless.<br>
+Be the editor.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Treat the AI like a talented intern: push the draft, show it examples, make it critique itself, and always ask for options. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ai-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The editor's moves</h2>
+
+  <p>Beginners send one message and take what comes back. That's like a coach watching
+  one play and going home. The conversation is the tool — every message you add is
+  information the model uses to sharpen the next draft.</p>
+  <p><b>Iterate.</b> React to the draft the way you'd coach an intern: shorter,
+  warmer, less formal, cut the second paragraph, stronger ending. Each instruction
+  costs seconds and compounds.</p>
+  <p><b>Show examples.</b> Descriptions of style are weak; samples are strong. Paste
+  two or three examples of the thing you want — <i>"match the voice of these"</i> —
+  and watch the output snap toward them. Showing beats telling.</p>
+  <p><b>Flip the critic.</b> Ask it to attack its own work: <i>"What are the three
+  weakest points in what you just wrote?"</i> It's usually a sharper critic than
+  writer — then make it fix exactly what it found.</p>
+  <p><b>Ask for options.</b> One safe, one bold, one weird. Options move you from
+  accepting or rejecting to <i>choosing</i> — and choosing is where your taste shows
+  up. Your taste is the part the machine doesn't have.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Push a draft through five rounds</h2>
+
+  <p>Choose something you actually want to exist — a club announcement, a bio for a
+  profile, a birthday message that doesn't sound canned.</p>
+  <p>Round 1: your best lesson-4 prompt. Rounds 2–3: iterate with specific coaching.
+  Round 4: flip the critic and make it fix what it found. Round 5: ask for two final
+  options and choose.</p>
+  <p>Keep the whole transcript — it's your evidence.</p>
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What's the most effective way to get output in a specific style?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Describe the style with plenty of adjectives</button>
+    <button class="choice" data-ok="1">Paste examples of the style and say 'match these'</button>
+    <button class="choice" data-ok="0">Ask for the style politely at the end of the prompt</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What does 'flip the critic' mean?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Ask the AI to find the weaknesses in its own draft, then fix exactly those</button>
+    <button class="choice" data-ok="0">Disagree with the AI's first answer on principle</button>
+    <button class="choice" data-ok="0">Start a fresh chat whenever a draft is weak</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — the draft came back ten paragraphs long when you wanted three sentences. Which lever did you forget?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Context</button>
+    <button class="choice" data-ok="1">Format</button>
+    <button class="choice" data-ok="0">Politeness</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The before-and-after</h2>
+  <div class="buildtask">
+
+  <p>Turn in the full five-round transcript plus a two-sentence caption: which move
+  improved the draft most, and what you chose between at the end.</p>
+  <p>Grade yourself honestly: if round 5 isn't clearly better than round 1, run it
+  again with harder coaching.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ai-4.html">&larr; Lesson 4</a> <a href="lesson-ai-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; How AI Works, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ai-5';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 5 complete';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Files — reading and writing · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="python-in-colab.html">Python in Colab</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Python in Colab · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Files — reading and writing</h1>
+<p class="lede">Programs that can't save anything forget everything. Today your code makes real files — memory that survives.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Memory that survives</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. write, read, append — and where Colab's files actually live.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: every program so far forgot everything the moment it ended.<br>
+Today: files — memory that survives.<br>
+LIVE: with open(&quot;note.txt&quot;, &quot;w&quot;) as f: f.write(...) — then click Colab&#x27;s folder icon.<br>
+THE FILE IS THERE. Your code made a real file on a real computer.<br>
+READ it back: open(..., &quot;r&quot;), f.read(). APPEND with &quot;a&quot; — add without erasing.<br>
+GOTCHA, honest: Colab&#x27;s files live on the session machine and vanish when it ends —<br>
+download what you want to keep.<br>
+LOOP over lines with enumerate — numbered output.<br>
+CLOSE: notebook — crew.txt, then the word counter: file + lesson 5&#x27;s tally pattern.<br>
+Two lessons ago meets last lesson, on purpose.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Your code makes a real file, reads it back, adds to it — and the honest note about where Colab's files go. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-python-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>w, r, a — and where the files live</h2>
+
+  <p><code>with open("note.txt", "w") as f:</code> opens a file for
+  <b>w</b>riting — creating it if needed. <code>f.write(...)</code> puts text in.
+  <b>r</b> reads; <b>a</b> appends without erasing. The <code>with</code> block
+  closes the file for you when it ends — the tidy habit from day one.</p>
+  <p>In Colab, click the folder icon on the left after writing: your file is really
+  there, on the session machine. <b>Honest note:</b> it vanishes when the session
+  ends — download anything you want to keep. (Real programs on your own computer
+  keep their files; the data course revisits this.)</p>
+  <p>The build joins two lessons on purpose: a file full of words, read back and fed
+  through lesson 5's tally pattern. Watching old tools combine into new powers is
+  what programming feels like from here on.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p>The notebook for this lesson walks you through everything above, live, with
+  your-turn cells and the build at the end.</p>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/py6-files.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/py6-files.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+    <p style="font-size:13px;color:var(--ink2)">Offline or blocked? Use the download link and
+    <b>File &rarr; Upload notebook</b> in Colab instead.</p>
+  </details>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">with open(&quot;note.txt&quot;, &quot;w&quot;) as f:
+    f.write(&quot;This file was created by my code.\n&quot;)
+
+with open(&quot;note.txt&quot;) as f:
+    print(f.read())</pre>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What's the difference between opening with "w" and with "a"?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">"w" starts the file fresh; "a" adds to the end without erasing</button>
+    <button class="choice" data-ok="0">"w" is for words, "a" is for anything else</button>
+    <button class="choice" data-ok="0">No difference — they're synonyms</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Your Colab session ends. What happened to note.txt?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">It's gone — session files vanish; download what you want to keep</button>
+    <button class="choice" data-ok="0">It's saved to your Google Drive automatically</button>
+    <button class="choice" data-ok="0">It's emailed to you</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 5 — counting every word in a file uses which pattern?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">The tally pattern: word_count[w] = word_count.get(w, 0) + 1</button>
+    <button class="choice" data-ok="0">A list with one slot per possible word</button>
+    <button class="choice" data-ok="0">An f-string per word</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The word counter</h2>
+  <div class="buildtask">
+
+  <p>A paragraph you choose → saved to a file → read back → tallied with lesson 5's
+  pattern → top five words printed. Sorting the tally is the ask-your-AI moment —
+  make it explain every piece of the sort.</p>
+  <p><b>Turn-in:</b> your top-five output plus the AI's sort line, explained in your
+  own words as a comment.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-python-5.html">&larr; Lesson 5</a> <a href="lesson-python-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Python in Colab, lesson 6 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-python-6';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 6 complete';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

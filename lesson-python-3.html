@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lists and loops · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="python-in-colab.html">Python in Colab</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Python in Colab · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Lists and loops</h1>
+<p class="lede">One list, one loop — and suddenly the computer does a thing a million times while you watch. This is the lesson where the power shows up.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Do it for each one</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. Lists, indexing from zero, the for loop, range.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a list typed live: crew = [&quot;Maya&quot;,&quot;DeShawn&quot;,&quot;Alex&quot;].<br>
+A list holds many values in order. crew[0] — counting starts at ZERO, everyone<br>
+trips on it once, now you won&#x27;t.<br>
+THE LOOP: for person in crew: print(person) — the indented line runs once per item.<br>
+THE INDENT IS THE LOOP BODY — demo adding a second indented line.<br>
+range(100): remember printing your name 100 times in lesson 1? That mystery code —<br>
+now you own the machinery.<br>
+DEMO the collector pattern: total = total + n inside a loop.<br>
+FINALE: add 1 to a million in half a second. The room where the power lives.<br>
+CLOSE: notebook — your top-5 songs numbered, then sum a million and VERIFY the AI&#x27;s<br>
+faster way against your own. Go.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Zero-indexing, the sacred indent, and the moment a loop does a million steps while you blink. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-python-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The list, the loop, the indent</h2>
+
+  <p>A <b>list</b> holds values in order: <code>crew = ["Maya", "DeShawn",
+  "Alex"]</code>. Positions count from <b>zero</b> — <code>crew[0]</code> is Maya.
+  Every programmer has tripped on that once; now you won't.</p>
+  <p>A <b>for loop</b> does something once per item:
+  <code>for person in crew:</code> followed by an <b>indented</b> line. The indent is
+  the loop body — it's what repeats. Python is strict about it, and the strictness is
+  a favor: you can <i>see</i> the shape of the program.</p>
+  <p><code>range(100)</code> gives a loop 100 turns — the machinery behind lesson 1's
+  print-your-name-100-times build. And the <b>collector pattern</b> —
+  <code>total = total + n</code> inside a loop — is how programs count, sum, and
+  accumulate anything.</p>
+  <p>The notebook ends by asking the AI for a faster way to sum a million numbers,
+  then <b>checking both answers agree</b>. Verifying the intern's work — that habit
+  is the whole course.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p>The notebook for this lesson walks you through everything above, live, with
+  your-turn cells and the build at the end.</p>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/py3-lists-loops.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/py3-lists-loops.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+    <p style="font-size:13px;color:var(--ink2)">Offline or blocked? Use the download link and
+    <b>File &rarr; Upload notebook</b> in Colab instead.</p>
+  </details>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">crew = [&quot;Maya&quot;, &quot;DeShawn&quot;, &quot;Alex&quot;, &quot;Jordan&quot;]
+for person in crew:
+    print(f&quot;{person} is on the team&quot;)</pre>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is crew[0]?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">The first item in the list — positions count from zero</button>
+    <button class="choice" data-ok="0">An empty slot before the list starts</button>
+    <button class="choice" data-ok="0">The number of items in the list</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. In a for loop, what marks the code that repeats?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The indentation under the for line</button>
+    <button class="choice" data-ok="0">The word 'repeat' before each line</button>
+    <button class="choice" data-ok="0">Parentheses around the block</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — inside a loop you want to print 'lap 3 of 10'. Which tool?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">An f-string: print(f"lap {i} of 10")</button>
+    <button class="choice" data-ok="0">Three separate print statements</button>
+    <button class="choice" data-ok="0">word.upper()</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Sum a million — then verify the intern</h2>
+  <div class="buildtask">
+
+  <p>Add the numbers 1 to 1,000,000 with a loop and print the total. Ask your AI if
+  there's a faster way — then <b>run both and confirm they agree</b>.</p>
+  <p><b>Turn-in:</b> both methods, both outputs, one sentence on whether they matched.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-python-2.html">&larr; Lesson 2</a> <a href="lesson-python-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Python in Colab, lesson 3 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-python-3';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

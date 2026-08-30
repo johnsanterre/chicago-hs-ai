@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dictionaries · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="python-in-colab.html">Python in Colab</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Python in Colab · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Dictionaries</h1>
+<p class="lede">Key → value: how programs remember facts about things. Includes the tally pattern — the five lines of code you'll reuse for the rest of your life.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Facts about things</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. Key-value pairs, nesting, and the tally pattern.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: a list can hold [&quot;Maya&quot;, 31, &quot;Wildcats&quot;] — but which number is<br>
+which? A DICTIONARY labels its contents: {&quot;name&quot;: &quot;Maya&quot;, &quot;points&quot;: 31}.<br>
+LIVE: player[&quot;points&quot;] — ask by label, not position. Add a key. Change a value.<br>
+LOOP over a dictionary: for name in scores: — keys out, values by lookup.<br>
+THE TALLY PATTERN, built live, slowly: tally[v] = tally.get(v, 0) + 1 inside a loop.<br>
+Count votes, count words, count anything. Five lines you&#x27;ll use forever — including<br>
+back in course 1&#x27;s bias tally, if you took it: same pattern, run by hand.<br>
+CLOSE: notebook — a dictionary about you, then the contact book with nested<br>
+dictionaries and a graceful miss when a name isn&#x27;t there.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Why labels beat positions, and the five-line tally pattern that counts anything. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-python-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Labels beat positions</h2>
+
+  <p>A <b>dictionary</b> stores pairs: <code>{"name": "Maya", "points": 31}</code>.
+  You ask by label — <code>player["points"]</code> — instead of remembering that
+  points happened to be item 2. Labels beat positions whenever you're storing
+  <i>facts about a thing</i>.</p>
+  <p>Dictionaries nest: a contact book is a dictionary of names, where each value is
+  another dictionary (phone, birthday, favorite food). Most real-world data — every
+  API response you'll meet in the data course — is shaped exactly like this.</p>
+  <p>And learn the <b>tally pattern</b> by heart:</p>
+  <p><code>tally[v] = tally.get(v, 0) + 1</code> inside a loop counts anything —
+  votes, words, dice rolls. <code>.get(v, 0)</code> means "the count so far, or zero
+  if we've never seen it." Five lines, endless uses; next lesson a library does it in
+  one line, and you'll know exactly what that shortcut is doing.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p>The notebook for this lesson walks you through everything above, live, with
+  your-turn cells and the build at the end.</p>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/py5-dictionaries.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/py5-dictionaries.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+    <p style="font-size:13px;color:var(--ink2)">Offline or blocked? Use the download link and
+    <b>File &rarr; Upload notebook</b> in Colab instead.</p>
+  </details>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">votes = [&quot;pizza&quot;, &quot;tacos&quot;, &quot;pizza&quot;, &quot;sushi&quot;, &quot;pizza&quot;, &quot;tacos&quot;]
+tally = {}
+for v in votes:
+    tally[v] = tally.get(v, 0) + 1
+print(tally)</pre>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. When is a dictionary better than a list?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">When you're storing labeled facts about a thing and want to ask by label</button>
+    <button class="choice" data-ok="0">When the data needs to stay in order</button>
+    <button class="choice" data-ok="0">Whenever there are more than ten items</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. In the tally pattern, what does tally.get(v, 0) mean?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The count so far for v — or 0 if v has never been seen</button>
+    <button class="choice" data-ok="0">Get item number v from the tally</button>
+    <button class="choice" data-ok="0">Reset v's count to zero</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — you want show(name) to print a contact card for any contact. What's the right structure?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">A function that looks the name up in the dictionary and prints its fields</button>
+    <button class="choice" data-ok="0">A separate function for each contact</button>
+    <button class="choice" data-ok="0">A list of print statements</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The contact book</h2>
+  <div class="buildtask">
+
+  <p>Nested dictionaries + a <code>show(name)</code> function + graceful handling
+  when the name isn't in the book. Three contacts, all cases demoed.</p>
+  <p><b>Turn-in:</b> the demo output, including the graceful miss.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-python-4.html">&larr; Lesson 4</a> <a href="lesson-python-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Python in Colab, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-python-5';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 5 complete';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

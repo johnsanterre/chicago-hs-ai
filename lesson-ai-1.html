@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What a language model actually is · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="how-ai-works.html">How AI Works</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">How AI Works · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>What a language model actually is</h1>
+<p class="lede">One trick, done at colossal scale: predict the next word. This lesson installs the mental model everything else in the course hangs on.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The prediction machine, in five minutes</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ai-1-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Planned: ~5 minutes. A live demo of an AI answering one token at a time, and the autocomplete-on-steroids idea done honestly.
+  <span style="color:var(--ink2)">(Generated slide video with narration; a recorded
+  version can replace it later.)</span></p>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script (for a future recording session)</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a phone keyboard, mid-text, autocomplete suggesting the next word.<br>
+You already use a tiny language model every day. This bar. It looks at your last few<br>
+words and guesses the next one. Now imagine that — scaled up a million times.<br>
+CUT to a chat window, type: &quot;Explain why the sky is blue, one sentence at a time.&quot;<br>
+Watch the answer arrive word by word. It&#x27;s not typing for drama. It is literally being<br>
+written one piece at a time — each word predicted from everything before it.<br>
+KEY IDEA on screen: &quot;There is no answer database inside.&quot;<br>
+The model read a huge slice of the internet and practiced one skill billions of times:<br>
+guess what comes next. Ask a question and it writes the most plausible answer into<br>
+existence — an answer that never existed before.<br>
+DEMO: ask the same question twice, get two different answers. A little on-purpose<br>
+randomness picks among good next words. Not moody — designed.<br>
+CLOSE: This one trick explains everything ahead: why it&#x27;s flexible, why it&#x27;s confident,<br>
+and why confident and correct are not the same thing. See you in the lesson.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The secret at the center of it all — prediction that looks like thinking, and why the mechanism explains both the magic and the mistakes. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ai-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>No database inside</h2>
+
+  <p>A language model is a next-word predictor. It was trained by reading an enormous
+  amount of text — books, websites, code, conversations — and practicing one skill over
+  and over: <b>given everything so far, guess what comes next.</b> Billions of practice
+  rounds later, that guessing got extremely good.</p>
+  <p>When you send it a message, it does not search a database of saved answers.
+  There is no database. It writes its reply into existence one piece at a time, each
+  piece chosen because it is a plausible continuation of everything before it. The
+  answer to your question <i>did not exist</i> until the moment it was generated.</p>
+  <p>This explains three things you'll see constantly:</p>
+  <p><b>Flexibility.</b> Poems, business plans, apologies, code — it's all just text to
+  continue. One trick covers all of it.</p>
+  <p><b>Confidence without guarantee.</b> A false sentence can be perfectly plausible.
+  The machine that writes truths and the machine that writes mistakes are the same
+  machine, running the same trick.</p>
+  <p><b>Different answers to the same question.</b> There's deliberate randomness in how
+  it picks among good next words — it keeps the writing from going stale. Ask twice,
+  get two answers. Neither is "the" answer; both are draws from the same distribution.</p>
+  <p>Hold on to this mental model. Every lesson in this course — tokens, training,
+  prompting, hallucination — is a consequence of it.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Catch it predicting</h2>
+
+  <p>Open the AI chatbot your class uses and run these three experiments:</p>
+  <p><b>1. The continuation.</b> Send exactly this: <i>"Continue this sentence in ten
+  different ways: The best thing about Chicago is"</i> — you're watching raw prediction
+  with the mask off.</p>
+  <p><b>2. The double ask.</b> Ask the same interesting question twice in two separate
+  chats. Compare the answers. Same machine, different draws.</p>
+  <p><b>3. The impossible lookup.</b> Ask: <i>"What did I have for breakfast today?"</i>
+  A good model admits it can't know. Notice what that tells you: it has no access to
+  anything but the text you give it.</p>
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is the core operation a language model performs?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Searching a database of stored answers</button>
+    <button class="choice" data-ok="1">Predicting what comes next, one piece at a time</button>
+    <button class="choice" data-ok="0">Looking up matching web pages in real time</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. You ask the same question twice and get two different answers. Why?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The model picks among plausible next words with a little on-purpose randomness</button>
+    <button class="choice" data-ok="0">The second answer corrects an error it noticed in the first</button>
+    <button class="choice" data-ok="0">Someone updated the model between your questions</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Before you asked it, did the answer to your question exist anywhere inside the model?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Yes — stored, and retrieved when you asked</button>
+    <button class="choice" data-ok="1">No — it was generated fresh, piece by piece, when you asked</button>
+    <button class="choice" data-ok="0">Yes for facts, no for opinions</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Explain it to someone at home</h2>
+  <div class="buildtask">
+
+  <p>Write a half-page explanation of what a language model actually does, in your own
+  words, for someone in your family who has never used one. No jargon — if you need the
+  word "token," you've gone too deep (that's next lesson).</p>
+  <p>Then actually read it to them, and write down the first question they ask you.</p>
+  <p><b>Turn-in:</b> your explanation plus their question, posted where your teacher
+  collects work. Their question is the interesting part — it's next week's material.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="how-ai-works.html">&larr; Course page</a> <a href="lesson-ai-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; How AI Works, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ai-1';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 1 complete';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

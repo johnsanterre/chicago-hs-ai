@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Where the knowledge comes from — training · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="how-ai-works.html">How AI Works</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">How AI Works · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Where the knowledge comes from — training</h1>
+<p class="lede">Two schools made the machine: a colossal reading phase that ended on a specific date, and a manners school run by humans. Both leave fingerprints on every answer.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>A library with a stop date</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ai-3-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Planned: ~5 minutes. The two training phases, plus a live demo of the knowledge cutoff.
+  <span style="color:var(--ink2)">(Generated slide video with narration; a recorded
+  version can replace it later.)</span></p>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script (for a future recording session)</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN on a stack of books morphing into a progress bar.<br>
+Where does it all come from? Two schools.<br>
+SCHOOL ONE — reading. Before you ever met it, the model read a massive slice of human<br>
+writing. More than any person could read in ten thousand lifetimes. From that it<br>
+learned patterns: language, arguments, code, facts.<br>
+KEY VISUAL: a calendar page tearing off and freezing. The reading STOPPED on a date —<br>
+the knowledge cutoff. Everything after: darkness.<br>
+DEMO: ask about an event from long ago — rich answer. Ask about last week&#x27;s game —<br>
+watch it admit it can&#x27;t know (or watch a web-search tool kick in, and name that as a<br>
+bolt-on patch, not the model).<br>
+SCHOOL TWO — manners. Raw prediction would continue ANYTHING, including awful things,<br>
+because the internet contains awful things. So humans spent months rating the model&#x27;s<br>
+answers — better, worse — until helpfulness and refusals stuck. When it politely<br>
+declines something harmful, that&#x27;s the manners school talking.<br>
+CLOSE: a frozen library plus etiquette lessons. Next segment you&#x27;ll go find the edge<br>
+of the library yourself.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The reading school and the manners school — a frozen library, a cutoff date, and why the model refuses some requests. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ai-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The reading school and the manners school</h2>
+
+  <p><b>Phase one: pretraining.</b> The model read a gigantic corpus of text and
+  learned, by next-word practice, the patterns inside it — grammar, facts, styles,
+  code. Two consequences matter to you forever after:</p>
+  <p>First, the <b>knowledge cutoff</b>. The reading ended on a date. The model's
+  built-in knowledge is frozen there — it knows history up to the cutoff and nothing
+  after. Tools that answer about yesterday are bolting live web search onto the frozen
+  model; know which one you're talking to.</p>
+  <p>Second, <b>it learned what people wrote, not what is true</b>. Where the internet
+  is rich and accurate, the model tends to be too. Where the internet is thin, wrong,
+  or lopsided, the model inherited that as well — which becomes a whole lesson later
+  in this course.</p>
+  <p><b>Phase two: alignment (the manners school).</b> After reading, humans spent
+  months shaping behavior: rating answers, rewarding helpfulness and honesty,
+  training refusals for harmful requests. When a model says "I can't help with that,"
+  you're hearing this phase. It's also why models say "I don't know" at all — raw
+  prediction would rather guess; it was <i>taught</i> to admit uncertainty, and the
+  teaching is imperfect.</p>
+  <p>Frozen library + etiquette lessons. Keep both in view and a lot of AI behavior
+  stops being mysterious.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Find the edge of the library</h2>
+
+  <p><b>1. Ask the model directly:</b> <i>"What is your knowledge cutoff date?"</i></p>
+  <p><b>2. Probe both sides of the edge.</b> Ask about something well before the
+  cutoff (it should be strong), then about something after it. Watch how it handles
+  not knowing — does it admit it, or guess?</p>
+  <p><b>3. Meet the manners school.</b> Ask for something a well-behaved assistant
+  should refuse (say, someone else's home address). Read the refusal closely — that
+  text is trained behavior, not reading.</p>
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why can't the model reliably discuss last week's news from its own knowledge?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Its training data ends at a cutoff date — its built-in knowledge is frozen there</button>
+    <button class="choice" data-ok="0">Recent news is licensed separately and costs extra</button>
+    <button class="choice" data-ok="0">It knows the news but is trained not to discuss current events</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. An AI refuses a harmful request. Where does that behavior come from?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The alignment phase — humans rated answers until refusing stuck</button>
+    <button class="choice" data-ok="0">A government filter that scans every chat</button>
+    <button class="choice" data-ok="0">Refusing is simply the most common next word on the internet</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — a tool answers questions about yesterday accurately. Given the cutoff, what's happening?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">The model's frozen knowledge secretly updates overnight</button>
+    <button class="choice" data-ok="1">Live web search is bolted on and feeding results into the context window</button>
+    <button class="choice" data-ok="0">Yesterday was before the cutoff for premium users</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Interview the machine about itself</h2>
+  <div class="buildtask">
+
+  <p>Interview the AI about its own limits — at least eight questions. Push past the
+  first answer: <i>what kinds of things can't you know? what happens when you're not
+  sure? what were you trained on?</i></p>
+  <p>Then write the five most interesting limits it admitted, in your own words, and
+  mark the one you plan to verify yourself — because after lesson 6, you won't be
+  taking its word for things.</p>
+  <p><b>Turn-in:</b> your five limits + the one you'll test.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ai-2.html">&larr; Lesson 2</a> <a href="lesson-ai-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; How AI Works, lesson 3 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ai-3';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>
