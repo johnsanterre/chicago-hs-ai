@@ -81,3 +81,47 @@ pre.code{background:#20262E;color:#E8ECF2;border-radius:8px;padding:16px 18px;ov
 .buildtask{border-left:4px solid var(--sky);padding-left:16px}
 @media (prefers-reduced-motion:reduce){.coursecard{transition:none}}
 .ffline{font-size:12.5px;color:var(--ink2);letter-spacing:.03em;margin-left:.9em}
+/* ---- interactive figures (Distill-style, inside lessons) ---- */
+.fig{background:var(--paper);border:1px solid var(--hair);border-left:4px solid var(--star);
+  border-radius:0 10px 10px 0;padding:18px 20px 20px;margin:26px 0}
+.fig .figlabel{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--star);margin-bottom:6px}
+.fig h3{margin:.1em 0 .4em;font-size:18px;color:var(--navy)}
+.fig .fignote{font-size:14px;color:var(--ink2);margin-top:12px}
+.wbtn{background:var(--navy);color:#fff;border:none;border-radius:6px;padding:.5em 1.1em;
+  font-size:14.5px;font-weight:600;cursor:pointer;font-family:var(--sans)}
+.wbtn:hover{background:#123A56}
+.wbtn:disabled{background:var(--hair);color:var(--ink2);cursor:default}
+.wbtn.alt{background:var(--card);color:var(--navy);border:1px solid var(--navy)}
+.wbtn:focus-visible,.guessrow input:focus-visible,select.wsel:focus-visible{
+  outline:3px solid var(--sky);outline-offset:2px}
+.bars{margin:10px 0 2px;display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:minmax(64px,92px) 1fr 48px;align-items:center;gap:10px;
+  font-size:14.5px}
+.bar .bw{font-weight:600;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .btrack{height:20px;background:var(--card);border:1px solid var(--hair);border-radius:4px;overflow:hidden}
+.bar .bfill{display:block;height:100%;width:0%;background:var(--sky);border-radius:3px;transition:width .45s ease}
+.bar.hit .bfill{background:var(--star)}
+.bar.hit .bw{color:var(--star)}
+.bar.pick .bfill{background:var(--navy)}
+.bar .bpc{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.guessrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.guessrow input{flex:1;min-width:140px;font-family:var(--sans);font-size:16px;padding:.5em .7em;
+  border:1px solid var(--hair);border-radius:6px;background:var(--card);color:var(--ink)}
+.prefix{font-size:17px;background:var(--card);border:1px solid var(--hair);border-radius:8px;
+  padding:12px 16px;margin:8px 0}
+.prefix .blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--star)}
+.tokstream{font-size:17px;line-height:2;background:var(--card);border:1px solid var(--hair);
+  border-radius:8px;padding:14px 16px;min-height:3.6em;margin:10px 0}
+.tok{display:inline-block;background:var(--sky);border-radius:4px;padding:0 .28em;margin:0 .1em;
+  animation:tokin .25s ease}
+@keyframes tokin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.dialrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 4px;font-size:14.5px}
+.dialrow input[type=range]{flex:1;min-width:120px;accent-color:var(--star)}
+.runlist{margin:10px 0 0;padding:0;list-style:none;font-size:14.5px}
+.runlist li{border-top:1px dashed var(--hair);padding:.45em 0;color:var(--ink2)}
+.runlist li b{color:var(--ink)}
+select.wsel{font-family:var(--sans);font-size:16px;padding:.4em .6em;border:1px solid var(--navy);
+  border-radius:6px;background:var(--card);color:var(--navy);font-weight:700}
+@media (prefers-reduced-motion:reduce){.bar .bfill{transition:none}.tok{animation:none}}
+[hidden]{display:none!important}
