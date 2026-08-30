@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading code you didn&#x27;t write · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="code-with-ai.html">Code with an AI Partner</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Code with an AI Partner · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Reading code you didn&#x27;t write</h1>
+<p class="lede">The defining skill of AI-era programming, practiced deliberately: predict what code does before running it, then check.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Predict, then run</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. An unfamiliar AI-generated page read line by line, predictions made and tested.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: an AI just generated 40 lines of HTML for us. Tempting to paste and<br>
+move on. Instead — the pro move.<br>
+THE METHOD, on screen: 1. Read a line. 2. SAY what it will do. 3. Run and check.<br>
+4. Wrong? That line just taught you something. Right? Confidence, earned.<br>
+LIVE: walk five lines including one surprise (a &lt;div&gt; — what IS that? ask the AI:<br>
+&quot;explain this line like I&#x27;ve never seen a div&quot;).<br>
+DELETION TEST: not sure what a line does? Delete it, refresh, see what breaks.<br>
+The browser forgives everything — undo brings it back.<br>
+CLOSE: you&#x27;ll do this on a full mystery page. Prediction before execution — that<br>
+habit is what separates people who USE AI from people AI uses.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The predict-then-check method, the deletion test, and why reading is now the programmer's first skill. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-web-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The reader's method</h2>
+
+  <p>AI writes code faster than any human. That moved the scarce skill: the
+  bottleneck now is <b>people who can read code and judge it</b>. This lesson is
+  deliberate practice at exactly that.</p>
+  <p>The method: read a line, <b>predict out loud</b> what it does, then run and
+  check. A wrong prediction is the best moment of your session — it's the exact
+  spot where your model of the code differs from reality, found cheaply.</p>
+  <p>Two power tools. The <b>deletion test</b>: unsure what a line does? Delete it,
+  refresh, observe what broke, undo. The browser forgives everything. And the
+  <b>explain-it-back prompt</b>: paste a line to your AI — "explain this like I've
+  never seen it, then quiz me with one question." The quiz keeps you honest.</p>
+  <p>Style-guide note for the whole course: every file you keep should read like you
+  wrote it — your indenting, your comments, no mystery lines. A mystery line kept is
+  a debt future-you pays.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Do it</div>
+  <h2>The mystery page</h2>
+
+  <p><b>1.</b> Ask your AI: "generate a 30–40 line HTML page about the history of
+  Chicago's flag, using at least two tags a beginner wouldn't know."</p>
+  <p><b>2.</b> Before opening it in the browser: annotate every line with a
+  prediction comment.</p>
+  <p><b>3.</b> Open it. Score your predictions honestly.</p>
+  <p><b>4.</b> Deletion-test the two unfamiliar tags; write down what actually
+  broke.</p>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why is reading code now the first skill?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">AI writes fast, so judging what it wrote is the human bottleneck</button>
+    <button class="choice" data-ok="0">Writing code is no longer possible for humans</button>
+    <button class="choice" data-ok="0">Reading is easier to grade than writing</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. The deletion test is…</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">removing a line to observe what breaks, then undoing</button>
+    <button class="choice" data-ok="0">deleting files that have errors</button>
+    <button class="choice" data-ok="0">removing all comments before shipping</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From the How AI Works course — the AI explains a line confidently. You should…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">verify by running it — confidence is not evidence</button>
+    <button class="choice" data-ok="0">accept it; explanation is what AI is best at</button>
+    <button class="choice" data-ok="0">ask a second AI and accept if they agree</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The annotated mystery</h2>
+  <div class="buildtask">
+
+  <p>The mystery page with your prediction comments, your score (right/wrong per
+  line), and two sentences: which wrong prediction taught you most, and why.</p>
+  <p><b>Turn-in:</b> the annotated file.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-web-2.html">&larr; Lesson 2</a> <a href="lesson-web-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Code with an AI Partner, lesson 3 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-web-3';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

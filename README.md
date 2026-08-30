@@ -13,15 +13,16 @@ one and begin.
 1. **How AI Works** — no coding required. What a language model
    actually is, how to talk to one well, how it fails, and when not
    to use it.
-2. **Code with an AI Partner** — first real builds on the web.
-   *(in production)*
+2. **Code with an AI Partner** — first real builds on the web:
+   HTML, CSS, JavaScript with an AI pair, shipped live on GitHub
+   Pages by lesson 8.
 3. **Python in Colab** — Python from zero, in the browser, with an
    AI pair. Eight lessons, eight notebooks, ending in a working
    chore-bot project.
-4. **Working with Data** — clean real data and make honest charts.
-   *(in production)*
-5. **Build with LLMs** — call a language model from your own code.
-   *(in production)*
+4. **Working with Data** — pandas, cleaning with a logged trail,
+   honest charts (and how charts lie), live Chicago open data.
+5. **Build with LLMs** — API calls, system prompts, JSON outputs,
+   document Q&A, a chat app, evals, and a hand-built agent loop.
 
 ## How a lesson works
 
@@ -54,6 +55,6 @@ folder anywhere.
 
 ## Status
 
-Draft in active development (started 2026-08-30). Courses 1 and 3 are
-complete; 2, 4, and 5 are in production. Feedback from real
-classrooms is the next input.
+Draft in active development (started 2026-08-30). All five courses
+are built — 40 lessons, 24 notebooks. Feedback from real classrooms
+is the next input.

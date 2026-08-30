@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charts that tell the truth · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="working-with-data.html">Working with Data</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Working with Data · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Charts that tell the truth</h1>
+<p class="lede">A chart is a claim. Honest ones carry a point-stating title, labeled axes, and bars that start at zero — and they're one matplotlib call away.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>A chart is a claim</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. Bar and line charts built live, each given a claim title.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: a table of sign-ups by neighborhood. True. Unreadable at a glance.<br>
+THE FIX: counts.plot(kind=&#x27;barh&#x27;). A bar chart appears. Now the eye does in one<br>
+second what the table made it work for.<br>
+THE HONESTY KIT, added live: plt.title — and not &#x27;Sign-ups&#x27; but the CLAIM:<br>
+&#x27;Pilsen leads sign-ups&#x27;. A title should say what the chart shows. Axis labels.<br>
+And for bars: the axis starts at ZERO — bars encode amount by LENGTH, and a<br>
+chopped bar is a visual lie (next lesson we build that lie on purpose).<br>
+LINE CHART live for change over time: weekly signups, marker=&#x27;o&#x27;, ylim(0,...).<br>
+WHICH CHART WHEN, on screen: comparing categories → bars. Change over time →<br>
+line. Parts of a whole → usually just a table, honestly.<br>
+CLOSE: notebook — chart your own data, claim titles required. If a stranger<br>
+can&#x27;t state your point from the chart alone, the chart isn&#x27;t done.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Bars compare, lines track change, titles state claims — and why a bar that doesn't start at zero is lying with its length. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-data-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The honesty kit</h2>
+
+  <p>A chart is a claim about data, made visual. <code>counts.plot(kind='barh')</code>
+  builds the bars; the honesty kit makes them trustworthy:</p>
+  <p><b>The claim title.</b> Not "Sign-ups" but <i>"Pilsen leads sign-ups."</i>
+  If the title states the point, a stranger reads the chart in three seconds — the
+  standard your charts are graded against.</p>
+  <p><b>Labeled axes.</b> Numbers without units are rumors.</p>
+  <p><b>Bars start at zero.</b> A bar encodes its amount by its <i>length</i>;
+  starting the axis at 70 makes a 71 and a 74 look like a 4× difference. For line
+  charts the rule softens (small changes over time can deserve a zoom), but the
+  default stays zero and departures get a reason.</p>
+  <p>Choosing the form: <b>comparing categories → bars. Change over time →
+  lines.</b> Fancier charts exist; these two, done honestly, cover most of what a
+  school, a team, or a nonprofit will ever ask of you.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/data5-charts.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/data5-charts.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">counts.sort_values().plot(kind=&#x27;barh&#x27;)
+plt.title(&#x27;Sign-ups by neighborhood — Pilsen leads&#x27;)
+plt.xlabel(&#x27;students signed up&#x27;)</pre>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. A good chart title…</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">states the claim the chart makes — the point in words</button>
+    <button class="choice" data-ok="0">names the dataset's file name</button>
+    <button class="choice" data-ok="0">is omitted so the data speaks for itself</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why must bars start at zero?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Bars encode amount by length; a chopped axis makes small gaps look huge</button>
+    <button class="choice" data-ok="0">matplotlib crashes otherwise</button>
+    <button class="choice" data-ok="0">Zero is the average of most data</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Comparing five neighborhoods' totals calls for…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">a bar chart</button>
+    <button class="choice" data-ok="0">a line chart</button>
+    <button class="choice" data-ok="0">a pie of pies</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Two honest charts</h2>
+  <div class="buildtask">
+
+  <p>One comparison (bars) and one change-over-time (line) from any table in this
+  course — full honesty kit on both. Trade with a classmate: can they state each
+  point from the chart alone?</p>
+  <p><b>Turn-in:</b> both charts + what your classmate said your point was.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-data-4.html">&larr; Lesson 4</a> <a href="lesson-data-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Working with Data, lesson 5 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-data-5';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 5 complete';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

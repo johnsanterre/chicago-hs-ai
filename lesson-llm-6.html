@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Is it good? — evaluating AI outputs · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="build-with-llms.html">Build with LLMs</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build with LLMs · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Is it good? — evaluating AI outputs</h1>
+<p class="lede">Changing a prompt and eyeballing one answer is guessing. An eval — fixed inputs, automatic checks, a score — turns prompt work into engineering.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Don't argue. Measure.</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~5 minutes. Two rival system prompts scored live over five topics and three checks.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: two system prompts for a flashcard maker. Which is better? Two<br>
+people could argue all lunch. Or: MEASURE.<br>
+THE EVAL, assembled live: five fixed topics (the inputs never change — that&#x27;s<br>
+what makes scores comparable). Three checks — plain functions: has Q and A?<br>
+question under 25 words? not empty? Output in, True/False out.<br>
+RUN: both prompts × five topics × three checks. Prompt A: 9/15. Prompt B:<br>
+14/15. Argument over. THAT&#x27;S an eval — the tool every serious AI team runs<br>
+before changing anything.<br>
+HONESTY BEAT: checks test FORM brilliantly, TRUTH badly. A wrong answer in<br>
+perfect format passes. Truth needs sources or humans — course 1, lesson 6<br>
+lives on.<br>
+CLOSE: add your own checks, eval YOUR tool from lesson 2 or 5, and never again<br>
+ship a prompt change on vibes.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Fixed inputs, check functions, a score instead of a vibe — and the honest limit: form is checkable, truth is harder. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-llm-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The eval: inputs, checks, score</h2>
+
+  <p>An <b>eval</b> has three parts. <b>Fixed inputs</b>: the same five topics
+  every run, so scores compare across prompt versions. <b>Checks</b>: plain
+  functions taking an output and returning True or False — has the format? under
+  the length? contains no hedging? Each encodes one property you care about.
+  <b>The score</b>: outputs × checks, counted. Prompt B beats prompt A 14 to 9
+  ends the argument that adjectives never could.</p>
+  <p>This is precisely how professional teams work: thousands of eval cases run
+  before any prompt or model change ships. Yours has five cases and three
+  checks — the shape is identical, and the habit is the point: <b>never ship a
+  prompt change on vibes</b>.</p>
+  <p>And the honest limit, which you knew before this course: checks verify
+  <i>form</i> wonderfully and <i>truth</i> poorly. A wrong answer in perfect
+  format passes every formatting check. Truth still requires sources or humans —
+  the verification rule from How AI Works, now wearing an engineering hat.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/llm6-evals.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/llm6-evals.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">def has_q_and_a(out): return &#x27;Q:&#x27; in out and &#x27;A:&#x27; in out
+for t in topics:
+    out = ask(t, system=sysprompt)
+    for c in CHECKS: total += 1; score += bool(c(out))</pre>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why fixed inputs across eval runs?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Scores are only comparable if the inputs didn't change</button>
+    <button class="choice" data-ok="0">The model memorizes new inputs</button>
+    <button class="choice" data-ok="0">Fixed inputs are cheaper per token</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. A check function is…</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">output in, True/False out — one property, tested automatically</button>
+    <button class="choice" data-ok="0">a human reading each answer carefully</button>
+    <button class="choice" data-ok="0">a spell-checker for prompts</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From How AI Works — evals struggle to test truth because…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">a false answer in perfect form passes form checks; truth needs sources</button>
+    <button class="choice" data-ok="0">truth changes daily</button>
+    <button class="choice" data-ok="0">models refuse to be tested</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Eval your own tool</h2>
+  <div class="buildtask">
+
+  <p>Five fixed inputs, three-plus checks, run against your lesson-2 or lesson-5
+  tool before and after one prompt improvement. The score table decides what
+  ships.</p>
+  <p><b>Turn-in:</b> the table + which prompt won and by how much.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-llm-5.html">&larr; Lesson 5</a> <a href="lesson-llm-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Build with LLMs, lesson 6 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-llm-6';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 6 complete';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

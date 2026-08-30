@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Getting data from APIs · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="working-with-data.html">Working with Data</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Working with Data · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>Getting data from APIs</h1>
+<p class="lede">Chicago publishes its own data — libraries, potholes, business licenses — behind URLs that return data instead of pages. Today you pull live city data into pandas.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The city, as JSON</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~5 minutes. data.cityofchicago.org toured; the libraries API pulled live into a DataFrame.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: data.cityofchicago.org. Scroll: crime reports, pothole repairs,<br>
+library locations, restaurant inspections. Your city, publishing itself.<br>
+THE IDEA: an API is a URL that returns DATA instead of a page. On screen: the<br>
+libraries endpoint URL → raw JSON in the browser. Ugly but familiar — those are<br>
+dictionaries in lists, the exact nested shapes from Python in Colab lesson 5.<br>
+LIVE: requests.get(url) → status 200 (the web&#x27;s &#x27;OK&#x27;) → r.json() →<br>
+pd.json_normalize(data) → a DataFrame of every Chicago public library. From<br>
+city servers to your table in four lines.<br>
+HONESTY BEAT: real data work needs a plan B — endpoints change, wifi dies. The<br>
+notebook ships a backup dataset; knowing WHEN to fall back is part of the<br>
+skill.<br>
+CLOSE: browse the portal, pick any dataset that makes you curious, pull it.<br>
+Homework has never been this literal about your own city.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>URLs that return data, status 200, JSON into pandas — and why your city's open-data portal is the best practice ground there is. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-data-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>URLs that return data</h2>
+
+  <p>An <b>API</b> is a URL that returns data instead of a web page. Chicago runs
+  a public one — <b>data.cityofchicago.org</b> — publishing libraries, 311
+  requests, inspections, licenses. Every dataset shows its API endpoint under
+  Export → API.</p>
+  <p>The pull is four moves: <code>requests.get(url)</code> asks;
+  <code>r.status_code</code> answers (200 = OK, 404 = wrong address);
+  <code>r.json()</code> parses the reply into Python objects — dictionaries in
+  lists, the nested shapes you met in the Python course; and
+  <code>pd.json_normalize(data)</code> flattens them into a DataFrame. City
+  servers to your table, four lines.</p>
+  <p>Two professional habits ride along. <b>Check the status before trusting the
+  data</b> — a 200 with three rows can still mean a rate limit truncated you.
+  And <b>keep a plan B</b>: endpoints change, wifi drops mid-class; the notebook
+  carries a small backup dataset so the lesson survives the real world. Knowing
+  when to fall back is itself a data skill — the same one that will matter when a
+  nonprofit's spreadsheet export fails the night before a board meeting.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/data7-apis.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/data7-apis.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">import requests, pandas as pd
+r = requests.get(&#x27;https://data.cityofchicago.org/resource/x8fc-8rcq.json&#x27;, timeout=30)
+df = pd.json_normalize(r.json())</pre>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. An API is…</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">a URL that returns data instead of a page</button>
+    <button class="choice" data-ok="0">a program that cleans data automatically</button>
+    <button class="choice" data-ok="0">a paid database subscription</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Status code 200 means…</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">the request succeeded</button>
+    <button class="choice" data-ok="0">200 rows were returned</button>
+    <button class="choice" data-ok="0">the server is 200 miles away</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From the Python course — JSON's nested dictionaries-in-lists are handled by…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">the same dictionary and list skills, plus json_normalize for tables</button>
+    <button class="choice" data-ok="0">a special language unrelated to Python</button>
+    <button class="choice" data-ok="0">converting everything to strings first</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Your dataset, from the portal</h2>
+  <div class="buildtask">
+
+  <p>Browse the portal, pick a dataset you're honestly curious about, pull it via
+  its API, show <code>.head()</code> and one <code>value_counts()</code>, and
+  write the one thing that surprised you.</p>
+  <p><b>Turn-in:</b> dataset name, code, surprise.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-data-6.html">&larr; Lesson 6</a> <a href="lesson-data-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Working with Data, lesson 7 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-data-7';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 7 complete';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Git and GitHub — your work in public · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="code-with-ai.html">Code with an AI Partner</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Code with an AI Partner · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>Git and GitHub — your work in public</h1>
+<p class="lede">A GitHub profile is a builder's public record — every project from every course lands there. Today: repo, commit, and the habit of saving your work like a professional.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Save points for your life's work</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. A repo created in the GitHub web UI, files uploaded, a real commit message written.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: game save points. Lose a boss fight, reload the save. Git is save<br>
+points for your work — and GitHub is where those saves live in public.<br>
+LIVE, all in the browser (no installs): github.com → New repository → name it<br>
+my-site → public → create.<br>
+UPLOAD: drag in hello.html, about.html. The commit message box — this matters:<br>
+&#x27;Add about page with styles and dark mode&#x27;. A commit message tells future-you<br>
+WHAT and WHY. &#x27;stuff&#x27; and &#x27;asdf&#x27; are lies to your future self.<br>
+THE PROFILE VIEW: this repo now sits on your profile. Colleges look. Employers<br>
+look. Twenty repos from these courses = a public record no resume matches.<br>
+CLOSE: from today, every build in every course ends with a commit. Next lesson,<br>
+this repo becomes a live website.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Repos, commits, and why a GitHub profile beats a resume — the save-point habit that compounds. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-web-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Repos, commits, and the record</h2>
+
+  <p>A <b>repository</b> ("repo") is a project's home: its files plus the full
+  history of every change. A <b>commit</b> is one saved change with a message
+  saying what and why. That history is the professional's safety net — any commit
+  can be revisited, nothing is ever truly lost.</p>
+  <p>Today you'll work entirely in GitHub's web interface — create the repo, drag
+  files in, write the commit message. (The command-line git that professionals also
+  use is one course away; the concepts you learn today are identical.)</p>
+  <p><b>Commit messages are letters to future-you.</b> "Add dark-mode toggle to
+  about page" lets next-month-you find the change in seconds. "stuff" does not.
+  Write the letter every time.</p>
+  <p>And the compounding part: this profile is your public record. Every course on
+  this site ends its builds here. A college admissions reader or a hiring manager
+  who finds twenty real projects, with histories, learns more about you than any
+  transcript can say. Start the record today; it only grows.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Do it</div>
+  <h2>Repo one</h2>
+
+  <p><b>1.</b> Create a GitHub account if you don't have one — username you'd put
+  on a college application.</p>
+  <p><b>2.</b> New repository: <i>my-site</i>, public, with a README.</p>
+  <p><b>3.</b> Upload your course files (hello, about, the bug-hunt page). Real
+  commit message.</p>
+  <p><b>4.</b> Edit the README in the web editor: two sentences on what this repo
+  is. Commit that too — second save point.</p>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. A commit is…</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">one saved change plus a message saying what and why</button>
+    <button class="choice" data-ok="0">a copy of the repo on your desktop</button>
+    <button class="choice" data-ok="0">a request for someone to review your code</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why do commit messages matter?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">They let future-you (and teammates) find and understand changes fast</button>
+    <button class="choice" data-ok="0">GitHub requires 10+ characters</button>
+    <button class="choice" data-ok="0">They improve your site's search ranking</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. The reason every course's builds land on GitHub:</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">a public record of real work that compounds — no resume matches it</button>
+    <button class="choice" data-ok="0">files are unsafe anywhere else</button>
+    <button class="choice" data-ok="0">teachers can only grade through GitHub</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The record begins</h2>
+  <div class="buildtask">
+
+  <p>Your repo, live: course files uploaded, honest commit messages, a README that
+  says what it is. Then write the commit message you WISH you could show a college
+  reader in four years — as the README's last line.</p>
+  <p><b>Turn-in:</b> the repo link.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-web-6.html">&larr; Lesson 6</a> <a href="lesson-web-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Code with an AI Partner, lesson 7 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-web-7';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 7 complete';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

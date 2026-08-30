@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cleaning messy real data · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="working-with-data.html">Working with Data</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Working with Data · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Cleaning messy real data</h1>
+<p class="lede">Real data is dirty — missing values, spelling chaos, duplicates, impossible numbers. Diagnose first, fix one thing at a time, and log every change.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Diagnose before you touch</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~5 minutes. A filthy 8-row table diagnosed and cleaned live, decisions narrated.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: a table with &#x27;pilsen&#x27;, &#x27;Pilsen&#x27;, and &#x27;PILSEN&#x27; as three different<br>
+neighborhoods, a missing value, a duplicate row, and someone with -1 hours.<br>
+Welcome to real data.<br>
+RULE 1: DIAGNOSE FIRST. Three commands: .isna().sum() (missing per column),<br>
+.unique() (spelling chaos), .duplicated().sum() (dupes). Look before touching.<br>
+FIX live, one problem at a time, narrating each decision:<br>
+drop_duplicates(). str.title().str.strip() to unify spelling. The -1 → that&#x27;s<br>
+IMPOSSIBLE, not just odd → treat as missing.<br>
+THE JUDGMENT CALL: what about missing values? Drop the row? Fill with the<br>
+average? Neither is &#x27;correct&#x27;. You DECIDE — and you DISCLOSE. On screen: the<br>
+cleaning log, every change listed.<br>
+CLOSE: cleaned data with no log is just data someone tampered with. The log is<br>
+what makes it science.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Missing, misspelled, duplicated, impossible — the diagnosis commands, and why the cleaning log is what makes clean data trustworthy. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-data-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>Diagnose, decide, disclose</h2>
+
+  <p>Real-world data arrives dirty, always: missing values, inconsistent spelling
+  ('Pilsen' / 'pilsen' / 'PILSEN' counting as three places), duplicate rows,
+  impossible values (-1 hours online). Cleaning is most of real data work — and
+  it's judgment, not just commands.</p>
+  <p><b>Diagnose first:</b> <code>df.isna().sum()</code> counts missing per
+  column; <code>df['col'].unique()</code> exposes spelling chaos;
+  <code>df.duplicated().sum()</code> finds copies. Professionals look before they
+  touch.</p>
+  <p><b>Fix one problem at a time,</b> checking after each:
+  <code>drop_duplicates()</code>, <code>str.title().str.strip()</code> to unify
+  text, and impossible values converted to missing — a lie is worse than a
+  blank.</p>
+  <p><b>Decide and disclose.</b> Missing values force a choice — drop the rows,
+  fill with an average, or leave them — and no choice is automatically right; each
+  bends the answers differently. So you keep a <b>cleaning log</b>: every change,
+  listed, in order. Cleaned data with a log is science. Without one, it's just a
+  table somebody quietly tampered with.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/data3-cleaning.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/data3-cleaning.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code">print(df.isna().sum())
+print(df[&#x27;neighborhood&#x27;].unique())
+df = df.drop_duplicates()
+df[&#x27;neighborhood&#x27;] = df[&#x27;neighborhood&#x27;].str.title().str.strip()</pre>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. First step with a fresh, suspicious dataset:</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">diagnose — count missing, check unique values, find duplicates</button>
+    <button class="choice" data-ok="0">fill every blank with zero</button>
+    <button class="choice" data-ok="0">delete every imperfect row</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why convert -1 hours to missing rather than leave it?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">An impossible value is a lie; a blank is at least honest</button>
+    <button class="choice" data-ok="0">Negative numbers crash pandas</button>
+    <button class="choice" data-ok="0">It makes the average higher</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. The cleaning log exists so that…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">anyone (including future-you) can see exactly how the data was altered</button>
+    <button class="choice" data-ok="0">the teacher can count your effort</button>
+    <button class="choice" data-ok="0">pandas can undo the changes automatically</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The cleaning log</h2>
+  <div class="buildtask">
+
+  <p>The notebook's messy table, fully cleaned, plus your log: every change, its
+  reason, and the one judgment call you had to make — with your defense of it.</p>
+  <p><b>Turn-in:</b> clean table + log.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-data-2.html">&larr; Lesson 2</a> <a href="lesson-data-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Working with Data, lesson 3 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-data-3';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>

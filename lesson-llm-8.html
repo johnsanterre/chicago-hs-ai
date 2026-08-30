@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mini-project — an AI helper for a real task · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="build-with-llms.html">Build with LLMs</a> / Lesson 8</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build with LLMs · Lesson 8 of 8 · about 2–4 hours</p>
+<h1>Mini-project — an AI helper for a real task</h1>
+<p class="lede">The capstone: a working AI helper for something in your actual life — with a system prompt you designed, one eval check, a cost line, and an honesty note.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Ship the helper</h2>
+  <div class="media-slot">
+    <b>Video slot</b> — Planned: ~4 minutes. A worked capstone, fast, with the four required elements flagged.<br>
+    <span class="tofill">TO FILL: generate/record video — script below is final</span>
+  </div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Video script</summary>
+    <p style="font-size:14px;color:var(--ink2);line-height:1.6">OPEN: the course&#x27;s toolkit on screen — calls, system prompts, JSON,<br>
+documents, chat, evals, agents. Time to aim it at YOUR week.<br>
+THE MENU: study buddy quizzing from your notes. Club communicator turning chaos<br>
+into clean announcements. Homework explainer with a strict hint-first soul.<br>
+Schedule agent with two lookup tools. Or yours, at this size.<br>
+THE METHOD, unchanged since the Python capstone: plan in comments first · build<br>
+in pieces · sign for every line · runs twice clean.<br>
+THE FOUR REQUIREMENTS flagged live on a worked example: 1. The system prompt,<br>
+explained — it&#x27;s the design. 2. One eval check proving one property. 3. The<br>
+cost line — total tokens, printed; you spent a shared resource, show it.<br>
+4. The honesty note — a paragraph on what it does BADLY. Every real product<br>
+has one; most just don&#x27;t publish it. You do.<br>
+CLOSE: this helper plus your portfolio is the toolkit the nonprofit practicum<br>
+assumes. Ship it, demo it, own it. Course five, complete.</p>
+  </details>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Plan, pieces, sign, runs-twice — plus the four capstone requirements: the soul, the check, the cost line, the honesty note. <span style="color:var(--ink2)">(Generated narration; produced audio comes later.)</span></p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-llm-8-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read</div>
+  <h2>The four requirements</h2>
+
+  <p>The method is the same one every capstone in these courses has drilled:
+  plan in comments before code, build in pieces, sign for every line the AI
+  helped with, and it runs twice, clean. What's new is what shipping an
+  <i>AI</i> product demands beyond working code:</p>
+  <p><b>The system prompt, explained.</b> It's the product's design and its
+  limits — present it like one, with a sentence on each rule it enforces.</p>
+  <p><b>One eval check.</b> A single automated property test (lesson 6) that
+  proves the helper holds one promise. One check honestly run beats ten claimed
+  virtues.</p>
+  <p><b>The cost line.</b> Total tokens spent, printed by your code. You built
+  on a shared key; accounting for what you used is professional habit one.</p>
+  <p><b>The honesty note.</b> A paragraph on what it does badly — where it
+  hallucinates, what it can't know, when a human should take over. Every real
+  AI product has this paragraph; the trustworthy ones say it out loud. Yours
+  will, from the first thing you ever ship.</p>
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="do">
+  <div class="stype">4 · Code</div>
+  <h2>Open the notebook</h2>
+  <p style="display:flex;gap:1em;align-items:center;flex-wrap:wrap">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/llm8-project.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/llm8-project.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <p style="margin-top:10px">A taste of what's inside:</p>
+<pre class="code"># MY PLAN (before any code):
+# what it does:
+# the pieces: 1.  2.  3.
+# what could go wrong + my guard:</pre>
+  <button class="mark" data-for="do">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. The four AI-specific capstone requirements are…</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">system prompt explained, one eval check, the cost line, the honesty note</button>
+    <button class="choice" data-ok="0">speed, length, color scheme, name</button>
+    <button class="choice" data-ok="0">five tools, ten prompts, two models, one agent</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why print the cost line?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">You spent a shared resource; accounting for it is professional habit</button>
+    <button class="choice" data-ok="0">The API refuses to run without it</button>
+    <button class="choice" data-ok="0">Tokens are free but the line looks impressive</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. The honesty note exists because…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">every AI product has failure modes; trustworthy builders state them</button>
+    <button class="choice" data-ok="0">teachers require humility</button>
+    <button class="choice" data-ok="0">it lowers the token bill</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Capstone — the helper, shipped</h2>
+  <div class="buildtask">
+
+  <p>The full notebook: plan, pieces, demo run twice clean, plus all four
+  requirements. This is the artifact the nonprofit practicum will assume you can
+  produce.</p>
+  <p><b>Turn-in:</b> the notebook + the honesty note read aloud in class. That's
+  the course.</p>
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 8</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-llm-7.html">&larr; Lesson 7</a> <a href="build-with-llms.html">Back to the course &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; Build with LLMs, lesson 8 of 8.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-chsai-llm-8';
+  const SEGS=['watch','listen','read','do','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 8 complete';
+      document.getElementById('doneHead').textContent='Lesson 8 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render()})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+</body>
+</html>
