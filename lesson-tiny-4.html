@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Context and the wall · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="tiny-language-model.html">Build a Tiny Language Model</a> / Lesson 4</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build a Tiny Language Model · Lesson 4 of 8 · about 2–4 hours</p>
+<h1>Context and the wall</h1>
+<p class="lede">One letter of memory writes gibberish. Three letters of memory write almost-words. So why not remember fifty? Because the table explodes — and hitting that wall is the whole point.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>More memory, better text, bigger table</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-tiny-4-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">The same corpus generates with one, two, and three letters of context — quality climbs, and the table size climbs a cliff.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>N-grams: why more context helps, and the combinatorial wall that stops counting cold.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-tiny-4-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The table that ate the alphabet</h2>
+
+
+  <p>Your bigram machine has a one-letter memory: it knows the current letter
+  and nothing before it. That's why its output dissolves — every letter is
+  chosen as if the sentence just started.</p>
+  <p>The upgrade is obvious: remember more. Condition on the last TWO letters
+  (a <b>trigram</b> model), or three, or four. Each extra letter of memory
+  visibly improves the text: real words start surfacing, then short phrases.
+  Run the numbers on the table, though:</p>
+  <p>1 letter of context: 27 rows. Two letters: 27 × 27 = <b>729</b> rows.
+  Three: <b>19,683</b>. Ten letters of context: about <b>206 trillion</b> rows —
+  and your corpus is a few thousand characters long. Almost every row would be
+  empty. The model would mostly know nothing, very precisely.</p>
+  <p>This is the wall, and it's worth respecting because it stopped the whole
+  field for decades: <b>counting cannot scale to long context, because most
+  long contexts have never occurred even once — anywhere.</b> The sentence
+  you're reading right now has never existed before, yet you understand it.
+  A counting model cannot; it can only look up the past.</p>
+  <p>What breaks the wall is the subject of the next lesson: stop looking up
+  contexts, start <i>learning</i> from them — so that similar-but-never-seen
+  contexts share what the model knows.</p>
+
+  <!-- ============ FIGURE 1: The context switch ============ -->
+  <div class="fig" id="figctx">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>One, two, three letters of memory</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Same corpus, same dice. Only
+    the memory changes.</p>
+    <div class="figtabs">
+      <button class="wbtn xbtn" data-k="1">1 letter</button>
+      <button class="wbtn alt xbtn" data-k="2">2 letters</button>
+      <button class="wbtn alt xbtn" data-k="3">3 letters</button>
+      <button class="wbtn" id="xgen">Generate</button>
+    </div>
+    <p style="font-size:14px;margin:8px 0"><span class="statebox">possible rows: <b id="xrows"></b></span>
+    <span class="statebox">rows actually seen: <b id="xseen"></b></span></p>
+    <div class="prefix" id="xout" style="font-size:16px;min-height:3.5em;word-break:break-all;white-space:normal"></div>
+    <p class="fignote" id="xnote">Quality up, table up — and "rows actually seen"
+    falling ever further behind "possible rows" is the wall, in two numbers.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Hit the wall yourself</h2>
+  <p>The notebook builds the trigram and 4-gram versions of your machine, generates from each, and then counts empty rows — you'll watch coverage collapse as context grows, on your own corpus.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/tiny4-context.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/tiny4-context.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why does more context improve the generated text?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Longer tables are more accurate by definition</button>
+    <button class="choice" data-ok="1">Each choice is conditioned on more of what came before, so it fits better</button>
+    <button class="choice" data-ok="0">The dice get better odds</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why can't counting scale to 10 letters of context?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Computers run out of memory printing the table</button>
+    <button class="choice" data-ok="1">Almost every 10-letter context has never occurred, so almost every row is empty</button>
+    <button class="choice" data-ok="0">The alphabet is too small</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 3 — your trigram model at temperature 0.1 starts repeating a phrase. What's happening?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Near-greedy sampling found a cycle in the favorites</button>
+    <button class="choice" data-ok="0">The table has a virus</button>
+    <button class="choice" data-ok="0">Three letters of context is too many</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The wall, documented</h2>
+  <div class="buildtask">
+
+
+  <p>Make a small table of your own: for context lengths 1 through 4 — possible
+  rows, rows your corpus filled, and your favorite generated line at each
+  length. Under it, two sentences: what improved, and what is about to become
+  impossible?</p>
+  <p><b>Turn-in:</b> the table and the two sentences. This is the "why" that
+  lesson 5 answers.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 4</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-tiny-3.html">&larr; Lesson 3</a> <a href="lesson-tiny-5.html">Lesson 5 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Build a Tiny Language Model, lesson 4 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-tiny-4';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 4 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 4 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CORPUS="the quick student counted every letter in the book and then the counting became a model that could write its own strange sentences about the city and the lake and the long quiet train ride home where the same student read the strange sentences out loud and laughed because the machine had learned the shape of english from nothing but counting what follows what in the text of an ordinary paragraph";
+  let K=1;
+  function build(k){
+    const t={};
+    for(let i=0;i+k<CORPUS.length;i++){
+      const ctx=CORPUS.slice(i,i+k),nxt=CORPUS[i+k];
+      t[ctx]=t[ctx]||{};t[ctx][nxt]=(t[ctx][nxt]||0)+1;
+    }
+    return t;
+  }
+  const tables={1:build(1),2:build(2),3:build(3)};
+  function stats(){
+    const poss=Math.pow(27,K);
+    $('xrows').textContent=poss.toLocaleString();
+    $('xseen').textContent=Object.keys(tables[K]).length.toLocaleString();
+  }
+  function gen(){
+    const t=tables[K];
+    let cur=CORPUS.slice(0,K),out=cur;
+    for(let i=0;i<110;i++){
+      const row=t[cur];
+      if(!row){out+=' ';cur=out.slice(-K);continue;}
+      const total=Object.values(row).reduce((s,n)=>s+n,0);
+      let r=Math.random()*total,picked=null;
+      for(const [b,n] of Object.entries(row)){r-=n;if(r<=0){picked=b;break;}}
+      if(picked===null)picked=Object.keys(row)[0];
+      out+=picked;cur=out.slice(-K);
+    }
+    $('xout').textContent=out.replaceAll(' ','·');
+    $('xnote').innerHTML=K===1?'One letter of memory: English-shaped static.':
+      K===2?'Two letters: real words are surfacing. Possible rows just multiplied by 27.':
+      'Three letters: phrases now — and 19,683 possible rows for a 398-character corpus. The wall is right there.';
+  }
+  document.querySelectorAll('.xbtn').forEach(b=>b.addEventListener('click',()=>{
+    K=+b.dataset.k;
+    document.querySelectorAll('.xbtn').forEach((x,j)=>x.className='wbtn xbtn'+(+x.dataset.k===K?'':' alt'));
+    stats();gen();
+  }));
+  $('xgen').addEventListener('click',gen);
+  stats();gen();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

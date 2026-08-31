@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>It learns · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="tiny-language-model.html">Build a Tiny Language Model</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build a Tiny Language Model · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>It learns</h1>
+<p class="lede">Counting hit a wall. The way past it: stop storing answers and start learning them — numbers, nudged a little at a time, until the predictions get good.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Watch the loss fall</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-tiny-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A model starts out guessing at random, gets nudged a few hundred times, and ends up as good as the counting table — without storing a single count.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Learning instead of looking up: weights, nudges, and the falling number that means it's working.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-tiny-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Nudge the numbers</h2>
+
+
+  <p>Here's the move that broke the wall. Instead of a table of counts, give the
+  model a grid of adjustable numbers — call them <b>weights</b>. To predict
+  what follows <b>t</b>, the model combines its weights into betting odds. At
+  the start the weights are random, so the odds are garbage.</p>
+  <p>Then the training loop, and it is almost insultingly simple:</p>
+  <p><b>Show</b> it one real example from the corpus — "after t came h."<br>
+  <b>Score</b> its bet: how much probability did it put on h? The score is a
+  single number called the <b>loss</b> — big when the model was surprised by
+  the truth, small when it expected it.<br>
+  <b>Nudge</b> every weight a tiny step in whichever direction would have made
+  the loss smaller.<br>
+  <b>Repeat</b> — thousands of times.</p>
+  <p>No single nudge accomplishes much. All of them together drag the loss
+  down, down, down — and a falling loss means the model's bets are getting
+  sharper. When you train it in the notebook you will watch the number fall
+  in real time, and that falling number is the same thing engineers at every
+  AI lab stare at all day.</p>
+  <p>Why does this beat counting? A table can only look up contexts it has
+  literally seen. Learned weights <b>generalize</b>: similar contexts share
+  weights, so the model has sensible odds even for combinations it never met.
+  That one property — plus a few thousand more of everything — is the road
+  from your notebook to the models you talk to.</p>
+
+  <!-- ============ FIGURE 1: Live training ============ -->
+  <div class="fig" id="figtrain">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Train it, right here</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">A real model with 756 weights,
+    training in your browser on lesson 2's corpus. Nothing is faked — the
+    curve is the actual loss.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="trstart">Train</button>
+      <button class="wbtn" id="trsample">Sample from it</button>
+      <button class="wbtn alt" id="trreset">Reset weights</button>
+    </div>
+    <p style="font-size:14px;margin:8px 0"><span class="statebox">epoch: <b id="trep">0</b></span>
+    <span class="statebox">loss: <b id="trloss">—</b></span></p>
+    <canvas id="trcv" width="640" height="160" style="width:100%;max-width:640px;border:1px solid var(--line);border-radius:8px;background:#fff"></canvas>
+    <div class="prefix" id="trout" style="font-size:16px;min-height:2.2em;margin-top:8px;word-break:break-all;white-space:normal"></div>
+    <p class="fignote">Sample before training: static. Sample after: lesson 2's
+    English-shaped gibberish — but nothing was counted. The weights learned it.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the learner</h2>
+  <p>The notebook builds this learner in numpy — weights, softmax, loss, nudges — trains it on a real book, plots the falling loss, and samples from the trained weights. Every line is code you can read.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/tiny5-learning.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/tiny5-learning.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is the loss?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">The number of wrong letters in the output</button>
+    <button class="choice" data-ok="1">A score of how surprised the model was by the true next letter</button>
+    <button class="choice" data-ok="0">The amount of memory the model uses</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why do learned weights beat a lookup table for new contexts?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Weights generalize — similar contexts share them, so never-seen combinations still get sensible odds</button>
+    <button class="choice" data-ok="0">Weights store more counts than tables</button>
+    <button class="choice" data-ok="0">Tables can't hold probabilities</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — the wall was that most long contexts have never occurred. Which part of learning answers that?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">The loop repeats thousands of times</button>
+    <button class="choice" data-ok="1">Generalization: the model doesn't need to have seen a context to bet sensibly on it</button>
+    <button class="choice" data-ok="0">The loss always reaches zero eventually</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The training report</h2>
+  <div class="buildtask">
+
+
+  <p>Train your learner twice: once for 50 nudge-rounds, once for 500. For each
+  run: the final loss, one generated line, and one sentence comparing them.
+  Then the question that matters: where do you think the improvement stops,
+  and why would it stop?</p>
+  <p><b>Turn-in:</b> the report, plus the model card updated for the learning
+  version.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-tiny-4.html">&larr; Lesson 4</a> <a href="lesson-tiny-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Build a Tiny Language Model, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-tiny-5';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CORPUS="the quick student counted every letter in the book and then the counting became a model that could write its own strange sentences about the city and the lake and the long quiet train ride home where the same student read the strange sentences out loud and laughed because the machine had learned the shape of english from nothing but counting what follows what in the text of an ordinary paragraph";
+  const AB="abcdefghijklmnopqrstuvwxyz ";
+  const V=27;
+  const idx={};for(let i=0;i<V;i++)idx[AB[i]]=i;
+  const data=[];
+  for(let i=0;i<CORPUS.length-1;i++){
+    const a=idx[CORPUS[i]],b=idx[CORPUS[i+1]];
+    if(a!==undefined&&b!==undefined)data.push([a,b]);
+  }
+  let W,losses,epoch,timer=null;
+  function reset(){
+    W=[];for(let i=0;i<V;i++){W.push([]);for(let j=0;j<V;j++)W[i].push((Math.random()-0.5)*0.1);}
+    losses=[];epoch=0;
+    $('trep').textContent='0';$('trloss').textContent='—';$('trout').textContent='';
+    if(timer){clearInterval(timer);timer=null;$('trstart').textContent='Train';}
+    drawCurve();
+  }
+  function softmaxRow(i){
+    const m=Math.max(...W[i]);
+    const e=W[i].map(w=>Math.exp(w-m));
+    const z=e.reduce((s,x)=>s+x,0);
+    return e.map(x=>x/z);
+  }
+  function epochStep(){
+    const grad=[];for(let i=0;i<V;i++){grad.push(new Array(V).fill(0));}
+    let L=0;
+    const rowCount=new Array(V).fill(0);
+    for(const [a,b] of data){
+      const p=softmaxRow(a);
+      L+=-Math.log(Math.max(p[b],1e-9));
+      for(let j=0;j<V;j++)grad[a][j]+=p[j];
+      grad[a][b]-=1;rowCount[a]++;
+    }
+    L/=data.length;
+    const lr=0.5;
+    for(let i=0;i<V;i++)for(let j=0;j<V;j++)W[i][j]-=lr*grad[i][j]/data.length*V;
+    losses.push(L);epoch++;
+    $('trep').textContent=epoch;$('trloss').textContent=L.toFixed(3);
+    drawCurve();
+    if(epoch>=120){clearInterval(timer);timer=null;$('trstart').textContent='Train more';}
+  }
+  function drawCurve(){
+    const cv=$('trcv'),ctx=cv.getContext('2d');
+    ctx.clearRect(0,0,640,160);
+    ctx.strokeStyle='#e2e2da';ctx.strokeRect(0,0,640,160);
+    if(losses.length<2)return;
+    const max=losses[0],min=Math.min(...losses);
+    ctx.strokeStyle='#174A6C';ctx.lineWidth=2;ctx.beginPath();
+    losses.forEach((l,i)=>{
+      const x=10+i/(Math.max(losses.length-1,119))*620;
+      const y=10+(max-l)/(max-min+1e-9)*140;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+  }
+  function sample(){
+    let cur=idx['t'],out='t';
+    for(let i=0;i<70;i++){
+      const p=softmaxRow(cur);
+      let r=Math.random(),pick=V-1;
+      for(let j=0;j<V;j++){r-=p[j];if(r<=0){pick=j;break;}}
+      out+=AB[pick];cur=pick;
+    }
+    $('trout').textContent=out.replaceAll(' ','·');
+  }
+  $('trstart').addEventListener('click',()=>{
+    if(timer)return;
+    timer=setInterval(epochStep,40);
+    $('trstart').textContent='Training…';
+  });
+  $('trsample').addEventListener('click',sample);
+  $('trreset').addEventListener('click',reset);
+  reset();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

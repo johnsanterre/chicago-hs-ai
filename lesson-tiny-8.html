@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your model · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="tiny-language-model.html">Build a Tiny Language Model</a> / Lesson 8</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build a Tiny Language Model · Lesson 8 of 8 · about 2–4 hours</p>
+<h1>Your model</h1>
+<p class="lede">The capstone: curate a corpus, train your machine on it, tune it, generate a page, and write the honest model card. Then find out exactly how far you are from the big ones — in numbers.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>From your words to your model</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-tiny-8-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A student's own writing goes in; a tiny model comes out speaking a recognizable shadow of their voice — and then the scale ladder shows what a trillion more parameters buys.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The capstone: your corpus, your model, your model card — and the honest distance between your machine and the frontier.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-tiny-8-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The capstone, and the ladder</h2>
+
+
+  <p>You have every piece: counting (1–2), the dial (3), context (4), learning
+  (5), tokens (6), and the knowledge that data decides everything (7). The
+  capstone assembles them:</p>
+  <p><b>Curate a corpus.</b> Your own writing is the best choice — old essays,
+  journals, messages you're comfortable using. Public-domain books are the
+  other good option. <b>The rule:</b> your words, or words old enough to
+  belong to everyone. Not your group chat (those aren't only your words), and
+  not copyrighted text.</p>
+  <p><b>Train, tune, generate.</b> Run the machine at two or three context
+  lengths, find the temperature that suits your corpus, and generate a full
+  page of output. Pick the best and worst passages.</p>
+  <p><b>Write the model card</b> — the real product: what data went in (and
+  what you chose to leave out), what the model does well, where it fails,
+  and one thing it "believes" that is really a fact about your corpus.</p>
+  <p>And then place yourself honestly on the ladder. Your model has a few
+  thousand numbers in it and read a few pages. GPT-2, which stunned the field
+  in 2019, has 1.5 billion. The models you talk to daily are far past that —
+  exact sizes undisclosed — trained on a large slice of everything ever
+  written. Same bet-placing idea. Same falling loss. Same data-is-destiny
+  rule. The distance between your machine and theirs is not a different kind
+  of thing. It is this thing, scaled by a factor you can now count.</p>
+
+  <!-- ============ FIGURE 1: The scale ladder ============ -->
+  <div class="fig" id="figscale">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The ladder</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Slide across seventy years of
+    the same idea. The bar is parameter count — on a log scale, because nothing
+    else could hold it.</p>
+    <div class="figtabs" style="align-items:center">
+      <input type="range" id="scdial" min="0" max="3" step="1" value="0" style="width:240px">
+    </div>
+    <h4 id="scname" style="margin:10px 0 2px"></h4>
+    <div class="bars"><div class="bar"><span class="bw">params</span>
+      <span class="btrack"><span class="bfill" id="scbar" style="transition:width .4s"></span></span>
+      <span class="bpc" id="scpc"></span></div></div>
+    <p id="scdesc" style="font-size:15px;min-height:4em;margin:8px 0"></p>
+    <p class="fignote">Every rung runs your loop: look at context, place bets,
+    sample, repeat. You didn't build a toy version of a language model. You
+    built a small one.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>The capstone notebook</h2>
+  <p>The notebook is your capstone workspace: paste your corpus, train at several context lengths, tune the temperature, generate your page, and fill in the model-card template at the bottom.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/tiny8-your-model.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/tiny8-your-model.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why is the corpus rule “your words, or words old enough to belong to everyone”?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Old text trains faster</button>
+    <button class="choice" data-ok="1">Other people's words — friends' messages, copyrighted books — aren't yours to train on</button>
+    <button class="choice" data-ok="0">New text has too many typos</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What belongs in a model card?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Only the model's best outputs</button>
+    <button class="choice" data-ok="1">The data that went in, what works, what fails, and the biases the corpus baked in</button>
+    <button class="choice" data-ok="0">The source code, printed in full</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From the whole course — what's the honest relationship between your model and the ones you use daily?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Completely different technologies that share a name</button>
+    <button class="choice" data-ok="1">The same bet-placing idea at vastly different scale — yours is small, not fake</button>
+    <button class="choice" data-ok="0">Identical, except yours is slower</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Ship it</h2>
+  <div class="buildtask">
+
+
+  <p>Turn in the full capstone: the corpus description (not the corpus itself
+  if it's personal), the generated page with best and worst passages marked,
+  and the finished model card. Present three minutes to the class: one
+  generated line, one thing your model learned about your voice, one thing
+  it can never do.</p>
+  <p><b>Turn-in:</b> page + model card + the three-minute presentation. The
+  model card is the course grade.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 8</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-tiny-7.html">&larr; Lesson 7</a> <a href="tiny-language-model.html">Course home &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Build a Tiny Language Model, lesson 8 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-tiny-8';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 8 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 8 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 8';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 8 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const RUNGS=[
+   ["Your model (this course)","~2,000 parameters",8,
+    "A few pages of corpus, seconds to train, one student maintaining it. It writes English-shaped text in your voice's shadow — and you can explain every number in it. That last part is the superpower nobody upstairs has."],
+   ["GPT-2 (2019)","1.5 billion parameters",55,
+    "Trained on 40 gigabytes of web text. In 2019 its paragraphs stunned researchers. It is your machine's idea — context in, bets out — with learned layers stacked deep and a token vocabulary from lesson 6."],
+   ["GPT-3 (2020)","175 billion parameters",78,
+    "A hundred times bigger, trained on hundreds of gigabytes. The jump that made models useful for everyday questions — and the point where nobody could fully audit what went in. Lesson 7's warning, at scale."],
+   ["Frontier models (now)","undisclosed",100,
+    "The companies stopped publishing sizes. Trained on a huge slice of everything written, tuned afterward by human feedback. Still, at the bottom of it all: look at context, place bets on what comes next. You built that part yourself."]];
+  function render(){
+    const r=RUNGS[+$('scdial').value];
+    $('scname').textContent=r[0];
+    $('scpc').textContent=r[1];
+    $('scbar').style.width=r[2]+'%';
+    $('scdesc').textContent=r[3];
+  }
+  $('scdial').addEventListener('input',render);
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

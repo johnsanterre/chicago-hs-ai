@@ -1,6 +1,6 @@
 # Chicago HS AI
 
-Six independent courses that teach Chicago high-schoolers to build
+Seven independent courses that teach Chicago high-schoolers to build
 with AI — and then to put that skill to work for local nonprofits.
 
 **Live site:** https://johnsanterre.github.io/chicago-hs-ai/
@@ -27,6 +27,10 @@ one and begin.
    task triage, iteration, studying, honest writing help, research
    with verification, planning, reusable prompts, and a capstone
    week run for real.
+7. **Build a Tiny Language Model** — build one for real: counting
+   models, temperature, context windows, a learner with a falling
+   loss, a BPE tokenizer, and a capstone model trained on a corpus
+   the student curated.
 
 ## How a lesson works
 
@@ -59,6 +63,6 @@ folder anywhere.
 
 ## Status
 
-Draft in active development (started 2026-08-30). All six courses
+Draft in active development (started 2026-08-30). All seven courses
 are built — 40 lessons, 24 notebooks. Feedback from real classrooms
 is the next input.

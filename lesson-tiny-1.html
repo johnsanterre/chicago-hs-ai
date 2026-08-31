@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A model you can count · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="tiny-language-model.html">Build a Tiny Language Model</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Build a Tiny Language Model · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>A model you can count</h1>
+<p class="lede">Course 1 told you a language model places bets on what comes next. This course builds one — and the first version is nothing but counting.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>From counting to predicting</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-tiny-1-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A paragraph gets counted, letter pair by letter pair, and the finished table starts predicting.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The whole course in one idea: count what follows what, and the counts become a model.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-tiny-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Count what follows what</h2>
+
+
+  <p>Here is the plan for this whole course: you are going to build a language
+  model. A small one — it fits in a free Colab notebook and trains in seconds —
+  but a real one, built on the same idea as the giant ones you use every day:
+  <b>look at what came before, place bets on what comes next.</b></p>
+  <p>Version one needs no math beyond counting. Take some text. Walk through it
+  one letter at a time and keep a tally: after the letter <b>t</b>, how often
+  does <b>h</b> come next? After <b>q</b>, how often <b>u</b>? Do that for every
+  pair of letters and you get a table. That table can answer a question no
+  program you've written could answer before: <i>"given this letter, what
+  probably comes next?"</i></p>
+  <p>That's a language model. Not a metaphor for one — an actual one, the kind
+  called a <b>bigram model</b> ("bigram" = two things in a row). It knows
+  nothing about meaning, grammar, or the world. It knows what follows what,
+  because it counted. Everything else in this course is upgrades to this one
+  move.</p>
+  <p>Watch the table build itself:</p>
+
+  <!-- ============ FIGURE 1: Build the table ============ -->
+  <div class="fig" id="figcount">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The counting machine</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Step through the sentence. Every
+    step adds one tally: this letter, then that one. Then ask the finished table
+    to predict.</p>
+    <div class="prefix" id="ctext" style="font-size:17px;letter-spacing:1px"></div>
+    <div class="figtabs">
+      <button class="wbtn" id="cstep">Step</button>
+      <button class="wbtn" id="crun">Run to the end</button>
+      <button class="wbtn alt" id="creset">Reset</button>
+    </div>
+    <div id="ctable" style="margin:10px 0;overflow-x:auto"></div>
+    <p id="cpredict" style="font-size:15px;min-height:2.5em;margin:8px 0"></p>
+    <p class="fignote">The table IS the model. Nothing else is hiding anywhere —
+    and it already knows that q wants u and t likes h, because the sentence
+    taught it.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Count a real paragraph</h2>
+  <p>The notebook walks the same tally over a full paragraph, builds the complete table, and asks it questions. You'll predict three next-letters by hand first, then check yourself against the counts.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/tiny1-counting.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/tiny1-counting.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What does a bigram model actually store?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Rules of English grammar</button>
+    <button class="choice" data-ok="1">Counts of what follows what, turned into probabilities</button>
+    <button class="choice" data-ok="0">The meaning of each word</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why can the table predict at all?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The text it counted has patterns, and the counts captured them</button>
+    <button class="choice" data-ok="0">It looks up answers on the internet</button>
+    <button class="choice" data-ok="0">Letters follow alphabetical order most of the time</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Your table saw only one paragraph. What happens when you ask it about a letter pair the paragraph never contained?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">It figures the answer out logically</button>
+    <button class="choice" data-ok="1">It has a zero there — the model literally has no idea</button>
+    <button class="choice" data-ok="0">It asks for more data</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Your first model card</h2>
+  <div class="buildtask">
+
+
+  <p>Every real model ships with a "model card" describing it honestly. Write
+  the card for your bigram counter: what data it saw, what it can do, three
+  example predictions it gets right, and one it gets hilariously wrong.</p>
+  <p><b>Turn-in:</b> the model card. You'll write one for every model in this
+  course — the last one is part of your capstone.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="tiny-language-model.html">&larr; Course home</a> <a href="lesson-tiny-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Build a Tiny Language Model, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-tiny-1';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 1 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const TEXT="the cat then the quiet truth";
+  let pos=0;
+  const counts={};
+  function pair(a,b){counts[a]=counts[a]||{};counts[a][b]=(counts[a][b]||0)+1;}
+  function render(){
+    let h='';
+    for(let i=0;i<TEXT.length;i++){
+      const ch=TEXT[i]===' '?'·':TEXT[i];
+      if(i===pos&&pos<TEXT.length-1)h+='<b style="background:var(--sky)">'+ch+'</b>';
+      else if(i===pos+1&&pos<TEXT.length-1)h+='<b style="background:#fde68a">'+ch+'</b>';
+      else h+=ch;
+    }
+    $('ctext').innerHTML=h;
+    const letters=Object.keys(counts).sort();
+    if(letters.length===0){$('ctable').innerHTML='<p style="font-size:14px;color:var(--ink2)">The table is empty. Step once.</p>';}
+    else{
+      let t='<table class="wtable" style="font-size:13.5px"><tr><th>after…</th><th>comes…</th></tr>';
+      letters.forEach(a=>{
+        const row=Object.entries(counts[a]).sort((x,y)=>y[1]-x[1])
+          .map(([b,n])=>(b===' '?'·':b)+'×'+n).join('  ');
+        t+='<tr><td><b>'+(a===' '?'·':a)+'</b></td><td>'+row+'</td></tr>';
+      });
+      $('ctable').innerHTML=t+'</table>';
+    }
+    if(pos>=TEXT.length-1){
+      const tRow=counts['t']?Object.entries(counts['t']).sort((x,y)=>y[1]-x[1]):[];
+      const top=tRow.length?tRow[0]:null;
+      $('cpredict').innerHTML='<b>Done counting. Now predict:</b> after <b>t</b>, the table bets on '+
+        (top?'<b>'+(top[0]===' '?'space':top[0])+'</b> ('+top[1]+' of '+tRow.reduce((s,e)=>s+e[1],0)+' tallies). ':'nothing yet. ')+
+        'It learned that from 28 characters. Imagine what it learns from a library.';
+    } else $('cpredict').textContent='';
+  }
+  function step(){
+    if(pos>=TEXT.length-1)return;
+    pair(TEXT[pos],TEXT[pos+1]);pos++;render();
+  }
+  $('cstep').addEventListener('click',step);
+  $('crun').addEventListener('click',()=>{while(pos<TEXT.length-1)step();});
+  $('creset').addEventListener('click',()=>{pos=0;for(const k in counts)delete counts[k];render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
