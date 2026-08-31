@@ -78,3 +78,19 @@ the gap.
 - [ ] No page without a stylesheet; no bare-directory links
       (GitHub Pages returns 404 for those)
 - [ ] Repo stays public (Colab loaders break the moment it is not)
+
+
+## Adding a whole course — site-wiring checklist
+
+(From courses 6–8. Page template + full instructions:
+`tools/new_course_template.py`.)
+
+- [ ] Course card on index.html, in course-number order
+- [ ] index.html h1 count updated ("Nine courses. Start with any of them.")
+- [ ] "N independent courses" footer updated on index.html AND every course page
+- [ ] README.md: count in the opening line, count in the status line, course list entry
+- [ ] teacher-guide.html: rubric section (turn-in / what good looks like / watch for, per lesson)
+- [ ] Media present before push: 8 videos (chsai-<key>-N-watch.mp4) + 8 narrations (chsai-<key>-N-listen.m4a)
+- [ ] Notebooks (code courses): 8 in notebooks/, algorithms EXECUTED offline, Colab links resolve
+- [ ] Every figure driven-click verified + one 390px spot check
+- [ ] LLM lessons: course-5 key ceremony + precomputed outputs for keyless study
