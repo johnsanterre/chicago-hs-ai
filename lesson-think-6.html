@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Break down big things · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="think-with-ai.html">Think with AI</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Think with AI · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Break down big things</h1>
+<p class="lede">Big assignments don't stall because they're hard. They stall because they don't fit in a day. Splitting is the skill — and the AI is a strong splitting partner when you push back.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>From dread to Tuesday</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-think-6-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A month-long project becomes ten tasks with dates, and the first one takes twenty minutes.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Split until every piece fits one sitting, keep the calendar yourself, and make the AI defend its steps.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-think-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Split until it fits</h2>
+
+
+  <p>You know the feeling: "research project due in four weeks" sits in your head as
+  one giant object, too big to start, so you don't. The problem isn't effort. The
+  problem is that <b>"do the project" is not a task.</b> It's a category of tasks
+  pretending to be one.</p>
+  <p>The fix is decomposition: split the thing, then split the pieces, until every
+  leaf passes two tests — <b>it fits in one sitting</b>, and <b>it has a visible
+  finish</b> ("three sources found and saved" — you know when it's done; "work on
+  research" — you never know when it's done).</p>
+  <p>The AI is a strong splitting partner. Give it the whole assignment and your
+  real constraints: "Break this into tasks. I have about 45 minutes on weekdays.
+  For each task, tell me what finished looks like." Then do the three things it
+  can't:</p>
+  <p><b>Push back on lazy splits.</b> "Step 2 'do the research' is still three
+  tasks. Split it."<br>
+  <b>Add what it can't know.</b> Your practice schedule, your slow subjects, the
+  week your cousins visit.<br>
+  <b>Own the calendar.</b> The AI proposes an order; you put dates on it, and you
+  put the scary task early — not because the AI said so, but because week four
+  is a bad time to discover the hard part.</p>
+  <p>When a step stalls mid-project, that's not failure — it's information: the
+  step was secretly three steps. Split it again and keep going.</p>
+
+  <!-- ============ FIGURE 1: The splitter ============ -->
+  <div class="fig" id="figsplit">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Split the science fair project</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Click any task that's still too big.
+    Green means it fits one sitting and has a visible finish. Turn the whole tree
+    green.</p>
+    <div id="sptree" style="line-height:1.9"></div>
+    <p id="spstat" style="font-size:15px;margin:10px 0 0"></p>
+    <p class="fignote">Nothing got easier — the same work is all still there. It just
+    stopped being one unstartable object and became ten startable ones.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Split something real</h2>
+
+
+  <p>Take the biggest thing actually looming in your life — a project, an
+  application, an event you're organizing. Hand it to the AI with your real
+  constraints and get a split.</p>
+  <p>Then earn it: find and fix at least two lazy splits, add at least one step the
+  AI couldn't know about, and put real dates on the result.</p>
+
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. When do you stop splitting a task?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">When there are ten or more pieces</button>
+    <button class="choice" data-ok="1">When each piece fits one sitting and has a visible finish</button>
+    <button class="choice" data-ok="0">When every piece takes exactly the same time</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. The AI proposes a task order. Who puts dates on it, and why?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">The AI — it knows how long tasks take on average</button>
+    <button class="choice" data-ok="1">You — it can't see your schedule, and the calendar is a judgment call about your own life</button>
+    <button class="choice" data-ok="0">Nobody — orders work fine without dates</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — the AI's split includes 'Step 2: do the research.' Best next message?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">“Great, thanks!”</button>
+    <button class="choice" data-ok="1">“Step 2 is still three tasks. Split it, and tell me what finished looks like for each piece.”</button>
+    <button class="choice" data-ok="0">Start a new chat immediately</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The plan</h2>
+  <div class="buildtask">
+
+
+  <p>Turn in the finished plan: every task one sitting or less with a visible
+  finish, dated, plus a note on which steps the AI missed or got wrong and how you
+  fixed them.</p>
+  <p><b>Turn-in:</b> the plan — and then actually do task one this week. Report
+  whether it really fit the sitting.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-think-5.html">&larr; Lesson 5</a> <a href="lesson-think-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Think with AI, lesson 6 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-think-6';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 6 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 6';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 6 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const NODES={
+   root:{text:"Science fair project (due in 4 weeks)",kids:["q","exp","board"]},
+   q:{text:"Pick and refine the question",kids:["q1","q2"]},
+   q1:{text:"List 5 candidate questions with the AI, pick 2 favorites",leaf:true},
+   q2:{text:"Run both favorites past the teacher, lock one in",leaf:true},
+   exp:{text:"Design and run the experiment",kids:["e1","e2","e3"]},
+   e1:{text:"Draft the procedure; make the AI attack it for flaws",leaf:true},
+   e2:{text:"Gather materials (list written, store trip done)",kids:["e2a","e2b"]},
+   e2a:{text:"Write the full materials list with quantities",leaf:true},
+   e2b:{text:"One store trip / one order placed",leaf:true},
+   e3:{text:"Run trials",kids:["e3a","e3b"]},
+   e3a:{text:"Run trial day 1, record data in the sheet",leaf:true},
+   e3b:{text:"Run trial day 2 + backup day, record data",leaf:true},
+   board:{text:"Analysis and the board",kids:["b1","b2","b3"]},
+   b1:{text:"Make the two charts from the data sheet",leaf:true},
+   b2:{text:"Write the conclusion paragraph (AI critiques, you revise)",leaf:true},
+   b3:{text:"Assemble and print the board",leaf:true}};
+  let open={root:true};
+  function leaves(k){const n=NODES[k];return n.leaf?[k]:n.kids.reduce((a,c)=>a.concat(leaves(c)),[]);}
+  function render(){
+    function draw(k,depth){
+      const n=NODES[k];
+      const pad=depth*22;
+      if(n.leaf){
+        return '<div style="padding-left:'+pad+'px"><span style="display:inline-block;background:#e8f4e8;border:1px solid #2f855a;color:#1d5c38;border-radius:6px;padding:2px 10px;font-size:14.5px">✓ '+n.text+'</span></div>';
+      }
+      if(!open[k]){
+        return '<div style="padding-left:'+pad+'px"><button class="wbtn alt spn" data-k="'+k+'" style="font-size:14.5px;padding:4px 12px">'+n.text+' — too big, click to split</button></div>';
+      }
+      return '<div style="padding-left:'+pad+'px;font-weight:700;font-size:14.5px">'+n.text+'</div>'+n.kids.map(c=>draw(c,depth+1)).join('');
+    }
+    $('sptree').innerHTML=draw('root',0);
+    document.querySelectorAll('.spn').forEach(b=>b.addEventListener('click',()=>{open[b.dataset.k]=true;render();}));
+    const total=leaves('root').length;
+    const allOpen=Object.keys(NODES).every(k=>NODES[k].leaf||open[k]);
+    $('spstat').innerHTML=allOpen?
+      '<b>All green: '+total+' tasks, every one a single sitting with a visible finish.</b> Put dates on these and the project is a calendar, not a cloud.':
+      'Keep splitting — anything not green is still a category pretending to be a task.';
+  }
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

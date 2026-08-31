@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research and verify · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="think-with-ai.html">Think with AI</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Think with AI · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Research and verify</h1>
+<p class="lede">The AI can map a topic in a minute. It can also invent a source without blinking. Using it for research means holding both facts at once.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The map and the minefield</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-think-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A research question goes in; a beautiful answer comes out — with one wrong number and one source that has never existed.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Map first, verify second: which claims need checking, and why a perfect-looking citation proves nothing.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-think-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Map, then check</h2>
+
+
+  <p>For getting oriented in a new topic, the AI is the best tool ever built. Ask
+  "what are the main sides of the school-start-time debate, the key terms, and the
+  questions people argue about?" and in thirty seconds you have a <b>map</b> that
+  would have taken an afternoon of searching. Use it for that constantly.</p>
+  <p>Then the rule changes. A map shows you where to look. It is not a place to
+  stand. The AI is a <b>starting point, never a source</b> — because it produces
+  wrong facts in exactly the same confident tone as right ones, and because it can
+  fabricate a citation out of thin air: real-sounding author, plausible title,
+  proper journal formatting, page numbers. The formatting proves nothing.
+  Formatting is the one thing it never gets wrong.</p>
+  <p>So the workflow is two passes. <b>Pass one — map:</b> get the overview, the
+  vocabulary, the claims. <b>Pass two — verify:</b> pick out every claim that
+  matters to your work and check each one against a source you can actually open
+  and point at.</p>
+  <p>Which claims matter? The rule of thumb: <b>anything with a number, a name, a
+  date, or a quote gets checked before you repeat it.</b> Background framing
+  ("the debate has two main camps") is low-risk. "The study followed 9,000 students
+  and found a 4.5% improvement" is exactly the kind of sentence that is sometimes
+  real, sometimes almost-real, and sometimes pure invention.</p>
+
+  <!-- ============ FIGURE 1: Triage the brief ============ -->
+  <div class="fig" id="figtriage">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Triage this brief</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">You asked about the reversal of the
+    Chicago River. Mark each claim <b>Safe</b> (background, low-risk) or
+    <b>Check&nbsp;it</b> (number, name, date, or quote). Then see how you did.</p>
+    <div id="trlist"></div>
+    <div class="figtabs"><button class="wbtn" id="trreveal" disabled>Reveal</button>
+      <button class="wbtn alt" id="trreset" hidden>Reset</button></div>
+    <p id="trsum" style="font-size:15px;min-height:1.5em;margin:10px 0 0"></p>
+    <p class="fignote">Two of these six are wrong — and one cites a book that does
+    not exist. Its formatting is flawless. That's the lesson.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Catch it lying about something you know</h2>
+
+
+  <p><b>Round 1:</b> ask for a detailed answer about something you know deeply —
+  your neighborhood, your team's season, a game you've mastered. Hunt for the
+  errors. Finding them in familiar territory teaches you what they look like in
+  unfamiliar territory.</p>
+  <p><b>Round 2:</b> ask about a topic from your actual schoolwork. Apply the rule:
+  every number, name, date, and quote gets a real source before it goes in your
+  notes. Track how many survive.</p>
+
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is the AI's proper role in research?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">A source you can cite if you quote it accurately</button>
+    <button class="choice" data-ok="1">The map that shows you where to look — never the place you stand</button>
+    <button class="choice" data-ok="0">A search engine with better grammar</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why are fabricated citations dangerous?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">They're rare enough that people stop checking</button>
+    <button class="choice" data-ok="1">They look exactly as polished as real ones — formatting proves nothing</button>
+    <button class="choice" data-ok="0">They only appear in science topics</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 3 — the same failure mode shows up in studying. What was the fix there?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Quiz only from your pasted notes, so invented facts never enter</button>
+    <button class="choice" data-ok="0">Ask the AI to double-check itself</button>
+    <button class="choice" data-ok="0">Study in shorter sessions</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>A verified brief</h2>
+  <div class="buildtask">
+
+
+  <p>Turn in the round-2 brief: the AI's answer with every claim marked safe or
+  check-it, and a real, openable source listed for at least three checked claims —
+  including any claim that turned out to be wrong.</p>
+  <p><b>Turn-in:</b> the marked-up brief. The wrong claims are the most valuable
+  part; bring one to class.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-think-4.html">&larr; Lesson 4</a> <a href="lesson-think-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Think with AI, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-think-5';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CLAIMS=[
+   ["The Chicago River originally flowed into Lake Michigan, carrying the city's sewage toward its drinking water.",0,
+    "Safe-ish background — and true. Framing claims like this are low-risk; your other sources will confirm them in passing."],
+   ["In 1900, engineers reversed the river's flow using a system of canal locks.",1,
+    "Check it — a date. This one is real: the Sanitary and Ship Canal opened January 1900. Checking cost you forty seconds and bought certainty."],
+   ["The reversal project moved more earth than the Panama Canal, which was completed later.",1,
+    "Check it — a comparison that sounds great in an essay. It's the wrong way around: the canal was a huge dig and a training ground for Panama, but Panama moved far more earth. Almost-true claims like this are the ones that sink papers."],
+   ["The project was led by engineer Isham Randolph.",1,
+    "Check it — a name. Real: Randolph was chief engineer of the Sanitary District. Names are cheap to verify and embarrassing to get wrong."],
+   ["St. Louis sued to stop the reversal, fearing Chicago's sewage would flow toward its own water supply.",0,
+    "Reasonable to mark either way — it has a city's name in it. It's true (Missouri v. Illinois, 1901). If you marked check-it, that instinct is correct."],
+   ["As documented in Harold Vance's 1962 book 'The River That Ran Backwards' (University of Chicago Press).",1,
+    "Check it — and here's the trap: this book does not exist. Author, year, publisher, plausible title, perfect formatting. If a citation is load-bearing, open the source or drop the claim."]];
+  let marks=CLAIMS.map(()=>null),revealed=false;
+  function render(){
+    $('trlist').innerHTML=CLAIMS.map((c,i)=>{
+      let badge='';
+      if(revealed){
+        const need=c[1]===1,got=marks[i];
+        const okmark=(need&&got===1)||(!need&&got!==null);
+        badge='<p style="font-size:14px;margin:4px 0 0;'+(c[2].includes('does not exist')||c[2].includes('wrong way around')?'color:var(--star)':'color:var(--ink2)')+'">'+c[2]+'</p>';
+      }
+      return '<div style="border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0">'+
+        '<p style="margin:0;font-size:15px">'+(i+1)+'. '+c[0]+'</p>'+
+        '<div style="margin-top:6px">'+
+        '<button class="wbtn trm'+(marks[i]===0?'':' alt')+'" data-i="'+i+'" data-m="0" style="font-size:13px;padding:4px 10px">Safe</button> '+
+        '<button class="wbtn trm'+(marks[i]===1?'':' alt')+'" data-i="'+i+'" data-m="1" style="font-size:13px;padding:4px 10px">Check it</button></div>'+badge+'</div>';
+    }).join('');
+    document.querySelectorAll('.trm').forEach(b=>b.addEventListener('click',()=>{
+      if(revealed)return;
+      marks[+b.dataset.i]=+b.dataset.m;render();}));
+    $('trreveal').disabled=marks.some(m=>m===null)||revealed;
+  }
+  $('trreveal').addEventListener('click',()=>{
+    revealed=true;
+    let caught=0;
+    [2,5].forEach(i=>{if(marks[i]===1)caught++;});
+    $('trsum').innerHTML='<b>The two wrong claims were #3 and #6.</b> You flagged '+caught+' of 2 for checking. '+(caught===2?'Both would have died on your verify pass — that\'s the workflow doing its job.':'The one you marked safe would have made it into your paper wearing a suit.');
+    $('trreset').hidden=false;render();});
+  $('trreset').addEventListener('click',()=>{marks=CLAIMS.map(()=>null);revealed=false;$('trsum').textContent='';$('trreveal').disabled=true;$('trreset').hidden=true;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

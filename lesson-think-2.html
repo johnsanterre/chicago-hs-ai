@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Asking well — and asking again · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="think-with-ai.html">Think with AI</a> / Lesson 2</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Think with AI · Lesson 2 of 8 · about 2–4 hours</p>
+<h1>Asking well — and asking again</h1>
+<p class="lede">The first answer is a first draft. The people who get the most out of AI aren't writing magic first prompts — they're better at the second message.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>One conversation, steered</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-think-2-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A mediocre answer gets three different second messages, and three very different conversations happen.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Specific first asks, then the three moves: steer, show an example, or start clean.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-think-2-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The second message</h2>
+
+
+  <p>A good first ask says four things: your situation, exactly what you want, what
+  shape the answer should take, and what the AI should <i>not</i> do. That takes
+  fifteen seconds and doubles the quality of what comes back.</p>
+  <p>But the real skill starts after the answer arrives, because the first answer is
+  almost never the best one available. You have three moves:</p>
+  <p><b>Steer.</b> Say what's wrong and what direction to go: "closer to the second
+  option, but shorter, and drop the jokes." Vague reactions ("make it better") steer
+  nothing. Specific reactions steer everything.</p>
+  <p><b>Show an example.</b> Paste something in the style you want — a paragraph you
+  like, a format from class — and say "match this." One example beats three sentences
+  of description.</p>
+  <p><b>Start clean.</b> When a chat has gone wrong — the AI has latched onto a bad
+  assumption and keeps building on it — stop steering. Open a fresh chat and write a
+  better first ask using everything you learned from the wreck. Knowing when to
+  restart is what separates people who use AI well from people who argue with it.</p>
+  <p>One more move, free: end a hard ask with <i>"ask me two questions before you
+  answer if anything is unclear."</i> The model is good at knowing what it's
+  missing — when you invite it to ask.</p>
+
+  <!-- ============ FIGURE 1: Steer or restart ============ -->
+  <div class="fig" id="figsteer">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>A conversation going wrong. Fix it.</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">You asked for help planning a study
+    group. Each round, pick your next move and see where it leads.</p>
+    <div class="convo" id="stconvo" style="max-height:none"></div>
+    <div class="figtabs" id="stmoves"></div>
+    <p class="fignote" id="stnote">Accepting a mediocre answer costs you the better one
+    that was two messages away.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Three second-messages</h2>
+
+
+  <p>Ask the AI for something real — a study plan, an explanation, a draft. Whatever
+  comes back, improve it three separate ways:</p>
+  <p><b>Round A:</b> steer it with one specific correction.</p>
+  <p><b>Round B:</b> paste an example of what you actually want and say "match this."</p>
+  <p><b>Round C:</b> open a brand-new chat and write a first ask so good it beats
+  both.</p>
+  <p>Compare the three results. Which move earned the most?</p>
+
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. The AI gives you a generic study plan. What's the strongest next message?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">“This is bad, try again”</button>
+    <button class="choice" data-ok="0">“Make it better and longer”</button>
+    <button class="choice" data-ok="1">“Too generic — I have 4 days, two of them busy, and the test is only on chapters 3–5. Redo it around that.”</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. When does starting a fresh chat beat steering the current one?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">When the conversation is built on a wrong assumption the AI keeps returning to</button>
+    <button class="choice" data-ok="0">Whenever the answer is too long</button>
+    <button class="choice" data-ok="0">Never — restarting loses your progress</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — a task is safe to fully delegate when…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">…the AI seems confident</button>
+    <button class="choice" data-ok="1">…the stakes are low and you can check the result yourself</button>
+    <button class="choice" data-ok="0">…it would take you more than an hour</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Before and after</h2>
+  <div class="buildtask">
+
+
+  <p>Write up the experiment: the original answer, your three moves, the three
+  results, and two sentences on which move won and how you could tell.</p>
+  <p><b>Turn-in:</b> the write-up, transcripts included.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 2</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-think-1.html">&larr; Lesson 1</a> <a href="lesson-think-3.html">Lesson 3 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Think with AI, lesson 2 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-think-2';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 2 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 2 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 2';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 2 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const START=[
+   ["you","Help me plan a study group."],
+   ["ai","Great! Here's a plan: 1) Pick a weekly time, 2) Choose a leader, 3) Rotate subjects, 4) Bring snacks, 5) Stay positive! Would you like tips for icebreakers?"]];
+  const ROUNDS=[
+   {moves:["Accept it — good enough","Steer: “It's 4 of us, chem final in 10 days, one hour after school Tue/Thu. Plan those sessions.”","Restart the chat"],
+    out:["You now have a plan about snacks and positivity for a chemistry final. Accepting round one means studying off a greeting card. (Pick another move.)",
+     "AI: “Got it — four sessions, one hour each. Tue: stoichiometry problem set together, hardest first. Thu: everyone brings the 3 problems they missed…” — real plan, real dates.",
+     "A restart works, but nothing here was broken — the AI just didn't know your situation yet. Steering was cheaper. (Both moves teach the same lesson: specifics.)"],
+    good:[false,true,false]},
+   {moves:["Steer: “make Thursday's session about the lab writeup instead”","Steer: “actually we're 6 people now and one can only come Tuesdays”","Accept the plan as is"],
+    out:["AI: “Thursday becomes lab-writeup review: swap drafts, check the calculation section against the rubric…” — the plan bends exactly where you pushed.",
+     "AI: “With 6 people, split Tuesday into two pods…” — it absorbs new facts mid-conversation without losing the good structure. Steering compounds.",
+     "Accepting now is fine — the plan is genuinely good. But notice you got here in two moves, and neither was magic. They were just specific."],
+    good:[true,true,true]},
+  ];
+  let round=0,hist=START.slice();
+  function render(){
+    $('stconvo').innerHTML=hist.map(m=>'<p class="'+(m[0]==='you'?'prompt':'resp')+'" style="margin:8px 0">'+(m[0]==='you'?'<b>You:</b> ':'<b>AI:</b> ')+m[1].replace('AI: ','')+'</p>').join('');
+    const box=$('stmoves');box.innerHTML='';
+    if(round>=ROUNDS.length){
+      $('stnote').innerHTML='<b>What happened:</b> two specific messages turned a greeting card into a working plan. The first answer is raw material — the conversation is the tool.';
+      const b=document.createElement('button');b.className='wbtn alt';b.textContent='Run it again';
+      b.addEventListener('click',()=>{round=0;hist=START.slice();$('stnote').textContent='Accepting a mediocre answer costs you the better one that was two messages away.';render();});
+      box.appendChild(b);return;
+    }
+    ROUNDS[round].moves.forEach((m,i)=>{
+      const b=document.createElement('button');b.className='wbtn alt';b.style.display='block';b.style.margin='6px 0';b.textContent=m;
+      b.addEventListener('click',()=>{
+        const r=ROUNDS[round];
+        if(!r.good[i]){$('stnote').innerHTML='<b style="color:var(--star)">'+r.out[i]+'</b>';return;}
+        hist.push(['you',r.moves[i].replace(/^Steer: /,'').replace(/^Restart.*/,'(new chat, better first ask)')]);
+        hist.push(['ai',r.out[i]]);
+        round++;$('stnote').textContent='';render();});
+      box.appendChild(b);});
+  }
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

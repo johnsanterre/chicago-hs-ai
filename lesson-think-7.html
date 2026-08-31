@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Everyday workflows · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="think-with-ai.html">Think with AI</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Think with AI · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>Everyday workflows</h1>
+<p class="lede">The tenth time you type the same kind of prompt, you don't have a habit — you have a workflow. Write it down once, reuse it forever.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>A prompt with blanks in it</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-think-7-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Three everyday chores become three saved templates, and Thursday's version of each takes thirty seconds.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Spotting your repeats, turning them into templates with slots, and keeping a personal prompt file.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-think-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Prompts with slots</h2>
+
+
+  <p>Look at your last month of AI use and patterns jump out: you keep asking for
+  the same kinds of help. An email that needs to sound right. A long thing you need
+  the short version of. Practice questions before a test. Those repeats are worth
+  more than any clever one-off prompt, because a repeat can become a
+  <b>template</b>: a prompt you wrote carefully once, with <b>slots</b> for the
+  parts that change.</p>
+  <p>Everything outside the slots is your accumulated judgment — the tone you want,
+  the format that works, the limits that keep it honest (lesson 4 lives inside your
+  templates now). Everything inside the slots is thirty seconds of filling in
+  today's details.</p>
+  <p>Keep them somewhere boring and permanent: a note on your phone titled
+  <b>"my prompts."</b> Five great templates you actually reuse beat fifty
+  screenshots of clever prompts you'll never find again.</p>
+  <p>And templates are drafts too, forever: each time one comes back with something
+  missing, add the fix to the template. Yours get better every week — that
+  compounding is the whole reason to write them down.</p>
+
+  <!-- ============ FIGURE 1: The template machine ============ -->
+  <div class="fig" id="figtmpl">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Fill the slots</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Three saved templates. Pick one,
+    fill its two slots, and the finished prompt assembles itself.</p>
+    <div class="figtabs">
+      <button class="wbtn tmbtn" data-w="0">The email drafter</button>
+      <button class="wbtn alt tmbtn" data-w="1">The summarizer</button>
+      <button class="wbtn alt tmbtn" data-w="2">The practice interviewer</button>
+    </div>
+    <div id="tmslots" style="margin:10px 0"></div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700">THE ASSEMBLED PROMPT:</p>
+    <div class="prefix" id="tmout" style="line-height:1.6"></div>
+    <p class="fignote">Everything in bold came from a thirty-second fill-in. Everything
+    else is judgment you wrote down once — including the limits that keep it yours.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="try">
+  <div class="stype">4 · Try it</div>
+  <h2>Find your third repeat</h2>
+
+
+  <p>The figure gave you two template patterns you can steal outright. Now find the
+  repeat that's actually yours: something you've asked an AI (or wished you could)
+  at least three times this month.</p>
+  <p>Write the template with its slots marked, use it once for real, then improve
+  it based on what came back missing.</p>
+
+  <button class="mark" data-for="try">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What turns a prompt into a template?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Making it as long and detailed as possible</button>
+    <button class="choice" data-ok="1">Slots — the parts that change get marked, everything else is written once</button>
+    <button class="choice" data-ok="0">Saving it in the chat history</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Which task is worth a template?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">The email to your coach you write a version of every few weeks</button>
+    <button class="choice" data-ok="0">A once-ever question about one homework problem</button>
+    <button class="choice" data-ok="0">Anything the AI answers well</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — your email template should include a limit like 'keep my casual tone, don't make it formal.' Why?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Formal emails are longer and cost more</button>
+    <button class="choice" data-ok="1">The message goes out under your name — the template's job includes keeping it sounding like you</button>
+    <button class="choice" data-ok="0">The AI can't write formal English</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Your prompt file</h2>
+  <div class="buildtask">
+
+
+  <p>Start the file: three templates minimum — two adapted from this lesson plus
+  the one you invented — each with its slots marked and one line on when to use
+  it.</p>
+  <p><b>Turn-in:</b> the prompt file. In lesson 8 it becomes a section of your
+  playbook, and improving it never stops.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-think-6.html">&larr; Lesson 6</a> <a href="lesson-think-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Think with AI, lesson 7 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; try &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-think-7';
+  const SEGS=['watch','listen','read','try','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 7 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const T=[
+   {slots:["Who it's to + the situation","What I need from them"],
+    defaults:["my counselor — I need to change one class before add/drop ends Friday","approve a switch from 4th-period Spanish to 4th-period art"],
+    make:(a,b)=>'Draft a short email to <b>'+a+'</b>. What I need: <b>'+b+'</b>. Keep my normal polite-but-casual tone — do not make it stiff or formal. Under 120 words, clear subject line, and end with one specific ask. Show me two versions.'},
+   {slots:["What I'm pasting","What I need out of it"],
+    defaults:["the 12-page assigned article on the 1919 Chicago flu response","the argument, the 3 strongest pieces of evidence, and anything I should quote directly"],
+    make:(a,b)=>'I\'m pasting <b>'+a+'</b>. Give me: <b>'+b+'</b>. Use only the pasted text — nothing from outside it. Flag anything in your summary you\'re uncertain about, and I\'ll read those sections myself.'},
+   {slots:["The topic / role","My level"],
+    defaults:["mock interview for the summer robotics internship","I\'ve never done a real interview before"],
+    make:(a,b)=>'Run a <b>'+a+'</b>. My level: <b>'+b+'</b>. One question at a time; wait for my answer; after each, give one strength and one fix, then ask a harder follow-up. Stay in character until I say stop.'}];
+  let w=0,vals=T.map(t=>t.defaults.slice());
+  function render(){
+    document.querySelectorAll('.tmbtn').forEach((b,i)=>b.className='wbtn tmbtn'+(i===w?'':' alt'));
+    $('tmslots').innerHTML=T[w].slots.map((s,i)=>
+      '<label style="display:block;font-size:14px;margin:6px 0">'+s+':<br><input class="tmin" data-i="'+i+'" value="'+vals[w][i].replace(/"/g,'&quot;')+'" style="width:100%;max-width:560px;padding:6px 8px;font-size:14px;border:1px solid var(--line);border-radius:6px"></label>').join('');
+    document.querySelectorAll('.tmin').forEach(inp=>inp.addEventListener('input',()=>{
+      vals[w][+inp.dataset.i]=inp.value;out();}));
+    out();
+  }
+  function out(){$('tmout').innerHTML=T[w].make(vals[w][0],vals[w][1]);}
+  document.querySelectorAll('.tmbtn').forEach((b,i)=>b.addEventListener('click',()=>{w=+b.dataset.w;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
