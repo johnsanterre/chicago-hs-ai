@@ -53,7 +53,7 @@ first; the questions come all course long.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Rows, columns, and the three openers</h2>
 
   <p>A dataset is a table: <b>rows are things, columns are facts about them</b>.
@@ -70,6 +70,21 @@ first; the questions come all course long.</p>
   and rows count from zero, exactly like Python lists, because that's what they
   are underneath. If you took Python in Colab, everything here rides on skills you
   already own; if not, lesson 1 of that course gets you running in an hour.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Row, column, or cell?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The table below is the shape of everything in this course. Classify each phrase.</p>
+    <table class="wtable" id="t1">
+      <thead><tr><th>name</th><th>neighborhood</th><th>hours_online</th><th>grade</th><th>score</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div id="q1"></div>
+    <p class="fignote" id="q1sum"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -156,23 +171,26 @@ df.head(3)</pre>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 1 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 1 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -191,6 +209,57 @@ df.head(3)</pre>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+const ROWS=[
+ {name:"Maya",hood:"Pilsen",hours:3,grade:"A",score:91},
+ {name:"DeShawn",hood:"Austin",hours:5,grade:"B",score:84},
+ {name:"Alex",hood:"Uptown",hours:2,grade:"A",score:88},
+ {name:"Jordan",hood:"Pilsen",hours:6,grade:"B",score:79},
+ {name:"Amara",hood:"Austin",hours:1,grade:"A",score:95},
+ {name:"Luis",hood:"Pilsen",hours:4,grade:"C",score:72},
+ {name:"Nia",hood:"Uptown",hours:3,grade:"B",score:83},
+ {name:"Marcus",hood:"Austin",hours:7,grade:"C",score:68}];
+(function(){
+  const tb=document.querySelector('#t1 tbody');
+  ROWS.slice(0,4).forEach(r=>{tb.insertAdjacentHTML('beforeend',
+    '<tr><td>'+r.name+'</td><td>'+r.hood+'</td><td>'+r.hours+'</td><td>'+r.grade+'</td><td>'+r.score+'</td></tr>')});
+})();
+(function(){
+  const QS=[
+ {q:'"DeShawn, Austin, 5, B, 84 — all in a line"',a:0,
+  opts:["A row — one THING (one student) with all its facts","A column — one fact about everyone","A cell — a single value"],
+  why:"A row is one thing. Every fact in that line belongs to DeShawn."},
+ {q:'"hours_online, for everybody"',a:1,
+  opts:["A row","A column — the same fact across every thing","The whole table"],
+  why:"A column runs down: one kind of fact, measured for every row."},
+ {q:'"84"',a:2,
+  opts:["A row","A column","A cell — where one row meets one column"],
+  why:"One value: DeShawn's score. Row times column gives you the cell."}];
+  const wrap=document.getElementById('q1');let done=0,score=0;
+  QS.forEach(q=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq"'+(q.mono?' style="font-family:ui-monospace,Menlo,monospace;font-size:14px;white-space:pre-wrap"':'')+'></div>';
+    card.querySelector('.qq').textContent=q.q;
+    q.opts.forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='choice';b.textContent=opt;
+      b.addEventListener('click',()=>{
+        if(card.dataset.done)return;card.dataset.done=1;
+        const ok=j===q.a;if(ok)score++;done++;
+        card.classList.add(ok?'good':'bad');
+        [...card.querySelectorAll('.choice')].forEach((x,k)=>{
+          x.disabled=true;if(k===q.a)x.classList.add('right');
+          else if(x===b&&!ok)x.classList.add('wrong');});
+        const fb=document.createElement('div');fb.className='qfb';
+        fb.innerHTML=(ok?'<b>Called it.</b> ':'<b>Reveal:</b> ')+q.why;
+        card.appendChild(fb);
+        if(done===QS.length)document.getElementById('q1sum').innerHTML=
+          '<b>'+score+' of '+QS.length+'.</b> Rows are things, columns are facts. Every question you will ask of data is a question about that shape.';
+      });
+      card.appendChild(b);});
+    wrap.appendChild(card);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

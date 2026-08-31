@@ -83,7 +83,7 @@ pre.code{background:#20262E;color:#E8ECF2;border-radius:8px;padding:16px 18px;ov
 .ffline{font-size:12.5px;color:var(--ink2);letter-spacing:.03em;margin-left:.9em}
 /* ---- interactive figures (Distill-style, inside lessons) ---- */
 .fig{background:var(--paper);border:1px solid var(--hair);border-left:4px solid var(--star);
-  border-radius:0 10px 10px 0;padding:18px 20px 20px;margin:26px 0}
+  border-radius:0 10px 10px 0;padding:18px 20px 20px;margin:26px 0;overflow-x:auto}
 .fig .figlabel{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--star);margin-bottom:6px}
 .fig h3{margin:.1em 0 .4em;font-size:18px;color:var(--navy)}
@@ -139,3 +139,39 @@ select.wsel{font-family:var(--sans);font-size:16px;padding:.4em .6em;border:1px 
 .convo{background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:4px 16px;margin:10px 0}
 .convo .you{color:var(--navy);font-weight:600;margin:10px 0 2px;font-size:14px}
 .convo .resp{margin:2px 0 12px;font-size:15px}
+/* widget engines for courses 2-5 (Read & play pass, 2026-08-30) */
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+@media(max-width:680px){.pg{grid-template-columns:1fr}}
+.pg textarea{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:#20262E;
+  color:#E8ECF2;border:none;border-radius:8px;padding:12px 14px;min-height:190px;resize:vertical;
+  line-height:1.5;width:100%}
+.pg textarea:focus-visible{outline:3px solid var(--sky)}
+.pg iframe{background:#fff;border:1px solid var(--hair);border-radius:8px;width:100%;
+  min-height:190px;height:100%}
+.wtable{border-collapse:collapse;font-size:14.5px;background:var(--card);width:100%;margin:8px 0}
+.wtable th{background:var(--sky);color:var(--navy);padding:.4em .7em;text-align:left;
+  font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.wtable td{border:1px solid var(--hair);padding:.4em .7em}
+.wtable td.badcell{cursor:pointer}
+.wtable td.badcell:hover{outline:2px solid var(--navy)}
+.wtable td.caught{background:#F0F8F2;outline:2px solid #1B7A45;font-weight:600}
+.wtable tr.dim td{color:var(--ink2);background:var(--paper)}
+.statebox{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;background:var(--card);
+  border:1px solid var(--hair);border-radius:8px;padding:10px 14px;margin:8px 0;
+  white-space:pre-wrap;min-height:2.2em}
+.codechoice{display:block;width:100%;text-align:left;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:14px;background:#20262E;color:#E8ECF2;border:2px solid #20262E;border-radius:6px;
+  padding:.5em .8em;margin:.35em 0;cursor:pointer;white-space:pre-wrap}
+.codechoice:hover{border-color:var(--sky)}
+.codechoice.right{border-color:#1B7A45;background:#1E3328}
+.codechoice.wrong{border-color:var(--star)}
+.axwrap{background:var(--card);border:1px solid var(--hair);border-radius:8px;padding:14px 18px}
+.axchart{display:flex;align-items:flex-end;gap:16px;height:200px;border-left:3px solid var(--ink2);
+  border-bottom:3px solid var(--ink2);padding:0 10px}
+.axchart .axbar{flex:1;background:var(--sky);border:2px solid var(--navy);border-bottom:none;
+  border-radius:4px 4px 0 0;position:relative;min-height:2px}
+.axchart .axbar span{position:absolute;top:-24px;left:0;right:0;text-align:center;
+  font-size:13px;color:var(--navy);font-weight:600}
+.axlabels{display:flex;gap:16px;padding:4px 10px 0}
+.axlabels span{flex:1;text-align:center;font-size:13.5px;color:var(--ink2)}
+.axtitle{font-weight:700;font-size:17px;margin:0 0 10px;text-align:center}

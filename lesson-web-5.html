@@ -54,7 +54,7 @@ CLOSE: HTML is bones, CSS is skin, JS is muscles. Your page is about to move.</p
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Bones, skin, muscles</h2>
 
   <p>The stack, complete: HTML is structure, CSS is looks, <b>JavaScript is
@@ -71,6 +71,28 @@ CLOSE: HTML is bones, CSS is skin, JS is muscles. Your page is about to move.</p
   and if you took Python in Colab you'll recognize almost everything, wearing
   different punctuation. Lean on your AI pair for syntax; keep the two-step model
   and the reading rule, and you can wire anything.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Wire a button</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">This playground runs JavaScript. The button works — read the wiring, then change what it does.</p>
+    <div class="pg">
+      <textarea id="pg5-src" spellcheck="false" aria-label="HTML source — edit it">&lt;button id="hi"&gt;Say hi&lt;/button&gt;
+&lt;p id="count"&gt;clicks: 0&lt;/p&gt;
+&lt;script&gt;
+let n = 0;
+document.getElementById('hi').onclick = () =&gt; {
+  n = n + 1;
+  document.getElementById('count').textContent = 'clicks: ' + n;
+};
+&lt;/script&gt;</textarea>
+      <iframe id="pg5-out" sandbox="allow-scripts" title="rendered page"></iframe>
+    </div>
+    <p class="fignote">Find an element, attach a behavior. Your move: make it count by 2. Then rename the id in ONE place only and watch it silently break — that bug is lesson 6's opening act.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -156,23 +178,26 @@ CLOSE: HTML is bones, CSS is skin, JS is muscles. Your page is about to move.</p
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 5 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 5 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -192,6 +217,10 @@ CLOSE: HTML is bones, CSS is skin, JS is muscles. Your page is about to move.</p
   });
   render();
 })();
+</script>
+<script>
+/* Read & play figure */
+(function(){const ta=document.getElementById('pg5-src'),fr=document.getElementById('pg5-out');function r(){fr.srcdoc=ta.value}ta.addEventListener('input',r);r();})();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -55,7 +55,7 @@ ship a prompt change on vibes.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The eval: inputs, checks, score</h2>
 
   <p>An <b>eval</b> has three parts. <b>Fixed inputs</b>: the same five topics
@@ -72,6 +72,24 @@ ship a prompt change on vibes.</p>
   <i>form</i> wonderfully and <i>truth</i> poorly. A wrong answer in perfect
   format passes every formatting check. Truth still requires sources or humans —
   the verification rule from How AI Works, now wearing an engineering hat.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Run the eval</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Two flashcard outputs, three checks each. Run the harness and read the grid — no arguing required.</p>
+    <div class="guessrow"><button class="wbtn" id="ev6run">Run the checks</button></div>
+    <table class="wtable" id="ev6t" style="max-width:640px">
+      <thead><tr><th>output</th><th>has Q&amp;A?</th><th>question short?</th><th>not empty?</th></tr></thead>
+      <tbody>
+        <tr><td style="font-size:13px">Prompt A: "The Chicago Fire was in 1871 and it was very destructive and…"</td><td id="a1">·</td><td id="a2">·</td><td id="a3">·</td></tr>
+        <tr><td style="font-size:13px">Prompt B: "Q: What year was the Great Chicago Fire? A: 1871"</td><td id="b1">·</td><td id="b2">·</td><td id="b3">·</td></tr>
+      </tbody>
+    </table>
+    <p class="fignote" id="ev6note">Checks are plain functions: output in, True/False out.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -158,23 +176,26 @@ for t in topics:
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 6 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 6 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 6 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 6';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -193,6 +214,23 @@ for t in topics:
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  document.getElementById('ev6run').addEventListener('click',()=>{
+    const res={a1:false,a2:false,a3:true,b1:true,b2:true,b3:true};
+    Object.keys(res).forEach((k,i)=>{
+      setTimeout(()=>{
+        const td=document.getElementById(k);
+        td.textContent=res[k]?'True':'False';
+        td.style.color=res[k]?'#1B7A45':'var(--star)';
+        td.style.fontWeight='700';
+        if(i===5)document.getElementById('ev6note').innerHTML=
+          '<b>Prompt A: 1/3. Prompt B: 3/3.</b> B wins — measured, not argued. Change a prompt, re-run, and the numbers move or they don’t.';
+      },i*350);});
+  });
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

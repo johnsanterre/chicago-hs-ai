@@ -53,7 +53,7 @@ faster way against your own. Go.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The list, the loop, the indent</h2>
 
   <p>A <b>list</b> holds values in order: <code>crew = ["Maya", "DeShawn",
@@ -70,6 +70,28 @@ faster way against your own. Go.</p>
   <p>The notebook ends by asking the AI for a faster way to sum a million numbers,
   then <b>checking both answers agree</b>. Verifying the intern's work — that habit
   is the whole course.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Watch the loop breathe</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The collector pattern, one step at a time. Press Step and track total with your eyes.</p>
+    <pre class="code" style="font-size:14px;margin:8px 0">total = 0
+for n in [12, 8, 30]:
+    total = total + n
+print(total)</pre>
+    <div class="guessrow">
+      <button class="wbtn" id="lp-step">Step</button>
+      <button class="wbtn alt" id="lp-reset">Reset</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">VARIABLES:</p>
+    <div class="statebox" id="lp-state"></div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">OUTPUT SO FAR:</p>
+    <div class="statebox" id="lp-out"></div>
+    <p class="fignote" id="lp-note"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -166,23 +188,26 @@ for person in crew:
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 3 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -200,6 +225,31 @@ for person in crew:
       })
     })
   });
+  render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const STEPS=[
+ ["total = 0        (before the loop)",""],
+ ["n = 12   total = 0 + 12  →  12",""],
+ ["n = 8    total = 12 + 8  →  20",""],
+ ["n = 30   total = 20 + 30 →  50",""],
+ ["loop finished — total holds 50","50"]];
+  let i=-1;
+  const st=document.getElementById('lp-state'),out=document.getElementById('lp-out'),
+        b=document.getElementById('lp-step'),rs=document.getElementById('lp-reset');
+  function render(){
+    if(i<0){st.textContent='(press Step to begin)';out.textContent='\u00a0';}
+    else{st.textContent=STEPS[i][0];out.textContent=STEPS[i][1]||'\u00a0';}
+    b.disabled=i>=STEPS.length-1;
+    b.textContent=i>=STEPS.length-1?'Done':'Step';
+    document.getElementById('lp-note').innerHTML=
+      i>=STEPS.length-1?'The indented line ran once per item, and total collected as it went. Sums, counts, scores — this exact shape.':'';
+  }
+  b.addEventListener('click',()=>{if(i<STEPS.length-1){i++;render()}});
+  rs.addEventListener('click',()=>{i=-1;render()});
   render();
 })();
 </script>

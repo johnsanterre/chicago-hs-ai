@@ -59,7 +59,7 @@ write software. You built it. You own it.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Tools, the loop, and the rules</h2>
 
   <p>A <b>tool</b> is a function of yours plus a description the model reads:
@@ -77,6 +77,27 @@ write software. You built it. You own it.</p>
   deletion. You'll meet these rules again the day a nonprofit hands you real
   systems; learn them now, on a fake schedule function, where mistakes are
   free.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The loop, slowed down</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">One question, one tool, four steps. Step through what actually travels each way.</p>
+    <pre class="code" style="font-size:14px;margin:8px 0">Q: "When does robotics practice meet?"
+
+tools = [practice_schedule]   # a function + a description the model reads</pre>
+    <div class="guessrow">
+      <button class="wbtn" id="ag-step">Step</button>
+      <button class="wbtn alt" id="ag-reset">Reset</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">THIS STEP:</p>
+    <div class="statebox" id="ag-state"></div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">WHAT TRAVELS:</p>
+    <div class="statebox" id="ag-out"></div>
+    <p class="fignote" id="ag-note"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -163,23 +184,26 @@ write software. You built it. You own it.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 7 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 7 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -197,6 +221,35 @@ write software. You built it. You own it.</p>
       })
     })
   });
+  render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const STEPS=[
+ ["1 · SEND — your code sends the question plus the tool list",
+  'messages=[{user: "When does robotics practice meet?"}], tools=[practice_schedule]'],
+ ["2 · THE MODEL ASKS — stop_reason: \"tool_use\". It is not answering; it is requesting.",
+  'tool_use: practice_schedule(team="robotics")'],
+ ["3 · YOUR CODE RUNS THE TOOL — the model ran nothing. Your function did.",
+  'result: "Tuesdays 4pm, room 112"'],
+ ["4 · RESULT RETURNS — the model folds it into a real answer",
+  '"Robotics meets Tuesdays at 4pm in room 112."'],
+ ["The rules: only tools YOU wrote · read-only first · cap the loop.",""]];
+  let i=-1;
+  const st=document.getElementById('ag-state'),out=document.getElementById('ag-out'),
+        b=document.getElementById('ag-step'),rs=document.getElementById('ag-reset');
+  function render(){
+    if(i<0){st.textContent='(press Step to begin)';out.textContent='\u00a0';}
+    else{st.textContent=STEPS[i][0];out.textContent=STEPS[i][1]||'\u00a0';}
+    b.disabled=i>=STEPS.length-1;
+    b.textContent=i>=STEPS.length-1?'Done':'Step';
+    document.getElementById('ag-note').innerHTML=
+      i>=STEPS.length-1?'The model asks; your code decides. That division of power is the entire safety story.':'';
+  }
+  b.addEventListener('click',()=>{if(i<STEPS.length-1){i++;render()}});
+  rs.addEventListener('click',()=>{i=-1;render()});
   render();
 })();
 </script>

@@ -54,7 +54,7 @@ sentence, and a caveat — the caveat is what makes it professional.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>groupby, and the caveat that keeps you honest</h2>
 
   <p><code>df.groupby('neighborhood')['score'].mean()</code> reads as a sentence:
@@ -72,6 +72,27 @@ sentence, and a caveat — the caveat is what makes it professional.</p>
   with"</b>; the word <b>"causes"</b> is reserved for experiments where you
   changed one thing on purpose. Every claim in your build carries a caveat
   sentence. That's not weakness — it's the credibility.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The sentence machine</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">BY ___, the ___ OF ___. Build the sentence; the answer table computes live from the class data.</p>
+    <div class="guessrow" style="font-size:16px">
+      <span><b>BY</b></span>
+      <select class="wsel" id="gby"><option>neighborhood</option><option>grade</option></select>
+      <span>, the</span>
+      <select class="wsel" id="gm"><option>mean</option><option>max</option><option>count</option></select>
+      <span><b>OF</b></span>
+      <select class="wsel" id="gof"><option>score</option><option>hours_online</option></select>
+    </div>
+    <div class="statebox" id="g4code" style="margin-top:10px"></div>
+    <table class="wtable" id="t4" style="max-width:420px"><tbody></tbody></table>
+    <p class="fignote">Swap any piece — every swap is a new question answered in seconds.
+    And the trap from the reading holds: the machine finds patterns; it never explains them.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -156,23 +177,26 @@ df[df[&#x27;study_h&#x27;]&gt;5][&#x27;score&#x27;].mean()   # heavy studiers</p
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 4 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 4 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -191,6 +215,37 @@ df[df[&#x27;study_h&#x27;]&gt;5][&#x27;score&#x27;].mean()   # heavy studiers</p
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+const ROWS=[
+ {name:"Maya",hood:"Pilsen",hours:3,grade:"A",score:91},
+ {name:"DeShawn",hood:"Austin",hours:5,grade:"B",score:84},
+ {name:"Alex",hood:"Uptown",hours:2,grade:"A",score:88},
+ {name:"Jordan",hood:"Pilsen",hours:6,grade:"B",score:79},
+ {name:"Amara",hood:"Austin",hours:1,grade:"A",score:95},
+ {name:"Luis",hood:"Pilsen",hours:4,grade:"C",score:72},
+ {name:"Nia",hood:"Uptown",hours:3,grade:"B",score:83},
+ {name:"Marcus",hood:"Austin",hours:7,grade:"C",score:68}];
+(function(){
+  const by=document.getElementById('gby'),m=document.getElementById('gm'),of=document.getElementById('gof');
+  const KEY={neighborhood:'hood',grade:'grade',score:'score',hours_online:'hours'};
+  function render(){
+    const bk=KEY[by.value],ok=KEY[of.value];
+    const groups={};
+    ROWS.forEach(r=>{(groups[r[bk]]=groups[r[bk]]||[]).push(r[ok])});
+    const tb=document.querySelector('#t4 tbody');tb.innerHTML='';
+    Object.keys(groups).sort().forEach(g=>{
+      const vs=groups[g];let v;
+      if(m.value==='mean')v=(vs.reduce((a,b)=>a+b,0)/vs.length).toFixed(1);
+      else if(m.value==='max')v=Math.max(...vs);
+      else v=vs.length;
+      tb.insertAdjacentHTML('beforeend','<tr><td><b>'+g+'</b></td><td style="text-align:right">'+v+'</td></tr>');});
+    document.getElementById('g4code').textContent=
+      'df.groupby("'+by.value+'")["'+of.value+'"].'+(m.value==='count'?'count':m.value)+'()';
+  }
+  [by,m,of].forEach(x=>x.addEventListener('change',render));render();
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

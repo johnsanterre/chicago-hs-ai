@@ -56,7 +56,7 @@ Data pipelines, meet language models.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The extraction contract</h2>
 
   <p>To use model output in a program, ask for a <b>shape</b>, not a vibe:
@@ -73,6 +73,17 @@ Data pipelines, meet language models.</p>
   you need actually there?), and know that professional APIs offer enforced
   structured-output modes — the guarantee you hand-built is what those automate.
   Having built it, you'll always know what's behind the curtain.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Will json.loads survive?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Three replies came back from the extraction prompt. Predict the parse before you reveal.</p>
+    <div id="q3"></div>
+    <p class="fignote" id="q3sum"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -161,23 +172,26 @@ Data pipelines, meet language models.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 3 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -196,6 +210,43 @@ Data pipelines, meet language models.</p>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const QS=[
+ {q:'{"date": "Thursday", "time": "4pm", "place": "room 214"}',mono:true,a:0,
+  opts:["Parses — a clean dictionary comes out","Crashes — JSONDecodeError"],
+  why:"Pure JSON, nothing else. json.loads returns a real dict and event[\"place\"] just works."},
+ {q:'Here’s your JSON!\n{"date": "Thursday", "time": "4pm", "place": "room 214"}',mono:true,a:1,
+  opts:["Parses — the JSON is in there","Crashes — JSONDecodeError"],
+  why:"The chatty prefix breaks the parser — loads needs the WHOLE string to be JSON. This is why the retry pattern exists: except, re-ask with ‘JSON ONLY. No other words.’"},
+ {q:'{"date": "Thursday", "place": "room 214"}',mono:true,a:0,
+  opts:["Parses — but the time key is missing","Crashes — missing keys are an error"],
+  why:"It parses fine — loads doesn’t know what keys you wanted. The crash comes LATER at event[\"time\"]. Check for required keys after parsing; that’s your job, not the parser’s."}];
+  const wrap=document.getElementById('q3');let done=0,score=0;
+  QS.forEach(q=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq"'+(q.mono?' style="font-family:ui-monospace,Menlo,monospace;font-size:14px;white-space:pre-wrap"':'')+'></div>';
+    card.querySelector('.qq').textContent=q.q;
+    q.opts.forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='choice';b.textContent=opt;
+      b.addEventListener('click',()=>{
+        if(card.dataset.done)return;card.dataset.done=1;
+        const ok=j===q.a;if(ok)score++;done++;
+        card.classList.add(ok?'good':'bad');
+        [...card.querySelectorAll('.choice')].forEach((x,k)=>{
+          x.disabled=true;if(k===q.a)x.classList.add('right');
+          else if(x===b&&!ok)x.classList.add('wrong');});
+        const fb=document.createElement('div');fb.className='qfb';
+        fb.innerHTML=(ok?'<b>Called it.</b> ':'<b>Reveal:</b> ')+q.why;
+        card.appendChild(fb);
+        if(done===QS.length)document.getElementById('q3sum').innerHTML=
+          '<b>'+score+' of '+QS.length+'.</b> Parse errors and missing keys are different failures — guard for both, retry for the first.';
+      });
+      card.appendChild(b);});
+    wrap.appendChild(card);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

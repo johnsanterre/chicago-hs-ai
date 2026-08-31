@@ -52,7 +52,7 @@ everything it writes. Lesson 3 is literally about that. Go make your file.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The file, the browser, the loop</h2>
 
   <p>A web page is a plain text file with an <code>.html</code> ending. The browser
@@ -69,6 +69,21 @@ everything it writes. Lesson 3 is literally about that. Go make your file.</p>
   will happily write whole pages. Fine — but you read every line you keep, and if
   you can't explain a line, you ask until you can. The next two lessons train
   exactly that.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The two-second loop, with zero seconds</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The editor is on the left; the page is on the right. Edit the text — the page updates as you type.</p>
+    <div class="pg">
+      <textarea id="pg1-src" spellcheck="false" aria-label="HTML source — edit it">&lt;h1&gt;Hello, Chicago&lt;/h1&gt;
+&lt;p&gt;My first page.&lt;/p&gt;</textarea>
+      <iframe id="pg1-out" sandbox="" title="rendered page"></iframe>
+    </div>
+    <p class="fignote">Change the headline to your own words. Add a second p tag. This is the edit-save-refresh loop from the video, collapsed to nothing — the real one in vscode.dev takes two seconds.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -155,23 +170,26 @@ everything it writes. Lesson 3 is literally about that. Go make your file.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 1 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 1 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -191,6 +209,10 @@ everything it writes. Lesson 3 is literally about that. Go make your file.</p>
   });
   render();
 })();
+</script>
+<script>
+/* Read & play figure */
+(function(){const ta=document.getElementById('pg1-src'),fr=document.getElementById('pg1-out');function r(){fr.srcdoc=ta.value}ta.addEventListener('input',r);r();})();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

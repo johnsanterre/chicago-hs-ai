@@ -53,7 +53,7 @@ this repo becomes a live website.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Repos, commits, and the record</h2>
 
   <p>A <b>repository</b> ("repo") is a project's home: its files plus the full
@@ -70,6 +70,17 @@ this repo becomes a live website.</p>
   this site ends its builds here. A college admissions reader or a hiring manager
   who finds twenty real projects, with histories, learns more about you than any
   transcript can say. Start the record today; it only grows.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Message or lie?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six commit messages from real student repos. Which ones talk to future-you, and which are lies?</p>
+    <div id="cm7"></div>
+    <p class="fignote" id="cm7sum"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -155,23 +166,26 @@ this repo becomes a live website.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 7 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 7 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -190,6 +204,34 @@ this repo becomes a live website.</p>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const MS=[
+   ["Add about page with styles and dark mode",true,"WHAT changed and enough WHY. Future-you says thanks."],
+   ["stuff",false,"Stuff. Which stuff? Every commit is 'stuff'. This message carries zero information."],
+   ["Fix broken menu link on the home page",true,"Precise. Six months from now this line explains itself."],
+   ["asdfasdf",false,"A keyboard mash. When the site breaks, this is the save point you can't identify."],
+   ["final version 2 REAL final",false,"Naming versions 'final' is a lie the second you commit again — say what changed instead."],
+   ["Remove unused hero image to speed up load",true,"What AND why in nine words. This is the standard."]];
+  const wrap=document.getElementById('cm7');let done=0,score=0;
+  MS.forEach(m=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq" style="font-family:ui-monospace,Menlo,monospace;font-size:14px">"'+m[0]+'"</div>'+
+      '<div class="qbtns"><button class="wbtn alt" data-a="1">Talks to future-you</button>'+
+      '<button class="wbtn alt" data-a="0">A lie</button></div><div class="qfb"></div>';
+    wrap.appendChild(card);
+    card.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+      if(card.dataset.done)return;card.dataset.done=1;
+      const ok=(b.dataset.a==='1')===m[1];if(ok)score++;done++;
+      card.classList.add(ok?'good':'bad');
+      card.querySelector('.qfb').innerHTML=(ok?'<b>Right.</b> ':'<b>Look again.</b> ')+m[2];
+      card.querySelectorAll('button').forEach(x=>x.disabled=true);
+      if(done===MS.length)document.getElementById('cm7sum').innerHTML=
+        '<b>'+score+' of 6.</b> From today, every build ends with a commit — and every commit gets a real sentence.';
+    }));});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

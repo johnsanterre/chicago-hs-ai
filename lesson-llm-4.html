@@ -56,7 +56,7 @@ genuinely useful tomorrow.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Stuff, then trust — carefully</h2>
 
   <p>The technique is honest about itself: <b>context stuffing</b> — read the
@@ -74,6 +74,17 @@ genuinely useful tomorrow.</p>
   first and stuff only that — <b>retrieval</b>, the R in RAG. You've now built
   the core of it; the searching machinery comes later in your journey, but the
   concept is no longer magic.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Pack the desk</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Question: “How many practices can a member miss?” The handbook has four sections — click the one to put in the prompt.</p>
+    <div id="dp4"></div>
+    <p class="fignote" id="dp4note">The context window is finite — you choose what goes on the desk.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -158,23 +169,26 @@ print(ask(f&quot;Answer using ONLY the document below. If the answer is not in i
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 4 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 4 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -193,6 +207,34 @@ print(ask(f&quot;Answer using ONLY the document below. If the answer is not in i
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const CHUNKS=[
+   ["Section 1 · Club history","Founded in 2019 after the citywide robotics expo…",
+    "Interesting, useless here — and it spent desk space. The model would say ‘not in this document.’"],
+   ["Section 2 · Attendance policy","Members may miss two practices per season before losing competition eligibility. Excused absences require…",
+    "This is the one. With this on the desk, the model answers: two per season — grounded in YOUR handbook."],
+   ["Section 3 · Equipment rules","Power tools require a mentor present. Batteries charge in the gray cabinet…",
+    "Wrong section — an honest model answers ‘not in this document,’ which is the guard working."],
+   ["Section 4 · Fundraising","The spring pizza sale funds travel to regionals…",
+    "Not here either. Notice what a wrong pick costs: a truthful ‘I can’t find it’ — never an invented rule."]];
+  const wrap=document.getElementById('dp4');
+  CHUNKS.forEach((c,i)=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq">'+c[0]+'</div><div style="font-size:14px;color:var(--ink2)">'+c[1]+'</div><div class="qfb"></div>';
+    card.style.cursor='pointer';
+    card.addEventListener('click',()=>{
+      if(wrap.dataset.done)return;
+      const ok=i===1;
+      card.classList.add(ok?'good':'bad');
+      card.querySelector('.qfb').innerHTML=(ok?'<b>Grounded.</b> ':'<b>Desk space spent: </b>')+c[2];
+      if(ok){wrap.dataset.done=1;
+        document.getElementById('dp4note').innerHTML='<b>“Answer using ONLY the document below. If the answer is not in it, say so.”</b> Both guards, working.';}
+    });
+    wrap.appendChild(card);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

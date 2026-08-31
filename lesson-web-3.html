@@ -52,7 +52,7 @@ habit is what separates people who USE AI from people AI uses.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The reader's method</h2>
 
   <p>AI writes code faster than any human. That moved the scarce skill: the
@@ -68,6 +68,17 @@ habit is what separates people who USE AI from people AI uses.</p>
   <p>Style-guide note for the whole course: every file you keep should read like you
   wrote it — your indenting, your comments, no mystery lines. A mystery line kept is
   a debt future-you pays.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Predict, then reveal</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Three lines from an AI-generated page. For each: decide what it does BEFORE you reveal.</p>
+    <div id="pr3"></div>
+    <p class="fignote" id="pr3sum"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -152,23 +163,26 @@ habit is what separates people who USE AI from people AI uses.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 3 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -187,6 +201,43 @@ habit is what separates people who USE AI from people AI uses.</p>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const QS=[
+   ['<a href="menu.html">Menu</a>',
+    ["Makes the word Menu a link that opens menu.html","Renames this file to menu.html","Adds a menu bar to the top of the page"],0,
+    "The a tag wraps text and points it somewhere. Click target: menu.html."],
+   ['<img src="team.jpg" alt="Our robotics team">',
+    ["Shows team.jpg; the alt text describes it if the image fails or for screen readers","Links to a page called team.jpg","Sets the page background to team.jpg"],0,
+    "img drops the picture in; alt is what blind users hear and what shows when the file is missing."],
+   ['<div class="card">…</div>',
+    ["An invisible box that groups things so they can be styled or moved together","A pre-styled card with a border and shadow","A comment the browser ignores"],0,
+    "A div is a plain container — no look of its own. The class name is a hook for CSS. Not sure? The deletion test: remove it and see what breaks."]];
+  const wrap=document.getElementById('pr3');let done=0,score=0;
+  QS.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq" style="font-family:ui-monospace,Menlo,monospace;font-size:14px">'+
+      q[0].replace(/</g,'&lt;')+'</div>';
+    q[1].forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='choice';b.textContent=opt;
+      b.addEventListener('click',()=>{
+        if(card.dataset.done)return;card.dataset.done=1;
+        const ok=j===q[2];if(ok)score++;done++;
+        card.classList.add(ok?'good':'bad');
+        [...card.querySelectorAll('.choice')].forEach((x,k)=>{
+          x.disabled=true;if(k===q[2])x.classList.add('right');
+          else if(x===b&&!ok)x.classList.add('wrong');});
+        const fb=document.createElement('div');fb.className='qfb';
+        fb.innerHTML=(ok?'<b>Called it.</b> ':'<b>Reveal:</b> ')+q[3];
+        card.appendChild(fb);
+        if(done===QS.length)document.getElementById('pr3sum').innerHTML=
+          '<b>'+score+' of 3.</b> Prediction before execution — on a real page, this is the habit, line by line.';
+      });
+      card.appendChild(b);});
+    wrap.appendChild(card);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

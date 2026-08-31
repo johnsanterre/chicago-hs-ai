@@ -55,7 +55,7 @@ what makes it science.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Diagnose, decide, disclose</h2>
 
   <p>Real-world data arrives dirty, always: missing values, inconsistent spelling
@@ -75,6 +75,20 @@ what makes it science.</p>
   bends the answers differently. So you keep a <b>cleaning log</b>: every change,
   listed, in order. Cleaned data with a log is science. Without one, it's just a
   table somebody quietly tampered with.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Find the mess</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">This table has five planted problems. Click every cell that needs a cleaning decision.</p>
+    <table class="wtable" id="t3">
+      <thead><tr><th>name</th><th>neighborhood</th><th>hours_online</th><th>grade</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="fignote" id="f3note">Found: <b id="f3n">0</b> of 5.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -160,23 +174,26 @@ df[&#x27;neighborhood&#x27;] = df[&#x27;neighborhood&#x27;].str.title().str.stri
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 3 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 3 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -195,6 +212,45 @@ df[&#x27;neighborhood&#x27;] = df[&#x27;neighborhood&#x27;].str.title().str.stri
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const ROWS=[
+   ["Maya","Pilsen","3","A"],
+   ["DeShawn","pilsen","5","B"],
+   ["Alex","Uptown","","A"],
+   ["Jordan","PILSEN","6","B"],
+   ["Jordan","PILSEN","6","B"],
+   ["Luis","Austin","-1","C"]];
+  const BAD={"1,1":"lowercase pilsen — same place, third spelling","2,2":"missing value — drop, fill, or flag: your call, on the record",
+   "3,1":"PILSEN shouting — spelling chaos, .unique() would have shown you","4,0":"duplicate row (compare row above) — .duplicated() catches it",
+   "4,1":"the duplicate again — dropping the row clears both","4,2":"the duplicate again","4,3":"the duplicate again",
+   "5,2":"-1 hours online — impossible value, a judgment call for the log"};
+  const NEED=new Set(["1,1","2,2","3,1","4,0","5,2"]);
+  let found=new Set();
+  const tb=document.querySelector('#t3 tbody');
+  ROWS.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    r.forEach((c,j)=>{
+      const td=document.createElement('td');
+      td.textContent=c===""?"(empty)":c;td.className='badcell';
+      td.addEventListener('click',()=>{
+        const k=i+','+j;
+        if(BAD[k]){
+          td.classList.add('caught');td.title=BAD[k];
+          const canon=NEED.has(k)?k:(k[0]==='4'?'4,0':k);
+          if(NEED.has(canon))found.add(canon);
+          document.getElementById('f3n').textContent=found.size;
+          document.getElementById('f3note').innerHTML='Found: <b>'+found.size+'</b> of 5. '+BAD[k]+
+            (found.size===5?' <br><b>All five.</b> Diagnose first, fix one problem at a time, and log every decision.':'');
+        }else{
+          document.getElementById('f3note').innerHTML='Found: <b>'+found.size+'</b> of 5. That cell is fine — look for spelling chaos, gaps, copies, and impossible values.';
+        }
+      });
+      tr.appendChild(td);});
+    tb.appendChild(tr);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

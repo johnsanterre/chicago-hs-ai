@@ -55,7 +55,7 @@ add. That&#x27;s the course — go take another one; they&#x27;re all flat.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>The method is the lesson</h2>
 
   <p>The chore bot matters less than the <b>method</b> you use to build it — the
@@ -73,6 +73,19 @@ add. That&#x27;s the course — go take another one; they&#x27;re all flat.</p>
   Same rule both places.</p>
   <p><b>It runs twice.</b> Top to bottom, no errors, two times in a row — the
   difference between "worked once on my machine" and <i>works</i>.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The method, in order</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The chore-program build method — click the moves in the order the lesson teaches.</p>
+    <div class="guessrow" id="mth8btns" style="flex-wrap:wrap"></div>
+    <p style="font-size:14px;color:var(--ink2);font-weight:700;margin:10px 0 4px">YOUR ORDER:</p>
+    <div class="statebox" id="mth8seq">&nbsp;</div>
+    <p class="fignote" id="mth8note">Wrong clicks bounce. The order IS the method.</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -173,23 +186,26 @@ add. That&#x27;s the course — go take another one; they&#x27;re all flat.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 8 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 8 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 8 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 8';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -208,6 +224,32 @@ add. That&#x27;s the course — go take another one; they&#x27;re all flat.</p>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const STEPS=["write the plan in comments","build ONE function","test that function",
+    "build the next piece","run the whole thing twice, fresh","commit with a real message"];
+  const SHUF=[4,1,5,0,3,2];
+  let next=0;const seq=[];
+  const wrap=document.getElementById('mth8btns');
+  SHUF.forEach(i=>{
+    const b=document.createElement('button');b.className='wbtn alt';
+    b.textContent=STEPS[i];b.dataset.i=i;
+    b.addEventListener('click',()=>{
+      if(+b.dataset.i===next){
+        b.className='wbtn';b.disabled=true;
+        seq.push((next+1)+'. '+STEPS[next]);next++;
+        document.getElementById('mth8seq').textContent=seq.join('\n');
+        if(next===STEPS.length)document.getElementById('mth8note').innerHTML=
+          '<b>That is how real programs get built.</b> Plan first — the plan is the design, and the AI helps best when the plan is yours.';
+      }else{
+        document.getElementById('mth8note').textContent=
+          'Not yet — what does "'+STEPS[+b.dataset.i]+'" depend on?';
+      }
+    });
+    wrap.appendChild(b);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

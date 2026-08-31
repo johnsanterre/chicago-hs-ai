@@ -52,7 +52,7 @@ the proof that decode(encode(msg)) == msg. Design yours before asking the intern
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>def, return, and stacking</h2>
 
   <p><code>def cheer(name):</code> defines a function — code with a name and a
@@ -69,6 +69,22 @@ the proof that decode(encode(msg)) == msg. Design yours before asking the intern
   <p>The build has a <b>testable promise</b>: <code>decode(encode(msg)) == msg</code>
   must print <code>True</code>. Programs that state their promises and prove them —
   that's where the Tests lesson of the craft courses will pick up.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Predict the call</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Two functions are defined below. Predict what each call produces — before you reveal.</p>
+    <pre class="code" style="font-size:14px;margin:8px 0">def cheer(name):
+    print(f"Go {name}!")
+
+def area(w, h):
+    return w * h</pre>
+    <div id="q4"></div>
+    <p class="fignote" id="q4sum"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -169,23 +185,26 @@ print(f&quot;The room is {room} square feet&quot;)</pre>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 4 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 4 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -204,6 +223,43 @@ print(f&quot;The room is {room} square feet&quot;)</pre>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const QS=[
+ {q:'cheer("Maya")',mono:true,a:0,
+  opts:["Prints: Go Maya!","Returns the text Go Maya! but prints nothing","Errors: name is not defined"],
+  why:"cheer prints inside its body and returns nothing. Defined once, called with any name."},
+ {q:'x = area(3, 4)\nprint(x)',mono:true,a:2,
+  opts:["Prints nothing — area has no print inside","Errors — you can't store a function's result","Prints: 12"],
+  why:"return HANDS BACK a value; the caller stores it in x and can print it, or feed it onward."},
+ {q:'print(area(2, area(2, 3)))',mono:true,a:1,
+  opts:["Errors — a function can't call another function","Prints: 12 — the inner call runs first (2*3=6), then area(2,6)","Prints: 2 2 3"],
+  why:"Composition: inner call first, its return value feeds the outer call. Small functions stacking — how all real software is built."}];
+  const wrap=document.getElementById('q4');let done=0,score=0;
+  QS.forEach(q=>{
+    const card=document.createElement('div');card.className='qcard';
+    card.innerHTML='<div class="qq"'+(q.mono?' style="font-family:ui-monospace,Menlo,monospace;font-size:14px;white-space:pre-wrap"':'')+'></div>';
+    card.querySelector('.qq').textContent=q.q;
+    q.opts.forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='choice';b.textContent=opt;
+      b.addEventListener('click',()=>{
+        if(card.dataset.done)return;card.dataset.done=1;
+        const ok=j===q.a;if(ok)score++;done++;
+        card.classList.add(ok?'good':'bad');
+        [...card.querySelectorAll('.choice')].forEach((x,k)=>{
+          x.disabled=true;if(k===q.a)x.classList.add('right');
+          else if(x===b&&!ok)x.classList.add('wrong');});
+        const fb=document.createElement('div');fb.className='qfb';
+        fb.innerHTML=(ok?'<b>Called it.</b> ':'<b>Reveal:</b> ')+q.why;
+        card.appendChild(fb);
+        if(done===QS.length)document.getElementById('q4sum').innerHTML=
+          '<b>'+score+' of '+QS.length+'.</b> return vs print, and composition — the two ideas the whole lesson hangs on.';
+      });
+      card.appendChild(b);});
+    wrap.appendChild(card);});
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

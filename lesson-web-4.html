@@ -53,7 +53,7 @@ your page until it looks like you meant it.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>selector { property: value; }</h2>
 
   <p>CSS is rules: a <b>selector</b> picks elements, properties set their look.
@@ -69,6 +69,25 @@ your page until it looks like you meant it.</p>
   three complete looks, one calm, one bold, one weird — then choose and iterate.
   The machine generates; your taste selects. And the readable-beats-flashy rule
   wins arguments: contrast high, lines short, spacing generous.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Three looks, one page — you choose</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The same page wearing three AI-generated style blocks. Click a look, read its rules, edit them.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="lk-calm">calm</button>
+      <button class="wbtn alt" id="lk-bold">bold</button>
+      <button class="wbtn alt" id="lk-weird">weird</button>
+    </div>
+    <div class="pg">
+      <textarea id="pg4-src" spellcheck="false" aria-label="HTML source — edit it">(pick a look above)</textarea>
+      <iframe id="pg4-out" sandbox="" title="rendered page"></iframe>
+    </div>
+    <p class="fignote">The AI generated the looks; choosing is YOUR job — and so is reading every rule. Edit a color or a size and watch the page obey. selector { property: value; }</p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -155,23 +174,26 @@ your page until it looks like you meant it.</p>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 4 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 4 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -190,6 +212,25 @@ your page until it looks like you meant it.</p>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const BODY='\n<h1>Amara Johnson</h1>\n<p>Junior at Kenwood. I build things.</p>\n<p>Chicago, IL</p>';
+  const LOOKS={
+   calm:'<style>\n  body { font-family: system-ui; background: #FCFBF8;\n         margin: 2em; }\n  h1   { color: #174A6C; }\n  p    { line-height: 1.6; max-width: 60ch; }\n</style>',
+   bold:'<style>\n  body { font-family: system-ui; background: #1E2530;\n         color: #fff; margin: 2em; }\n  h1   { font-size: 3em; color: #B3DDF2;\n         text-transform: uppercase; }\n  p    { font-size: 1.1em; }\n</style>',
+   weird:'<style>\n  body { font-family: Georgia, serif; background: #B3DDF2;\n         margin: 2em; transform: rotate(-1deg); }\n  h1   { color: #CE3A36; letter-spacing: .3em; }\n  p    { border-left: 6px solid #CE3A36;\n         padding-left: 1em; }\n</style>'};
+  const ta=document.getElementById('pg4-src'),fr=document.getElementById('pg4-out');
+  function r(){fr.srcdoc=ta.value}
+  ta.addEventListener('input',r);
+  function pick(k){ta.value=LOOKS[k]+BODY;r();
+    ['calm','bold','weird'].forEach(x=>{
+      document.getElementById('lk-'+x).className='wbtn'+(x===k?'':' alt')});}
+  ['calm','bold','weird'].forEach(k=>
+    document.getElementById('lk-'+k).addEventListener('click',()=>pick(k)));
+  pick('calm');
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

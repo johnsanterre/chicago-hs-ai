@@ -55,7 +55,7 @@ have an actual chatbot you made from parts you understand completely.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Stateless, and honest about it</h2>
 
   <p>The API is <b>stateless</b>: every call stands alone, no memory of the
@@ -73,6 +73,31 @@ have an actual chatbot you made from parts you understand completely.</p>
   summarize, or window their histories. Your build adds the first version of
   that discipline — a guard that warns when the list is getting long. Small
   program; real-world shape.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The list is the memory</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Step through three chat turns and watch what actually travels to the API each time.</p>
+    <pre class="code" style="font-size:14px;margin:8px 0">history = []
+
+def chat_turn(user_text):
+    history.append({"role": "user", "content": user_text})
+    reply = call_model(history)      # sends the WHOLE list
+    history.append({"role": "assistant", "content": reply})
+    return reply</pre>
+    <div class="guessrow">
+      <button class="wbtn" id="hs-step">Step</button>
+      <button class="wbtn alt" id="hs-reset">Reset</button>
+    </div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">WHAT THE API RECEIVES THIS TURN:</p>
+    <div class="statebox" id="hs-state"></div>
+    <p style="font-size:13px;color:var(--ink2);font-weight:700;margin:8px 0 2px">THE REPLY:</p>
+    <div class="statebox" id="hs-out"></div>
+    <p class="fignote" id="hs-note"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -160,23 +185,26 @@ def chat_turn(user_text):
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 5 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 5 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -194,6 +222,30 @@ def chat_turn(user_text):
       })
     })
   });
+  render();
+})();
+</script>
+<script>
+/* Read & play figure */
+(function(){
+  const STEPS=[
+ ['[ {user: "My name is Amara."} ]','"Nice to meet you, Amara!"'],
+ ['[ {user: "My name is Amara."},\n  {assistant: "Nice to meet you…"},\n  {user: "Use my name!"} ]','"Of course, Amara!"'],
+ ['AMNESIA RUN — appends commented out:\n[ {user: "Use my name!"} ]      ← nothing else travels','"You haven’t told me your name."'],
+ ['The API never remembered anything.\nThe LIST carried the name — until it didn’t.','']];
+  let i=-1;
+  const st=document.getElementById('hs-state'),out=document.getElementById('hs-out'),
+        b=document.getElementById('hs-step'),rs=document.getElementById('hs-reset');
+  function render(){
+    if(i<0){st.textContent='(press Step to begin)';out.textContent='\u00a0';}
+    else{st.textContent=STEPS[i][0];out.textContent=STEPS[i][1]||'\u00a0';}
+    b.disabled=i>=STEPS.length-1;
+    b.textContent=i>=STEPS.length-1?'Done':'Step';
+    document.getElementById('hs-note').innerHTML=
+      i>=STEPS.length-1?'Every turn re-sends the whole conversation. Memory is your list — and desks have edges, so long chats cost more.':'';
+  }
+  b.addEventListener('click',()=>{if(i<STEPS.length-1){i++;render()}});
+  rs.addEventListener('click',()=>{i=-1;render()});
   render();
 })();
 </script>

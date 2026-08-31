@@ -54,7 +54,7 @@ in code, then say the answer in a sentence — the sentence is the analysis.</p>
 </section>
 
 <section class="seg" data-seg="read">
-  <div class="stype">3 · Read</div>
+  <div class="stype">3 · Read &amp; play</div>
   <h2>Filter, sort, count</h2>
 
   <p><b>Filter</b> — <code>df[df['col'] == value]</code>. Read it inside-out: the
@@ -72,6 +72,28 @@ in code, then say the answer in a sentence — the sentence is the analysis.</p>
   questions a human eyeball never could. One discipline: after each code answer,
   write the plain-English sentence. Code computes; the sentence is the
   analysis.</p>
+  
+  <p>Now run it with your own hands:</p>
+
+  <div class="fig" id="figx1">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The filter machine</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Build the filter with the dropdowns and watch both the code and the table respond.</p>
+    <div class="guessrow">
+      <span style="font-family:ui-monospace,Menlo,monospace;font-size:15px">df[df["</span>
+      <select class="wsel" id="fcol"><option>neighborhood</option><option>grade</option><option>hours_online</option></select>
+      <span style="font-family:ui-monospace,Menlo,monospace;font-size:15px">"]</span>
+      <select class="wsel" id="fop"><option>==</option><option>&gt;=</option></select>
+      <select class="wsel" id="fval"></select>
+      <span style="font-family:ui-monospace,Menlo,monospace;font-size:15px">]</span>
+    </div>
+    <table class="wtable" id="t2">
+      <thead><tr><th>name</th><th>neighborhood</th><th>hours_online</th><th>grade</th><th>score</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="fignote" id="f2note"></p>
+  </div>
+
   <button class="mark" data-for="read">Mark complete</button>
 </section>
 
@@ -157,23 +179,26 @@ df[&#x27;neighborhood&#x27;].value_counts()</pre>
       const done=!!state[s]; if(done)n++;
       const el=segEl(s); el.classList.toggle('done',done);
       const b=el.querySelector('button.mark[data-for="'+s+'"]');
-      if(b&&s!=='done'){b.disabled=done;b.textContent=done?'✓ Complete':'Mark complete'}
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
     }
     document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
     document.getElementById('pdone').textContent=n;
     const others=SEGS.slice(0,-1).every(s=>state[s]);
     const fin=document.getElementById('finishBtn');
-    if(state.done){fin.disabled=true;fin.textContent='✓ Lesson 2 complete';
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 2 complete — undo';
       document.getElementById('doneHead').textContent='Lesson 2 complete';
       document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
-    else{fin.disabled=!others;
+    else{fin.disabled=!others;fin.textContent='Complete lesson 2';
+      document.getElementById('doneHead').textContent='Finish the lesson';
       document.getElementById('doneMsg').textContent=others?
         'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
   }
   document.querySelectorAll('button.mark').forEach(b=>{
-    b.addEventListener('click',()=>{state[b.dataset.for]=true;save();render();
-      if(b.dataset.for==='done'&&window.goatcounter&&window.goatcounter.count){
-        window.goatcounter.count({path:'complete/'+KEY,event:true});}})
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
   });
   const groups=[...document.querySelectorAll('[data-q]')];
   const right={};
@@ -192,6 +217,43 @@ df[&#x27;neighborhood&#x27;].value_counts()</pre>
     })
   });
   render();
+})();
+</script>
+<script>
+/* Read & play figure */
+const ROWS=[
+ {name:"Maya",hood:"Pilsen",hours:3,grade:"A",score:91},
+ {name:"DeShawn",hood:"Austin",hours:5,grade:"B",score:84},
+ {name:"Alex",hood:"Uptown",hours:2,grade:"A",score:88},
+ {name:"Jordan",hood:"Pilsen",hours:6,grade:"B",score:79},
+ {name:"Amara",hood:"Austin",hours:1,grade:"A",score:95},
+ {name:"Luis",hood:"Pilsen",hours:4,grade:"C",score:72},
+ {name:"Nia",hood:"Uptown",hours:3,grade:"B",score:83},
+ {name:"Marcus",hood:"Austin",hours:7,grade:"C",score:68}];
+(function(){
+  const col=document.getElementById('fcol'),op=document.getElementById('fop'),
+        val=document.getElementById('fval'),note=document.getElementById('f2note');
+  const VALS={neighborhood:["Pilsen","Austin","Uptown"],grade:["A","B","C"],hours_online:["3","5"]};
+  const KEY={neighborhood:'hood',grade:'grade',hours_online:'hours'};
+  function fillVals(){
+    val.innerHTML=VALS[col.value].map(v=>'<option>'+v+'</option>').join('');
+  }
+  function render(){
+    const k=KEY[col.value],v=val.value,useNum=col.value==='hours_online';
+    const keep=ROWS.filter(r=>{
+      const cell=r[k];
+      return op.value==='=='?String(cell)===v:cell>=+v;});
+    const tb=document.querySelector('#t2 tbody');tb.innerHTML='';
+    ROWS.forEach(r=>{
+      const inKeep=keep.includes(r);
+      tb.insertAdjacentHTML('beforeend','<tr'+(inKeep?'':' class="dim"')+'><td>'+r.name+'</td><td>'+r.hood+
+        '</td><td>'+r.hours+'</td><td>'+r.grade+'</td><td>'+r.score+'</td></tr>');});
+    note.innerHTML='<b>'+keep.length+' of '+ROWS.length+' rows kept.</b> The inner part made a True/False '+
+      'column; the outer bracket kept the True rows. Every filter you will ever write is this shape.';
+  }
+  col.addEventListener('change',()=>{fillVals();render()});
+  op.addEventListener('change',render);val.addEventListener('change',render);
+  fillVals();render();
 })();
 </script>
 <script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
