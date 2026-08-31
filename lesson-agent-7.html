@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The report shows its work · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>The report shows its work</h1>
+<p class="lede">Merge the duplicates, rank by confidence, then write — every number cited, every single-source claim hedged, every gap admitted. The report is trustworthy because of what it refuses to say.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>From claim table to report</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-7-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">The verified claims assemble into a half-page report; toggling the citations off turns the same paragraph into something you'd be right not to trust.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Prose comes from the model; facts and their order come from the table. The gaps get named. That division is the whole craft.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Writing from the table only</h2>
+
+
+  <p>The last stage is the one readers see, and it is mostly discipline
+  about who does what.</p>
+  <p><b>Code merges and ranks.</b> Different angles produced overlapping
+  claims — "60 plots (census)" and "now 60 plots (news)" are one fact, and
+  the merge folds them into one claim with two supporting sources, which is
+  stronger than either alone. Then the claims sort by confidence:
+  confirmed first, plausible after, refuted nowhere — the quarantine file
+  lists those, with reasons, for anyone who asks.</p>
+  <p><b>The model writes prose — from the table and nothing else.</b> The
+  writing prompt is strict: <i>use only these claims; cite the source
+  after every factual sentence; hedge anything labeled plausible ("a
+  single source suggests\u2026"); if the claims don't answer part of the
+  question, say so.</i> The model turns rows into readable paragraphs,
+  which it is good at. It does not get to add facts, remember things, or
+  round numbers — everything factual traces to a row, and every row traces
+  to a quote, and every quote to a URL. You built that chain across four
+  lessons; the report is just the chain made readable.</p>
+  <p><b>The limits section is not optional.</b> "No source states the
+  garden's budget; the lease claim rests on one page" — two sentences like
+  that do more for the report's credibility than any amount of confident
+  prose, because they prove somebody checked. A report that admits what it
+  doesn't know earns trust for what it does say. The figure makes the
+  point physically.</p>
+
+  <!-- ============ FIGURE 1: The trust toggles ============ -->
+  <div class="fig" id="figrep">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Same report, three ways</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Toggle what the report is
+    allowed to show. Read it each way and notice your own trust move.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="rpcit">citations</button>
+      <button class="wbtn" id="rphedge">hedges &amp; limits</button>
+    </div>
+    <div class="prefix" id="rptext" style="font-size:14px;white-space:pre-wrap;line-height:1.75"></div>
+    <p class="fignote" id="rpnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Assemble and write</h2>
+  <p>The notebook merges duplicate claims in code, ranks by verification verdict, then prompts the model to write the cited report from the table only (class API key; precomputed report included) — and finishes by diffing the report's numbers against the claim table to prove nothing crept in.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent7-report.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent7-report.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Who supplies the facts in the final report?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">The model, from its training memory</button>
+    <button class="choice" data-ok="1">The claim table — the model only turns rows into prose and may not add facts</button>
+    <button class="choice" data-ok="0">The reader</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Two sources supporting one merged claim is stronger than two separate claims. Why?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Independent agreement is evidence; the same fact counted twice is decoration</button>
+    <button class="choice" data-ok="0">Merged claims use fewer tokens</button>
+    <button class="choice" data-ok="0">It isn't stronger</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 6 — a claim labeled 'plausible' appears in the report how?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">As a plain fact — it survived, after all</button>
+    <button class="choice" data-ok="1">Hedged, e.g. 'a single source suggests', so the reader inherits the caveat</button>
+    <button class="choice" data-ok="0">It is deleted with the refuted ones</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The number diff</h2>
+  <div class="buildtask">
+
+
+  <p>Run the notebook's final check by hand: list every number that appears
+  in the generated report, and for each one find its row in the claim
+  table. A number with no row is an invention that slipped through — the
+  notebook's report has none, but your capstone report might, and this
+  diff is how you'll know.</p>
+  <p><b>Turn-in:</b> the number-to-row list, plus one sentence: which
+  sentence of the report would you cut if you could only keep half of it,
+  and why.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-6.html">&larr; Lesson 6</a> <a href="lesson-agent-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 7 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-7';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 7 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  let cit=true,hed=true;
+  function txt(){
+    const c1=cit?' [cityparks.gov/report-2026; lakeview-news.com]':'';
+    const c2=cit?' [riverside-garden.org/history; cityparks.gov/report-2026]':'';
+    const c3=cit?' [cityparks.gov/grants-2025]':'';
+    const c4=cit?' [riverside-garden.org/join]':'';
+    let t='Is the Riverside Community Garden growing?\n\n'+
+    'Yes, on every measure a source covers. The garden reached 60 plots in 2026'+c1+
+    ', up from 48 in 2023'+c2+'. Membership rose from 31 to 48 families over the same period'+c2+
+    '. A $15,000 city grant arrived in 2025'+c3+', and 22 families are waitlisted for plots'+c4+'.';
+    if(hed){t+=' A single source suggests the land lease runs to 2028; treat that as unconfirmed.'+
+    '\n\nLimits: no source states the garden\u2019s operating budget, and the lease claim rests on one page. One blog\u2019s figure of 600 plots was refuted (typo for 60) and excluded.';}
+    return t;
+  }
+  function render(){
+    $('rpcit').className='wbtn'+(cit?'':' alt');
+    $('rphedge').className='wbtn'+(hed?'':' alt');
+    $('rptext').textContent=txt();
+    $('rpnote').innerHTML=(cit&&hed)?
+      '<b>Full dress.</b> Every number has a receipt, the weak claim is hedged, the gaps are named. This is what \u201cthe report shows its work\u201d means.':
+     cit?'Citations without limits: looks rigorous, hides what it doesn\u2019t know. The reader can check each fact but can\u2019t see the holes.':
+     hed?'Hedges without citations: honest about uncertainty, but no fact is checkable. Trust me, says the report.':
+      '<b>Stripped.</b> The same true sentences \u2014 and no way to tell them from confident invention. This is what most AI answers look like.';
+  }
+  $('rpcit').addEventListener('click',()=>{cit=!cit;render();});
+  $('rphedge').addEventListener('click',()=>{hed=!hed;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

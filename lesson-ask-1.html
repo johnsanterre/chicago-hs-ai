@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The model has never read your stuff · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>The model has never read your stuff</h1>
+<p class="lede">A model knows its training data, not your handbook, your club minutes, or your notes. The fix is not a bigger model — it's retrieval: find the relevant pieces of your pile, hand them over, then ask.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Why the model doesn't know</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-1-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">The same question — 'can I retake a final?' — asked three ways: from memory (a guess), with the whole handbook pasted in (too big), and with retrieval (the one paragraph that answers it).
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Context is working memory: small, expensive, and everything the model gets to see. Retrieval decides what deserves the space.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Working memory, not a library</h2>
+
+
+  <p>Ask a model "can I retake a final at Jefferson High?" and it has
+  nothing to work with. Jefferson's handbook was never in its training
+  data — your school's rules, your club's minutes, your own notes are
+  invisible to it. Models that answer anyway are guessing from what
+  <i>other</i> schools' handbooks tend to say, which is exactly the kind of
+  confident wrongness you can't detect by reading the answer.</p>
+  <p>The obvious fix: paste the handbook into the chat. And for one page,
+  that works — the model reads what you pasted and answers from it. This
+  is the key fact of the whole course: <b>the model answers well from text
+  you put in front of it.</b> What breaks is scale. The space a model can
+  read per request — its <b>context window</b> — is working memory, not a
+  library: real piles (a 200-page handbook, three years of minutes) don't
+  fit, and even when something fits, you pay for every word sent, and
+  burying one relevant paragraph under two hundred irrelevant pages makes
+  answers worse, not better. Relevance gets diluted.</p>
+  <p>So the architecture that actually works keeps the pile <i>outside</i>
+  the model and moves only the relevant pieces in, per question:</p>
+  <p><b>1. Store</b> — your documents, split into pieces, sitting in your
+  own storage.<br>
+  <b>2. Retrieve</b> — for each question, find the few pieces most likely
+  to contain the answer.<br>
+  <b>3. Ask</b> — hand the model those pieces plus the question, with
+  orders to answer only from them.</p>
+  <p>Steps 1 and 2 are yours — plain code, no model involved. Only step 3
+  touches the model at all. The next six lessons build the three steps
+  properly; the figure shows why step 2 can't be skipped.</p>
+
+  <!-- ============ FIGURE 1: The context meter ============ -->
+  <div class="fig" id="figctx">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>What fits in front of the model</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">One question, three
+    strategies. Watch the context window fill.</p>
+    <div class="figtabs">
+      <button class="wbtn cxbtn" data-c="0">memory only</button>
+      <button class="wbtn alt cxbtn" data-c="1">paste everything</button>
+      <button class="wbtn alt cxbtn" data-c="2">retrieve first</button>
+    </div>
+    <div style="background:#e8eef4;border-radius:6px;height:26px;overflow:hidden;margin:6px 0">
+      <div id="cxbar" style="height:100%;width:0%;background:var(--navy);transition:none"></div>
+    </div>
+    <div class="prefix" id="cxout" style="font-size:14px;white-space:pre-wrap;line-height:1.7"></div>
+    <p class="fignote" id="cxnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Feel the problem</h2>
+  <p>The notebook ships the Jefferson High pile — handbook sections, club minutes, schedules, about forty pieces — and lets you ask questions three ways: no context (watch it guess), the whole pile (watch cost and dilution), and hand-picked context (watch it answer well). The hand-picking is what lessons 2-4 automate.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask1-the-problem.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask1-the-problem.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why does the model guess wrong about YOUR school's rules?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Models dislike schools</button>
+    <button class="choice" data-ok="1">Your documents were never in its training data; it patterns-matches from other schools' rules</button>
+    <button class="choice" data-ok="0">School rules change too fast for any system</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What is the context window?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">The model's permanent memory of past chats</button>
+    <button class="choice" data-ok="1">The text a model can read per request — working memory you fill, and pay for, each time</button>
+    <button class="choice" data-ok="0">A browser feature</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Why not just paste the entire pile with every question?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">It may not fit, you pay for every word, and burying the relevant paragraph dilutes the answer</button>
+    <button class="choice" data-ok="0">Pasting is against the rules</button>
+    <button class="choice" data-ok="0">Models can only read one document</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Map your own pile</h2>
+  <div class="buildtask">
+
+
+  <p>Choose the document pile you'll use for the rest of this course —
+  yours or your family's, with permission: a student handbook, club or team
+  documents, notes from a class, a game's rulebook. List what's in it, in
+  what formats, and roughly how big it is. Then write three questions you
+  genuinely want it to answer, and mark which document you <i>think</i>
+  holds each answer — you'll check your guesses in lesson 8.</p>
+  <p><b>Turn-in:</b> the pile inventory and the three questions with
+  guesses.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="ask-your-documents.html">&larr; Course home</a> <a href="lesson-ask-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-1';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 1 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CASES=[
+   [3,'Q: Can I retake a final at Jefferson High?\n\n(no documents provided)\n\nMODEL: \u201cMost schools allow retakes if you scored below\n70% and apply within two weeks\u2026\u201d\n\n\u2014 fluent, specific, and invented. Jefferson\u2019s actual rule\nis different.',
+    '<b>3% used, 0 documents.</b> The model answered from what other handbooks tend to say. Confident wrongness.'],
+   [96,'Q: Can I retake a final at Jefferson High?\n\n+ all 214 pages: dress code, cafeteria policy, bus routes,\n  three years of robotics minutes, the fire drill schedule\u2026\n\nMODEL: \u201cBased on the documents\u2026 finals may be retaken\u2026\u201d\n(correct \u2014 eventually, at full price)',
+    '<b>96% used, 214 pages sent, one relevant.</b> It fit \u2014 this time. You paid for all of it, and the answer sat under 213 pages of noise.'],
+   [8,'Q: Can I retake a final at Jefferson High?\n\n+ Handbook \u00a74.2 \u201cExam Retake Policy\u201d (retrieved)\n+ Handbook \u00a74.3 \u201cGrade Appeals\u201d (retrieved)\n\nMODEL: \u201cYes \u2014 one retake per semester for scores below\n75%, within ten school days [\u00a74.2].\u201d',
+    '<b>8% used, 2 pieces \u2014 the right ones.</b> Cheap, focused, checkable. Finding those two pieces automatically is the next three lessons.']];
+  let c=0;
+  function render(){
+    document.querySelectorAll('.cxbtn').forEach(b=>b.className='wbtn cxbtn'+(+b.dataset.c===c?'':' alt'));
+    $('cxbar').style.width=CASES[c][0]+'%';
+    $('cxbar').style.background=CASES[c][0]>90?'var(--star)':'var(--navy)';
+    $('cxout').textContent=CASES[c][1];
+    $('cxnote').innerHTML=CASES[c][2];
+  }
+  document.querySelectorAll('.cxbtn').forEach(b=>b.addEventListener('click',()=>{c=+b.dataset.c;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

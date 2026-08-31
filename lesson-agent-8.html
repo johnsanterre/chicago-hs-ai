@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capstone: run your own question · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 8</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 8 of 8 · about 2–4 hours</p>
+<h1>Capstone: run your own question</h1>
+<p class="lede">Pick a question you actually want answered. Run the whole flow — angles, gather, claims, verify, report — on the real web or the bundled corpus, and ship the report with its receipts.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The full flow, end to end</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-8-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">One real question travels every stage from lesson 1 to lesson 7, and the deliverables drop out the bottom: report, claim table, quarantine, limits.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Before anything runs: the agent's report is a draft for a human, and verify-before-you-repeat applies to you too.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-8-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Your question, the whole machine</h2>
+
+
+  <p>Everything is built. This lesson points it at a question you choose
+  and adds the two pieces that make it real research: the live web, and
+  the rules for using it.</p>
+  <p><b>Real search, one line.</b> The bundled mini-web taught the
+  mechanics because it was small and checkable. For real questions, the
+  Claude API offers search as a <b>server-side tool</b>: include the
+  web-search tool in the request and the model searches the live web
+  during its turn, returning answers with the URLs it used. Your loop
+  doesn't change shape — search is just a tool the model requests, exactly
+  like lesson 2, except the search itself runs on the provider's side.
+  The notebook shows both paths: mini-web (free, keyless, deterministic)
+  and live web (class API key).</p>
+  <p><b>The rules, before anything runs.</b> First: what you send to the
+  model — your question, your angles, anything you paste in — leaves your
+  machine; research someone else's private situation and you have shared
+  it. Second: the live web contains wrong pages in a way the mini-web only
+  simulates, which is why verification is not a school exercise — it is
+  the stage doing the most work out there. Third, the one to carry for
+  life: <b>the agent's report is a draft for a human, not an oracle.</b>
+  Before you repeat one of its claims to another person, follow the
+  citation and read the source yourself. You built the receipts precisely
+  so a human could spend thirty seconds using them.</p>
+  <p><b>Pick a question with stakes.</b> The capstone works best on a
+  question where you care whether the answer is right — a program you might
+  join, a purchase your family is weighing, a local decision. Caring is
+  what makes the verification stage feel necessary instead of ceremonial.</p>
+
+  <!-- ============ FIGURE 1: Grade this report ============ -->
+  <div class="fig" id="figgrade">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Grade this report</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">A report from a sloppier
+    agent. Click every sentence that should not have survived the
+    lesson-7 discipline. There are two.</p>
+    <div id="grlist" style="font-size:14.5px;line-height:1.9"></div>
+    <p class="fignote" id="grnote">The grader's checklist: does every number
+    have a row, every row a quote, every weak claim a hedge?</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Run the capstone</h2>
+  <p>The notebook runs the complete pipeline on your question — decompose, gather, claims, three-pass verify, cited report — over the mini-web keyless or the live web with the class key and the server-side search tool, and writes all four deliverables to files.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent8-your-question.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent8-your-question.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. With the server-side web-search tool, what changes in your agent loop?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">The loop's shape — server tools need a different architecture</button>
+    <button class="choice" data-ok="1">Almost nothing: search is still a requested tool; it just executes on the provider's side</button>
+    <button class="choice" data-ok="0">The model gains permanent internet access for future chats</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why is verification MORE important on the live web than the mini-web?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">It isn't — real pages are professionally checked</button>
+    <button class="choice" data-ok="1">The live web contains stale, wrong, and copied pages at scale; the mini-web only simulates that</button>
+    <button class="choice" data-ok="0">Live searches are slower</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — the finished agent still cannot delete a file, send an email, or spend a dollar. Why?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Models are legally barred from those actions</button>
+    <button class="choice" data-ok="1">Its dispatch table holds search and fetch, nothing else — the hands you gave it are the hands it has</button>
+    <button class="choice" data-ok="0">It could, if it wanted to</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Ship the research run</h2>
+  <div class="buildtask">
+
+
+  <p>Your capstone ships four things:</p>
+  <p><b>1. The report</b> — half a page to a page, every factual sentence
+  cited, plausible claims hedged, with a limits section.<br>
+  <b>2. The claim table</b> — every claim with source, quote, and
+  verification verdict.<br>
+  <b>3. The quarantine</b> — refuted claims with the evidence that killed
+  them.<br>
+  <b>4. The run report</b> — your question, the angles used, how many
+  pages were fetched, and one paragraph on what you would trust from this
+  report and what you would verify by hand before repeating it.</p>
+  <p>Then the practicum move, if your question touched a real decision:
+  give the report to the person who is deciding, and watch what they check
+  first.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 8</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-7.html">&larr; Lesson 7</a> <a href="research-agents.html">Course home &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 8 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-8';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 8 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 8 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 8';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 8 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const SENTS=[
+   ['The Riverside garden reached 60 plots in 2026 [cityparks.gov/report-2026].',false,'Cited, checkable \u2014 this one is fine.'],
+   ['Roughly 75 families are involved when you count volunteers.',true,'No citation, and \u201croughly\u2026 when you count\u201d smells like the model doing arithmetic on its own. No row, no receipt \u2014 cut it.'],
+   ['A $15,000 city grant arrived in 2025 [cityparks.gov/grants-2025].',false,'Cited, checkable \u2014 fine.'],
+   ['The garden is easily the most successful community project in the neighborhood.',true,'A vibe, not a claim \u2014 lesson 5 would never have let it into the table, so lesson 7 could never have written it.'],
+   ['A single source suggests the lease runs to 2028; this is unconfirmed [cityparks.gov/grants-2025].',false,'Hedged AND cited \u2014 exactly how a plausible-grade claim should appear.']];
+  const found={};
+  function render(){
+    $('grlist').innerHTML=SENTS.map((s,i)=>{
+      const st=found[i]===undefined?'':(found[i]?'background:#fde8e6;':'background:#e8f2e8;');
+      return '<span class="grs" data-i="'+i+'" style="cursor:pointer;border-bottom:1px dotted #999;'+st+'">'+s[0]+'</span> ';
+    }).join('');
+    document.querySelectorAll('.grs').forEach(el=>el.addEventListener('click',()=>{
+      const i=+el.dataset.i,s=SENTS[i];found[i]=s[1];
+      $('grnote').innerHTML=(s[1]?'<b style="color:var(--star)">Caught.</b> ':'<b style="color:var(--navy)">That one holds.</b> ')+s[2]+
+        (Object.keys(found).filter(k=>SENTS[k][1]&&found[k]).length===2?' <b>Both problems found.</b>':'');
+      render();
+    }));
+  }
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

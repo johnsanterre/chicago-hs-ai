@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gather everything, keep the receipts · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 4</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 4 of 8 · about 2–4 hours</p>
+<h1>Gather everything, keep the receipts</h1>
+<p class="lede">The angles fan out into searches, the searches into fetched pages, the pages into notes. The rule that makes it research instead of rumor: every note carries its source URL and date, from the moment it is written.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The gather stage</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-4-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Four angles run, twelve results dedupe down to seven pages, and each fetched fact lands in the notes with its URL and date stapled on.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Provenance is cheap at gather time and impossible to reconstruct later. Receipts now, or rumors forever.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-4-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Notes with origins</h2>
+
+
+  <p>Now the agent does the legwork. Each angle from lesson 3 becomes a
+  search; each search returns results; the promising ones get fetched. Two
+  mechanical habits and one law make this stage professional.</p>
+  <p><b>Habit one: dedupe before fetching.</b> Different angles find the
+  same pages — the news story about the expansion shows up under
+  <i>plot history</i> and under <i>coverage</i>. Fetching it twice wastes a
+  call and, worse, makes one source look like two independent ones later.
+  A set of already-seen URLs, checked before every fetch, fixes it in three
+  lines.</p>
+  <p><b>Habit two: notes, not pages.</b> A fetched page is mostly noise. The
+  agent extracts the sentences that bear on the question into a growing
+  notes list — small, quotable, checkable pieces.</p>
+  <p><b>The law: every note carries its receipt.</b> Each note is stored
+  with the URL it came from and the date on the page:
+  <code>{"note": "60 plots", "source": "cityparks.gov/report-2026",
+  "date": "2026-03-14"}</code>. Do this at gather time and it costs
+  nothing — the URL is right there in your hand. Skip it and it is gone:
+  an hour later nobody, human or model, can say which of seven pages a
+  number came from. Every later stage of this course — checking claims,
+  resolving contradictions, citing the report — reads that source field.
+  A note without one is unusable for all of it. The figure lets you feel
+  the difference.</p>
+
+  <!-- ============ FIGURE 1: Strip the receipts ============ -->
+  <div class="fig" id="figrec">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The same notes, twice</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six gathered notes. Toggle
+    the receipts off and try to answer the question below them.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="rcon">with receipts</button>
+      <button class="wbtn alt" id="rcoff">receipts stripped</button>
+    </div>
+    <div id="rclist" style="font-size:14px;line-height:1.75"></div>
+    <p class="fignote" id="rcnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the gather stage</h2>
+  <p>The notebook runs all four angles over the mini-web, dedupes the found URLs, fetches each page once, and builds the notes list with source and date on every entry — then proves the point by trying one downstream task against a stripped copy of the same notes.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent4-gather.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent4-gather.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why dedupe URLs before fetching?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Duplicate fetches waste calls and make one source masquerade as two independent ones</button>
+    <button class="choice" data-ok="0">Search engines ban repeated visits</button>
+    <button class="choice" data-ok="0">Deduping makes the notes alphabetical</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What must every note carry, and when is it attached?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Its source URL and date, attached at gather time when the URL is in hand</button>
+    <button class="choice" data-ok="0">A confidence score, added during the final report</button>
+    <button class="choice" data-ok="0">The model's reasoning, appended at the end</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 3 — the angle list decides what gets gathered. What does a missing angle cost?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Nothing; search engines fill gaps automatically</button>
+    <button class="choice" data-ok="1">Whatever evidence lived there is silently absent — nothing marks the hole</button>
+    <button class="choice" data-ok="0">An error message from the fetch tool</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Gather for your own question</h2>
+  <div class="buildtask">
+
+
+  <p>Run the gather stage, then audit it like a professional: from the
+  notebook's final notes list, pick the three notes that would matter most
+  for answering the research question. For each, follow its receipt — open
+  the source page text and find the exact sentence the note came from.
+  Report one note where the page says something slightly different from
+  the note, if you can find one. (There is one.)</p>
+  <p><b>Turn-in:</b> the three notes with their source quotes, and the
+  mismatch if you found it.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 4</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-3.html">&larr; Lesson 3</a> <a href="lesson-agent-5.html">Lesson 5 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 4 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-4';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 4 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 4 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const NOTES=[
+   ['60 plots as of the 2026 census','cityparks.gov/report-2026','2026-03-14'],
+   ['48 plots listed on the old sign','riverside-garden.org/history','2023-05-02'],
+   ['garden added 12 plots this spring','lakeview-news.com/garden-expands','2026-04-20'],
+   ['48 member families','cityparks.gov/report-2026','2026-03-14'],
+   ['waitlist is 22 families','riverside-garden.org/join','2026-06-01'],
+   ['$15,000 city grant received','cityparks.gov/grants-2025','2025-11-08']];
+  let show=true;
+  function render(){
+    $('rcon').className='wbtn'+(show?'':' alt');
+    $('rcoff').className='wbtn'+(show?' alt':'');
+    $('rclist').innerHTML=NOTES.map(n=>
+      '<div style="padding:4px 0;border-bottom:1px dashed #d8e4ee">\u201c'+n[0]+'\u201d'+
+      (show?' <span style="color:var(--ink2);font-size:12.5px">\u2014 '+n[1]+' \u00b7 '+n[2]+'</span>':'')+
+      '</div>').join('')+
+      '<p style="margin:.7em 0 0;font-size:14.5px"><b>Now answer:</b> the plot count went 48 \u2192 60. Which notes prove it, and are they from different sources or the same one?</p>';
+    $('rcnote').innerHTML=show?
+      'Answerable: the 48 is the garden\u2019s own 2023 page, the 60 is the city\u2019s 2026 census \u2014 <b>two independent sources, three years apart.</b> The receipts did that.':
+      '<b>Stuck.</b> Two of these notes might be the same source counted twice, or contradict each other \u2014 and there is no way to tell. Stripped of receipts, notes are rumors with nice formatting.';
+  }
+  $('rcon').addEventListener('click',()=>{show=true;render();});
+  $('rcoff').addEventListener('click',()=>{show=false;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

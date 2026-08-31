@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From pages to claims · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>From pages to claims</h1>
+<p class="lede">A report is built from claims — statements specific enough to check against a source. This lesson turns the gathered notes into a claim table, and teaches the difference between a claim and a vibe.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>What is a claim</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Six statements go under the same test — could a source prove this wrong? — and only the checkable ones survive into the claim table.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Falsifiable means checkable: a number, a date, a named source. 'The garden is thriving' checks nothing.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Statements you can check</h2>
+
+
+  <p>The notes list is evidence, but evidence is not yet a report. The next
+  stage compresses notes into <b>claims</b> — and the word has a precise
+  meaning here. A claim is a statement that is <b>falsifiable</b>: specific
+  enough that a source could prove it wrong.</p>
+  <p>"The garden has 60 plots" is a claim — the census either says 60 or it
+  doesn't. "The garden grew from 48 to 60 plots between 2023 and 2026" is a
+  better claim — two numbers, two dates, checkable at both ends. "The
+  garden is thriving" is <b>not a claim</b>. No source can contradict it,
+  because it doesn't pin anything down. Feel-good sentences like that are
+  where sloppy research hides; a research agent's report is built only from
+  the checkable kind.</p>
+  <p><b>The claim record.</b> Each claim keeps three things: the statement,
+  the source it came from, and the exact quote that backs it —
+  <code>{"claim": "60 plots in 2026", "source": "cityparks.gov/report-2026",
+  "quote": "Riverside Community Garden: 60 plots"}</code>. The quote
+  matters: it is the difference between "the source supports this" and
+  "I remember the source supporting this." If you took Document Pipelines,
+  this is the schema-prompt pattern again — same JSON contract, same
+  <code>null</code> rule for anything the source doesn't actually state —
+  now aimed at sentences instead of form fields.</p>
+  <p><b>Why the model does this stage.</b> Turning "we're up to sixty plots
+  now, from just 48 when we started the expansion push in 2023!" into a
+  dated, two-number claim is reading for meaning. The model is good at it —
+  and it can also invent, quietly, which is why every claim in the table
+  goes to lesson 6 before anyone trusts it.</p>
+
+  <!-- ============ FIGURE 1: Claim or vibe ============ -->
+  <div class="fig" id="figclaim">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Claim or vibe?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six statements from the
+    garden notes. Sort each one: could a source prove it wrong?</p>
+    <div id="cvlist"></div>
+    <p class="fignote" id="cvnote">Score: <span id="cvscore">0 of 6 sorted</span>.
+    The test is always the same — what evidence would contradict this?</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Extract the claim table</h2>
+  <p>The notebook sends each gathered note-cluster to the model with a claim schema — statement, source, exact quote, null where the source doesn't say — and builds the claim table for the garden question (class API key; precomputed outputs included). One extracted claim quietly says more than its quote does; the notebook shows how to spot it.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent5-claims.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent5-claims.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What makes a statement a claim, in this course's sense?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">It sounds confident</button>
+    <button class="choice" data-ok="1">It is falsifiable — specific enough that a source could prove it wrong</button>
+    <button class="choice" data-ok="0">It came from a model</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why does each claim keep an exact quote, not just a source URL?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Quotes make the report longer</button>
+    <button class="choice" data-ok="1">The quote is checkable on sight; 'the source supports this' without one is a memory, not evidence</button>
+    <button class="choice" data-ok="0">URLs expire</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — a claim's source field traces back to what moment?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Gather time, when the note was written with its URL in hand</button>
+    <button class="choice" data-ok="0">Report time, when citations get added</button>
+    <button class="choice" data-ok="0">Whenever someone asks</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The quote audit</h2>
+  <div class="buildtask">
+
+
+  <p>Take the notebook's claim table. For every claim, compare the statement
+  to its quote and mark it: <b>backed</b> (the quote says exactly this),
+  <b>stretched</b> (the quote says less than the claim), or <b>unbacked</b>
+  (the quote doesn't support it at all). There is at least one stretch in
+  the table.</p>
+  <p><b>Turn-in:</b> the marked table and one sentence on the stretch you
+  found — what the claim added that the quote never said.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-4.html">&larr; Lesson 4</a> <a href="lesson-agent-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-5';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const ITEMS=[
+   ['The garden has 60 plots (2026 census)',true,'A source can contradict a number with a date. Claim.'],
+   ['The garden is a beloved community treasure',false,'Nothing pins it down \u2014 no source could prove it wrong. Vibe.'],
+   ['Membership grew 31 \u2192 48 families since 2023',true,'Two numbers, two dates, checkable at both ends. Claim \u2014 a strong one.'],
+   ['The expansion was a huge success',false,'\u201cHuge\u201d and \u201csuccess\u201d measure nothing. Vibe \u2014 rewrite it with the numbers and it becomes a claim.'],
+   ['A $15,000 city grant arrived in 2025',true,'Amount, source, year. The grants page either lists it or it doesn\u2019t. Claim.'],
+   ['Everyone loves the new plots',false,'\u201cEveryone\u201d is uncheckable. The waitlist number nearby is the claim this vibe is hiding.']];
+  const done={};
+  function score(){
+    const n=Object.keys(done).length;
+    $('cvscore').textContent=n+' of 6 sorted'+(n===6?' \u2014 all of them':'');
+  }
+  $('cvlist').innerHTML=ITEMS.map((it,i)=>
+    '<div style="padding:7px 0;border-bottom:1px dashed #d8e4ee" id="cv'+i+'">'+
+    '\u201c'+it[0]+'\u201d<br>'+
+    '<button class="wbtn alt cvb" data-i="'+i+'" data-v="1" style="font-size:12.5px;padding:3px 10px;margin-top:4px">claim</button> '+
+    '<button class="wbtn alt cvb" data-i="'+i+'" data-v="0" style="font-size:12.5px;padding:3px 10px;margin-top:4px">vibe</button>'+
+    '<span class="cvfb" id="cvfb'+i+'" style="font-size:13px;display:block;margin-top:3px"></span></div>').join('');
+  document.querySelectorAll('.cvb').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i,guess=b.dataset.v==='1',it=ITEMS[i];
+    const ok=guess===it[1];done[i]=true;
+    $('cvfb'+i).innerHTML=(ok?'<b style="color:var(--navy)">Right.</b> ':'<b style="color:var(--star)">Not quite.</b> ')+it[2];
+    score();
+  }));
+  score();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

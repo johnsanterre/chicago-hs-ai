@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tools: the model asks, your code acts · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 2</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 2 of 8 · about 2–4 hours</p>
+<h1>Tools: the model asks, your code acts</h1>
+<p class="lede">A tool is a function you describe to the model. It replies with the tool's name and JSON arguments; your code runs the function and returns the result. That handshake is how every real agent works.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The tool handshake</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-2-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">One tool call travels the full round trip: description, request, dispatch, execution, result — and the model's next turn uses what came back.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Tools are for what the model can't know or can't do reliably. The dispatch table is yours, and that is the safety line.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-2-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Describing hands to a planner</h2>
+
+
+  <p>Lesson 1's scripted planner always asked for the right thing, because
+  we wrote the script. A real model needs to be <b>told what actions
+  exist</b>. That is a tool description: a name, what it does, and what
+  arguments it takes — written in plain language, sent along with the
+  question.</p>
+  <p><b>The handshake, in order.</b> You send the question plus the tool
+  descriptions. If the model wants an action, it replies with a structured
+  request — the tool's name and its arguments as JSON, like
+  <code>{"tool": "search", "query": "riverside garden founding"}</code>.
+  Your <b>dispatch code</b> looks the name up in a dictionary of functions,
+  runs the real function, and sends the result back as the next message.
+  The model reads it and continues. Nothing here is magic: the model writes
+  a request in a fixed format, and a five-line dictionary lookup does the
+  rest.</p>
+  <p><b>What deserves a tool?</b> Things the model cannot know: today's
+  facts, your private files, live pages. And things it cannot do reliably:
+  arithmetic is the classic — models predict text, and text-shaped
+  arithmetic goes wrong quietly, so professionals give the model a
+  calculator tool instead of trusting its multiplication. Things the model
+  already does well from memory — defining a word, translating a sentence —
+  need no tool at all.</p>
+  <p><b>The safety line, again.</b> The model can request any tool it
+  wants; only the functions <i>you put in the dispatch table</i> can ever
+  run. An agent with search and fetch can search and fetch. It cannot
+  delete files, send email, or spend money, because you gave it no such
+  hands. Deciding what hands to give an agent is a real design decision,
+  and you will make it deliberately in the capstone.</p>
+
+  <!-- ============ FIGURE 1: Which tool? ============ -->
+  <div class="fig" id="figtool">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Watch the model choose</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Three tasks, three different
+    calls. Pick one and see the request the model writes.</p>
+    <div class="figtabs">
+      <button class="wbtn tlbtn" data-t="0">today's weather</button>
+      <button class="wbtn alt tlbtn" data-t="1">847 &times; 392</button>
+      <button class="wbtn alt tlbtn" data-t="2">define "photosynthesis"</button>
+    </div>
+    <div class="prefix" id="tlout" style="font-size:14px;white-space:pre-wrap;line-height:1.7"></div>
+    <p class="fignote" id="tlnote">Tools cover what the model can't know
+    (live facts) or can't do reliably (arithmetic). Memory covers the rest.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Wire real tools to a real model</h2>
+  <p>The notebook describes search() and fetch() to the model, builds the dispatch table, and runs lesson 1's loop with the model doing the planning — using the class API key, with every model turn also precomputed so the lesson works keyless.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent2-tools.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent2-tools.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is a tool, to the model?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">A plugin the model downloads and executes</button>
+    <button class="choice" data-ok="1">A described function it can request by name with JSON arguments — that your code then runs</button>
+    <button class="choice" data-ok="0">A faster kind of prompt</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why give a model a calculator tool when it can 'do' arithmetic?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Models predict text, and text-shaped arithmetic fails quietly; the tool is exact</button>
+    <button class="choice" data-ok="0">Calculators are cheaper than tokens</button>
+    <button class="choice" data-ok="0">It can't — arithmetic tools are banned</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — an agent with only search and fetch in its dispatch table can:</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Do anything the model decides to do</button>
+    <button class="choice" data-ok="1">Only search and fetch — the dispatch table is the boundary</button>
+    <button class="choice" data-ok="0">Nothing, until it is given file access</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Design a tool set</h2>
+  <div class="buildtask">
+
+
+  <p>Pick a task an agent could do for someone you know — track a team's
+  schedule, watch for a scholarship deadline, compare grocery prices. Write
+  the tool descriptions it would need: each tool's name, one sentence on
+  what it does, and its arguments. Then write one sentence on a tool you
+  deliberately did NOT give it, and why.</p>
+  <p><b>Turn-in:</b> the task, the tool list, and the withheld tool with
+  your reason.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 2</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-1.html">&larr; Lesson 1</a> <a href="lesson-agent-3.html">Lesson 3 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 2 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-2';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 2 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 2 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 2';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 2 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CASES=[
+   ['Task: "What is the weather in Chicago right now?"\n\nMODEL replies with a tool request:\n  {"tool": "search", "query": "Chicago weather now"}\n\nYour dispatch: TOOLS["search"]("Chicago weather now")\n  \u2192 result returns as the next message',
+    'The model\u2019s training data ended months ago. <b>It cannot know today.</b> Live facts always go through a tool.'],
+   ['Task: "What is 847 \u00d7 392?"\n\nMODEL replies with a tool request:\n  {"tool": "calculator", "expression": "847 * 392"}\n\nYour dispatch: TOOLS["calculator"]("847 * 392")\n  \u2192 332024, exactly',
+    'The model could guess \u2014 it predicts text, and its guess would look right. <b>The tool is exact; the guess only looks exact.</b>'],
+   ['Task: "Define photosynthesis."\n\nMODEL replies with the answer directly:\n  "Photosynthesis is the process by which plants use\n  sunlight to make sugar from carbon dioxide and water\u2026"\n\nNo tool call. Nothing to look up, nothing to compute.',
+    'Stable knowledge the model holds well needs no tool. <b>Tools have a cost</b> \u2014 time and money per call \u2014 so a good agent uses them only where memory fails.']];
+  let t=0;
+  function render(){
+    document.querySelectorAll('.tlbtn').forEach(b=>b.className='wbtn tlbtn'+(+b.dataset.t===t?'':' alt'));
+    $('tlout').textContent=CASES[t][0];
+    $('tlnote').innerHTML=CASES[t][1];
+  }
+  document.querySelectorAll('.tlbtn').forEach(b=>b.addEventListener('click',()=>{t=+b.dataset.t;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

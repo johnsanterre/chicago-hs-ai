@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A model in a loop · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>A model in a loop</h1>
+<p class="lede">A chatbot answers from memory. A research agent goes and looks: the model plans, your code acts, the evidence comes back, and the loop repeats until the question is answered — with receipts.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>What makes an agent</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-1-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">One question runs twice: once as a chatbot answering from memory, once as an agent that searches, reads, and cites what it found.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The loop is the whole idea: model proposes, code executes, result returns. Everything else in this course is a refinement of that.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Plan, act, observe, repeat</h2>
+
+
+  <p>Ask a plain chatbot "how many plots does the Riverside Community Garden
+  have?" and it answers from whatever was in its training data — which may be
+  nothing, or stale, or a confident guess. It cannot go look. An <b>agent</b>
+  can, because an agent is not a different kind of model. It is the same
+  model placed in a <b>loop</b>:</p>
+  <p><b>1. Plan</b> — the model reads the question and says what action it
+  needs: "search for <i>riverside community garden plots</i>."<br>
+  <b>2. Act</b> — your code runs that action and gets a real result.<br>
+  <b>3. Observe</b> — the result goes back into the conversation.<br>
+  <b>4. Repeat</b> — the model reads the new evidence and either asks for
+  the next action or answers.</p>
+  <p>Two things to notice before the figure. First, the model never touches
+  the world — <b>your code is the hands</b>. The model only writes requests,
+  and your dispatch code decides what actually runs. That is a safety
+  property you will keep for the whole course. Second, the answer at the end
+  is different in kind from the chatbot's answer: it can say <i>where</i>
+  each fact came from, because the evidence arrived during the loop instead
+  of being remembered from training. This course builds one specific and
+  useful agent — a <b>research agent</b>, the kind that takes a question and
+  returns a small cited report. The loop below is the one you will build in
+  the notebook, step by step.</p>
+
+  <!-- ============ FIGURE 1: The loop stepper ============ -->
+  <div class="fig" id="figloop">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Step through one agent run</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">The question: <i>how many
+    plots does the Riverside garden have?</i> Click Step to advance the loop.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="lpstep">Step</button>
+      <button class="wbtn alt" id="lpreset">Reset</button>
+    </div>
+    <div class="prefix" id="lplog" style="font-size:14px;white-space:pre-wrap;line-height:1.7;min-height:120px"></div>
+    <p class="fignote" id="lpnote">Model plans, code acts, evidence returns.
+    Watch which lines come from the model and which from your code.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the loop</h2>
+  <p>The notebook ships a tiny bundled 'web' — nine pages about a fictional community garden — plus search() and fetch() functions, and you build the plan-act-observe loop around them. It runs entirely offline with a scripted planner, so you can see every turn; the real-model version of the same loop is lesson 2.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent1-the-loop.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent1-the-loop.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What turns a plain model into an agent?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">A bigger model with more parameters</button>
+    <button class="choice" data-ok="1">A loop: the model requests actions, code runs them, results return as evidence</button>
+    <button class="choice" data-ok="0">A special research mode the company switches on</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. In the loop, who actually executes the search?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">The model — it has direct internet access</button>
+    <button class="choice" data-ok="1">Your dispatch code — the model only writes the request</button>
+    <button class="choice" data-ok="0">The browser</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Why can the agent's answer cite sources when the chatbot's can't?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">The evidence arrived during the loop, so each fact has a known origin</button>
+    <button class="choice" data-ok="0">Agents are trained on more data</button>
+    <button class="choice" data-ok="0">Chatbots are not allowed to cite</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Trace a run by hand</h2>
+  <div class="buildtask">
+
+
+  <p>Run the notebook's loop on the plot-count question and copy the full
+  transcript. Annotate every line with <b>M</b> (the model wrote it) or
+  <b>C</b> (your code produced it). Then answer in two sentences: what would
+  break if the model could execute actions directly, without your dispatch
+  code in between?</p>
+  <p><b>Turn-in:</b> the annotated transcript and the two sentences.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="research-agents.html">&larr; Course home</a> <a href="lesson-agent-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-1';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 1 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const STEPS=[
+   ['MODEL',  'I need current facts. ACTION: search("riverside community garden plots")'],
+   ['CODE',   'search ran. 3 results:\n  1. riverside-garden.org/about \u2014 "Our garden today"\n  2. lakeview-news.com/garden-expands \u2014 "Garden adds 12 plots"\n  3. cityparks.gov/report-2026 \u2014 "Community garden census"'],
+   ['MODEL',  'The city census sounds authoritative. ACTION: fetch("cityparks.gov/report-2026")'],
+   ['CODE',   'fetch ran. Page text:\n  "\u2026Riverside Community Garden: 60 plots, 48 member families,\n  established 2019\u2026" (published 2026-03-14)'],
+   ['MODEL',  'ANSWER: The Riverside Community Garden has 60 plots, per the city parks census of March 2026 [cityparks.gov/report-2026].']];
+  const NOTES=[
+   'Turn 1 \u2014 the model cannot search. It can only <b>request</b> a search, in text.',
+   'Your code executed the request and handed back real results. The model has not touched the world.',
+   'The model chose the most authoritative-looking source. Choosing sources is planning too.',
+   'Evidence in the conversation now \u2014 with its URL and date attached.',
+   '<b>Done in five turns.</b> The answer carries its receipt: a number, a source, a date. That is the shape every answer in this course will have.'];
+  let i=0;
+  function render(){
+    let out='';
+    for(let k=0;k<i;k++){
+      const [who,txt]=STEPS[k];
+      out+=(who==='MODEL'?'\u25b6 MODEL:  ':'\u2699 CODE:   ')+txt+'\n\n';
+    }
+    $('lplog').textContent=out||'(press Step to start the run)';
+    $('lpnote').innerHTML=i===0?
+      'Model plans, code acts, evidence returns. Watch which lines come from the model and which from your code.':NOTES[i-1];
+    $('lpstep').disabled=(i>=STEPS.length);
+  }
+  $('lpstep').addEventListener('click',()=>{if(i<STEPS.length){i++;render();}});
+  $('lpreset').addEventListener('click',()=>{i=0;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

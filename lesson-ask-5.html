@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retrieve, then ask · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Retrieve, then ask</h1>
+<p class="lede">The pieces assemble: embed the question, take the nearest chunks, hand them to the model with strict orders — answer only from these, cite the section, and say so when the answer isn't there.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The full pipeline runs</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A question travels store-retrieve-ask end to end: the map lookup, the three winning chunks, the grounded prompt, and an answer with its section citation.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The prompt is a contract: only these chunks, cite what you use, refuse what isn't there. Every word of it earns its place.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Assembling the machine</h2>
+
+
+  <p>Everything is built; today it clicks together. The runtime loop is
+  four moves long:</p>
+  <p><b>1.</b> Embed the incoming question (lesson 4).<br>
+  <b>2.</b> Rank chunks by nearness; keep the top few — the <b>top-k</b>,
+  usually three to five (lesson 4).<br>
+  <b>3.</b> Build the prompt: the question plus the retrieved chunks, each
+  with its receipt (lesson 2).<br>
+  <b>4.</b> Send it to the model and return the answer.</p>
+  <p>Move 4 is where this lesson's real content lives, because the prompt
+  is not "here's some stuff, answer the question." It is a <b>contract</b>,
+  and each clause exists because of a specific failure it prevents:</p>
+  <p><b>"Answer using ONLY the provided sections."</b> Without it, the
+  model blends your chunks with its training-data guesses — other schools'
+  retake rules leak into Jefferson's answer, and you can't see the seam.<br>
+  <b>"Cite the section after each fact."</b> The receipts traveled from
+  chunking through retrieval precisely so the answer could carry them.
+  A cited answer is checkable in seconds; an uncited one is a rumor.<br>
+  <b>"If the sections don't contain the answer, say exactly that."</b>
+  This clause does the most work. Without it, a model handed the wrong
+  chunks does what models do: writes something plausible anyway. With it,
+  retrieval failure surfaces as an honest "not in the provided documents"
+  instead of a confident invention — a failure you can see and fix beats
+  one you swallow without noticing.</p>
+  <p>That is the whole architecture this course promised: your pile stays
+  in your storage, retrieval picks the relevant atoms, and the model —
+  under contract — turns them into a cited answer. The figure walks one
+  question through every station.</p>
+
+  <!-- ============ FIGURE 1: The pipeline, station by station ============ -->
+  <div class="fig" id="figpipe">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>One question, four stations</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Q: <i>"when do we get out
+    early on Wednesdays?"</i> Step through the run.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="ppstep">Step</button>
+      <button class="wbtn alt" id="ppreset">Reset</button>
+    </div>
+    <div class="prefix" id="pplog" style="font-size:13.5px;white-space:pre-wrap;line-height:1.65;min-height:110px"></div>
+    <p class="fignote" id="ppnote">Four stations: embed, retrieve, contract, answer.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Run the whole system</h2>
+  <p>The notebook assembles embed-retrieve-prompt-ask into one ask() function over the Jefferson pile — the grounded prompt with all three clauses, the class API key for the answering call (precomputed answers included for keyless study) — and runs the question set through it end to end.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask5-retrieve-ask.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask5-retrieve-ask.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why does the prompt say 'answer ONLY from the provided sections'?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">To keep answers short</button>
+    <button class="choice" data-ok="1">Without it the model blends your documents with training-data guesses, invisibly</button>
+    <button class="choice" data-ok="0">API rules require it</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why is 'say when the answer isn't there' the hardest-working clause?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">It turns retrieval failure into a visible refusal instead of a plausible invention</button>
+    <button class="choice" data-ok="0">It makes the model faster</button>
+    <button class="choice" data-ok="0">It prevents all wrong answers</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — the citation in the final answer traces back to what?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">The receipt attached to each chunk when the pile was cut</button>
+    <button class="choice" data-ok="0">The model's memory of the handbook</button>
+    <button class="choice" data-ok="0">A web search</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Ask your pile ten questions</h2>
+  <div class="buildtask">
+
+
+  <p>Point the assembled ask() at your own pile and run your ten-question
+  set. For each answer, record: right or wrong, cited or not, and — for
+  any 'not in the documents' response — whether that refusal was correct
+  (the answer truly isn't there) or a retrieval miss (it is there and
+  wasn't found). Those two kinds of refusal look identical to a casual
+  reader; you now have the receipts to tell them apart.</p>
+  <p><b>Turn-in:</b> the ten answers with your three-column grading.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-4.html">&larr; Lesson 4</a> <a href="lesson-ask-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-5';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const STEPS=[
+   ['STATION 1 \u2014 EMBED\n\nquestion \u2192 [0.12, -0.44, 0.87, \u2026 302 more numbers]\n\nThe question is now a point on the meaning map.',
+    'Same model that embedded the chunks \u2014 they have to share the map.'],
+   ['STATION 2 \u2014 RETRIEVE (top 3 by nearness)\n\n  0.81  \u201cdismissal at 1:30 PM every Wednesday\u2026\u201d [\u00a72.1]\n  0.64  \u201cbell schedule, regular days\u2026\u201d [\u00a72.0]\n  0.41  \u201clate arrival policy\u2026\u201d [\u00a72.4]',
+    'Nearness scores, not word counts \u2014 the synonym gap is already crossed. Receipts ride along.'],
+   ['STATION 3 \u2014 THE CONTRACT\n\nAnswer using ONLY the sections below. Cite the section\nafter each fact. If they don\u2019t contain the answer, say\nexactly that.\n\n[\u00a72.1] dismissal at 1:30 PM every Wednesday\u2026\n[\u00a72.0] bell schedule, regular days\u2026\n[\u00a72.4] late arrival policy\u2026\n\nQ: when do we get out early on Wednesdays?',
+    'Three clauses, three failure modes prevented: blending, rumor-mode, confident invention.'],
+   ['STATION 4 \u2014 ANSWER\n\n\u201cSchool dismisses at 1:30 PM on Wednesdays, for staff\ndevelopment [\u00a72.1].\u201d',
+    '<b>Cited, checkable, cheap.</b> Thirty seconds with \u00a72.1 verifies it \u2014 which is the whole design working.']];
+  let i=0;
+  function render(){
+    $('pplog').textContent=i===0?'(press Step to run the pipeline)':STEPS[i-1][0];
+    $('ppnote').innerHTML=i===0?'Four stations: embed, retrieve, contract, answer.':STEPS[i-1][1];
+    $('ppstep').disabled=(i>=STEPS.length);
+  }
+  $('ppstep').addEventListener('click',()=>{if(i<STEPS.length){i++;render();}});
+  $('ppreset').addEventListener('click',()=>{i=0;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

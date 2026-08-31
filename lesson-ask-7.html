@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>When retrieval fails, and the fixes · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>When retrieval fails, and the fixes</h1>
+<p class="lede">Every miss has a mechanism: the cut, the k, the phrasing, or a pile that never held the answer. This lesson is the repair manual — diagnose from the ten-question set, fix the right stage, measure again.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The failure catalog</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-7-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Four broken retrievals, four different mechanisms, four different fixes — and the measuring loop that tells you whether a fix actually fixed.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Never tune blind. Change one stage, rerun the question set, compare the numbers. That loop is the whole craft.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>A repair manual, not a mystery</h2>
+
+
+  <p>Your question set has misses. Good — misses with receipts are
+  diagnosable, and there are only about four mechanisms behind nearly all
+  of them.</p>
+  <p><b>The answer straddled a cut.</b> The rule in one chunk, its
+  condition in the next; neither alone scores well. Fix at the chunking
+  stage: bigger chunks along real seams, more overlap (lesson 2's knife,
+  re-swung). </p>
+  <p><b>Top-k too small.</b> The right chunk ranked fourth; you kept
+  three. Fix: raise k — and know the cost curve. More chunks means more
+  context spent and more noise for the model to ignore; k is a dial, not
+  a virtue.</p>
+  <p><b>The question's phrasing lands far from the answer's.</b>
+  Embeddings shrink the synonym gap; they don't erase it. A question full
+  of slang or missing key terms can still land in the wrong region. Fix:
+  <b>query rewriting</b> — a cheap model call that turns "so like when can
+  we bail early" into "what time is early dismissal" before embedding. The
+  model fixes the question, retrieval stays honest.</p>
+  <p><b>The answer isn't in the pile.</b> No retrieval fixes absence. Fix:
+  either add the missing document, or let the refusal stand — that edge is
+  real, and lesson 6 taught why honoring it beats papering over it.</p>
+  <p>The discipline tying it together: <b>never tune blind.</b> One stage
+  changed at a time, the full question set rerun after, hits counted
+  before and after. Tuning by vibes — "it feels better now" — is how
+  systems drift worse while everyone nods. If you took Build with LLMs,
+  this is the eval lesson again, now with more stages to blame; the
+  measuring habit transfers whole.</p>
+
+  <!-- ============ FIGURE 1: Diagnose the miss ============ -->
+  <div class="fig" id="figfix">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Four misses, four mechanisms</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Read each failed retrieval
+    and pick the stage you'd fix.</p>
+    <div class="figtabs">
+      <button class="wbtn fxbtn" data-f="0">miss 1</button>
+      <button class="wbtn alt fxbtn" data-f="1">miss 2</button>
+      <button class="wbtn alt fxbtn" data-f="2">miss 3</button>
+      <button class="wbtn alt fxbtn" data-f="3">miss 4</button>
+    </div>
+    <div class="prefix" id="fxcase" style="font-size:13.5px;white-space:pre-wrap;line-height:1.65"></div>
+    <div class="figtabs" style="margin-top:6px">
+      <button class="wbtn alt fxfix" data-x="0">re-chunk</button>
+      <button class="wbtn alt fxfix" data-x="1">raise k</button>
+      <button class="wbtn alt fxfix" data-x="2">rewrite query</button>
+      <button class="wbtn alt fxfix" data-x="3">pile lacks it</button>
+    </div>
+    <p class="fignote" id="fxnote">Pick the mechanism, then the fix follows.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Diagnose and repair</h2>
+  <p>The notebook seeds four engineered misses over the Jefferson pile, walks the diagnosis of each — where the right chunk ranked, what the cut looked like, what the query embedded near — applies each fix, and reruns the full question set so every repair shows up as a before/after number.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask7-failures.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask7-failures.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. The right chunk ranked 4th and your top-k is 3. The mechanism and its fix?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">The model is too small; upgrade it</button>
+    <button class="choice" data-ok="1">Top-k too small; raise the dial — knowing more chunks costs context and adds noise</button>
+    <button class="choice" data-ok="0">The pile lacks the answer; add documents</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What does query rewriting fix?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Questions phrased so far from the answer's wording that even embeddings land wrong</button>
+    <button class="choice" data-ok="0">Chunks that are too big</button>
+    <button class="choice" data-ok="0">Slow embedding models</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Why rerun the WHOLE question set after any fix?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">It looks thorough</button>
+    <button class="choice" data-ok="1">Fixes can break existing hits — only the full set shows the trade</button>
+    <button class="choice" data-ok="0">The API requires batch runs</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Fix your two worst misses</h2>
+  <div class="buildtask">
+
+
+  <p>From your audit: take your two worst misses, diagnose each against
+  the four mechanisms, apply the matching fix, and rerun your full
+  ten-question set — not just the fixed questions, because fixes can break
+  hits (a re-chunk that saves one question can orphan another's answer).
+  Report both before/after tables.</p>
+  <p><b>Turn-in:</b> the two diagnoses, the fixes, and both tables — with
+  one sentence on anything a fix broke.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-6.html">&larr; Lesson 6</a> <a href="lesson-ask-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 7 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-7';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 7 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CASES=[
+   ['Q: \u201cCan freshmen join varsity teams?\u201d\n\nThe eligibility rule: \u201cfreshmen may try out\u2026\u201d ends chunk 12;\n\u201c\u2026only with a coach\u2019s petition\u201d opens chunk 13.\nNeither half alone scored above 0.4. Nothing useful retrieved.',1,
+    'The answer straddled a cut \u2014 rule and condition in different atoms. Re-chunk: wider pieces on the section seam, more overlap.'],
+   ['Q: \u201cWhat\u2019s the late-work policy?\u201d\n\nRanking: 1. syllabus boilerplate (0.71)  2. attendance (0.66)\n3. homework tips (0.61)  4. LATE WORK POLICY \u00a74.5 (0.60)\n\nTop-3 retrieved. The answer ranked fourth.',2,
+    'The system found it \u2014 and threw it away at the cutoff. Raise k (and watch what the extra chunks cost in noise).'],
+   ['Q: \u201cso like when can we bail early on wednesdays\u201d\n\nEmbedded near: casual-language chunks about absences.\nThe dismissal chunk (\u00a72.1) ranked 9th. Slang moved the\nquestion to the wrong neighborhood of the map.',3,
+    'Phrasing landed far from the answer\u2019s register. Rewrite the query first \u2014 one cheap model call: \u201cwhat time is early dismissal on Wednesdays.\u201d'],
+   ['Q: \u201cHow much does the ski trip cost?\u201d\n\nBest score anywhere: 0.31 (generic field-trip cost rules).\nNo document in the pile mentions the ski trip at all.',4,
+    'Absence. No retriever finds what isn\u2019t there. Add the ski-trip flyer to the pile \u2014 or let \u201cnot in the documents\u201d stand, because it\u2019s true.']];
+  let f=0;
+  function render(){
+    document.querySelectorAll('.fxbtn').forEach(b=>b.className='wbtn fxbtn'+(+b.dataset.f===f?'':' alt'));
+    document.querySelectorAll('.fxfix').forEach(b=>b.className='wbtn alt fxfix');
+    $('fxcase').textContent=CASES[f][0];
+    $('fxnote').innerHTML='Pick the mechanism, then the fix follows.';
+  }
+  document.querySelectorAll('.fxbtn').forEach(b=>b.addEventListener('click',()=>{f=+b.dataset.f;render();}));
+  document.querySelectorAll('.fxfix').forEach(b=>b.addEventListener('click',()=>{
+    const x=+b.dataset.x,right=(x===CASES[f][1]-1);
+    b.className='wbtn fxfix'+(right?'':' alt');
+    $('fxnote').innerHTML=(right?'<b style="color:var(--navy)">Right fix.</b> ':'<b style="color:var(--star)">Different mechanism.</b> ')+CASES[f][2];
+  }));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

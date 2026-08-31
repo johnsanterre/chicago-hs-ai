@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meaning as numbers · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 4</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 4 of 8 · about 2–4 hours</p>
+<h1>Meaning as numbers</h1>
+<p class="lede">An embedding turns text into a list of numbers where similar meanings land near each other. 'Get out early' and 'dismissal' become neighbors — and retrieval stops depending on shared words.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The map of meanings</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-4-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Chunks scatter across a map by meaning; the synonym query that word-search fumbled drops in right next to the dismissal chunk, and the lesson-3 failure closes.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Nearness in the vector space IS the similarity score. Everything else is nearest-neighbor lookup.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-4-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Where similar things are near</h2>
+
+
+  <p>Lesson 3 died on a fact: words are not meanings. The repair is one of
+  the best ideas in modern AI. An <b>embedding model</b> reads a piece of
+  text and outputs a list of numbers — a <b>vector</b>, typically a few
+  hundred numbers long — with one trained-in property: <b>texts with
+  similar meanings get vectors that are close together.</b> "Dismissal at
+  1:30" and "when do we get out early" share almost no words, but they
+  land near each other, because the model learned from billions of
+  sentences that those phrasings live in the same contexts.</p>
+  <p>You can picture it as a map. Every chunk in your pile gets a point.
+  The schedule chunks cluster in one region, the grading rules in
+  another, the robotics minutes in a third — not because anyone sorted
+  them, but because meaning determines position. A question becomes a
+  point on the same map, and retrieval becomes geometry: <b>return the
+  chunks nearest the question.</b> Closeness is measured with one small
+  formula (cosine similarity — "do these vectors point the same way?"),
+  and the notebook builds it in three lines.</p>
+  <p>So the pipeline is: embed every chunk once and store the vectors;
+  embed each question as it arrives; rank chunks by nearness; return the
+  top few. The embedding model runs free in your Colab — a small
+  open-source one downloads in seconds, no API key — and your pile never
+  leaves the notebook at this stage.</p>
+  <p>One honest note: the map isn't magic. Embeddings can put things near
+  each other for shallow reasons (same names, same format), and a fact
+  that isn't in your pile is still not in your pile — nearness can't
+  invent the answer chunk. That's why lesson 7 measures instead of
+  trusting. But the synonym hole — lesson 3's whole failure class —
+  closes today.</p>
+
+  <!-- ============ FIGURE 1: The meaning map ============ -->
+  <div class="fig" id="figmap">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Drop a question on the map</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Chunks are gray dots,
+    placed by meaning. Pick a question and see where it lands — its three
+    nearest chunks light up.</p>
+    <div class="figtabs">
+      <button class="wbtn mpbtn" data-m="0">"get out early wed."</button>
+      <button class="wbtn alt mpbtn" data-m="1">"retake a final"</button>
+      <button class="wbtn alt mpbtn" data-m="2">"join robotics"</button>
+    </div>
+    <canvas id="mpcanvas" style="width:100%;max-width:560px;display:block;border:1px solid #d8e4ee;border-radius:6px;background:#fbfdff"></canvas>
+    <p class="fignote" id="mpnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Embed the pile</h2>
+  <p>The notebook downloads a small open embedding model (free, no key), embeds every Jefferson chunk, builds cosine similarity by hand, and reruns lesson 3's full question set — including the synonym questions — so the improvement is a measured number, not a promise.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask4-embeddings.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask4-embeddings.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What property makes embeddings useful for retrieval?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">They compress text to save disk space</button>
+    <button class="choice" data-ok="1">Texts with similar meanings get vectors that are close together</button>
+    <button class="choice" data-ok="0">They encrypt your documents</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. How does 'get out early' finally find 'dismissal at 1:30'?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">The embedding model was trained on Jefferson's handbook</button>
+    <button class="choice" data-ok="1">The two phrasings land near each other on the meaning map, so nearest-neighbor lookup returns the chunk</button>
+    <button class="choice" data-ok="0">A synonym dictionary maps one to the other</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — embeddings improve retrieval, but what problem from that lesson do they NOT solve?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">An answer that isn't in your pile still can't be retrieved — nearness can't invent chunks</button>
+    <button class="choice" data-ok="0">The context window is still too small for one paragraph</button>
+    <button class="choice" data-ok="0">Models still can't read pasted text</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Rematch your misses</h2>
+  <div class="buildtask">
+
+
+  <p>Embed your own pile and rerun your ten-question set from lesson 3.
+  Build the before/after table: word retriever vs embedding retriever,
+  hit or miss per question. Report the questions that flipped to hits,
+  any that flipped to misses (it happens — say why), and any still missed
+  by both. The both-missed ones are your lesson 7 homework.</p>
+  <p><b>Turn-in:</b> the before/after table and three sentences of
+  diagnosis.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 4</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-3.html">&larr; Lesson 3</a> <a href="lesson-ask-5.html">Lesson 5 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 4 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-4';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 4 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 4 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const cvs=$('mpcanvas');
+  const W=560,H=340;cvs.width=W*2;cvs.height=H*2;cvs.style.height='auto';
+  const ctx=cvs.getContext('2d');ctx.scale(2,2);
+  const DOTS=[
+   ['dismissal 1:30 Wed',95,55],['bell schedule',150,95],['late arrival policy',120,130],
+   ['exam retakes \u00a74.2',390,80],['grade appeals \u00a74.3',430,115],['grading scale',355,142],
+   ['robotics minutes',200,255],['club sign-up',255,235],['permission forms',300,265],
+   ['bus routes',450,240],['cafeteria policy',390,220]];
+  const QS=[
+   ['get out early wed.',125,95,'Landed in the schedule cluster. Nearest: dismissal, bell schedule, late arrival \u2014 <b>zero shared words with the top hit, and it found it anyway.</b> Lesson 3\u2019s hole, closed.'],
+   ['retake a final',395,100,'Landed among the grading rules. \u00a74.2 nearest, appeals second \u2014 same result word search got, so nothing was lost on the easy cases.'],
+   ['join robotics',235,245,'The club cluster. Sign-up nearest, minutes and permission forms behind it \u2014 the map groups by topic without anyone labeling topics.']];
+  let m=0;
+  function dist(a,b,x,y){return (a-x)*(a-x)+(b-y)*(b-y);}
+  function render(){
+    document.querySelectorAll('.mpbtn').forEach(b=>b.className='wbtn mpbtn'+(+b.dataset.m===m?'':' alt'));
+    const[label,qx,qy,note]=QS[m];
+    ctx.clearRect(0,0,W,H);
+    const near=DOTS.map((d,i)=>[dist(d[1],d[2],qx,qy),i]).sort((a,b)=>a[0]-b[0]).slice(0,3).map(p=>p[1]);
+    DOTS.forEach((d,i)=>{
+      const hot=near.indexOf(i)>=0;
+      if(hot){ctx.strokeStyle='#c9d8e6';ctx.beginPath();ctx.moveTo(qx,qy);ctx.lineTo(d[1],d[2]);ctx.stroke();}
+      ctx.fillStyle=hot?'#174A6C':'#b9c6d2';
+      ctx.beginPath();ctx.arc(d[1],d[2],hot?7:5,0,7);ctx.fill();
+      ctx.fillStyle=hot?'#174A6C':'#8b98a5';ctx.font=(hot?'bold ':'')+'11px system-ui';
+      ctx.fillText(d[0],d[1]+10,d[2]+4);
+    });
+    ctx.fillStyle='#CE3A36';ctx.beginPath();ctx.arc(qx,qy,8,0,7);ctx.fill();
+    ctx.font='bold 12px system-ui';ctx.fillText('Q: '+label,qx-40,qy-14);
+    $('mpnote').innerHTML=note;
+  }
+  document.querySelectorAll('.mpbtn').forEach(b=>b.addEventListener('click',()=>{m=+b.dataset.m;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

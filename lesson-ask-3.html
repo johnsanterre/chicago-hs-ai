@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search by words, and where it breaks · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Search by words, and where it breaks</h1>
+<p class="lede">The first retriever is honest arithmetic: score chunks by the words they share with the question, weighting rare words most. It works — until the question and the answer use different words.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Word matching, weighted</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-3-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A query meets forty chunks: shared words light up, rare words weigh in, the right chunk wins — then a synonym query comes back empty-handed while the answer sits right there.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Rare words carry the signal — 'retake' finds one section, 'the' finds all of them. And words are still not meanings.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Counting shared words</h2>
+
+
+  <p>Retrieval, first attempt: score every chunk by overlap with the
+  question, return the top few. You can build it in an afternoon, and the
+  whole thing is visible arithmetic.</p>
+  <p><b>Count shared words</b> — "how many final-exam retakes do I get?"
+  shares <i>final</i>, <i>exam</i>, <i>retakes</i> with §4.2, and almost
+  nothing with the bus schedule. §4.2 wins.</p>
+  <p><b>Weight rare words most.</b> Not all shared words are evidence.
+  Sharing "the" with a chunk means nothing — every chunk has "the".
+  Sharing "retake" means nearly everything — one section in the whole pile
+  uses it. So each word's vote is scaled by its rarity across the pile:
+  common words whisper, rare words shout. That one idea — rare-word
+  weighting — powered real search engines for decades, and it is worth
+  building by hand once, which the notebook does.</p>
+  <p><b>Now the break.</b> Ask "when do we get out early on Wednesdays?"
+  The answering chunk says "dismissal at 1:30 PM every Wednesday." Count
+  the shared meaningful words: essentially none. <i>Get out early</i> and
+  <i>dismissal</i> are the same idea wearing different words, and word
+  arithmetic has no idea. The chunk scores near zero; retrieval returns
+  the wrong pieces; the model downstream answers from noise or refuses.
+  Notice what kind of failure this is: <b>silent</b>. No error appears —
+  you just get worse answers, and unless you're measuring (lesson 7), you
+  won't know. Words are not meanings. Getting from one to the other is
+  lesson 4, and it's the best idea in this course.</p>
+
+  <!-- ============ FIGURE 1: The scoreboard ============ -->
+  <div class="fig" id="figword">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Watch the scoring</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Two queries against four
+    chunks. Shared meaningful words are highlighted; scores follow.</p>
+    <div class="figtabs">
+      <button class="wbtn wqbtn" data-q="0">"final exam retake"</button>
+      <button class="wbtn alt wqbtn" data-q="1">"get out early wednesday"</button>
+    </div>
+    <div id="wqlist" style="font-size:13.5px;line-height:1.7"></div>
+    <p class="fignote" id="wqnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the word retriever</h2>
+  <p>The notebook builds keyword scoring with rare-word weighting from scratch — no libraries, every number printable — runs it over the Jefferson chunks, shows it winning on word-match questions, then runs the synonym question set and measures the silent failure rate.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask3-word-search.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask3-word-search.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why do rare words get more weight in the score?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Rare words are longer</button>
+    <button class="choice" data-ok="1">Sharing 'the' says nothing; sharing 'retake' pins the topic — rarity is evidence</button>
+    <button class="choice" data-ok="0">Common words are misspelled more often</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. The 'get out early' query fails against the 'dismissal at 1:30' chunk because:</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">The chunk is too long</button>
+    <button class="choice" data-ok="1">Same meaning, different words — word arithmetic can't see meaning</button>
+    <button class="choice" data-ok="0">Wednesday is spelled differently</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — a badly cut chunk hurts even a perfect retriever. Why?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Retrieval returns chunks, so what's found is only ever as whole as the cutting made it</button>
+    <button class="choice" data-ok="0">Bad chunks crash the scorer</button>
+    <button class="choice" data-ok="0">It doesn't; scoring fixes cutting</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Find the synonym holes</h2>
+  <div class="buildtask">
+
+
+  <p>Run the word retriever over your own pile with your three questions
+  from lesson 1, plus seven more you write now. For each, record whether
+  the right chunk came back in the top three. For every miss, diagnose it
+  in one sentence: was the answer really absent, or present in different
+  words? Keep this ten-question set — it becomes your measuring stick for
+  the rest of the course.</p>
+  <p><b>Turn-in:</b> the ten questions, the hit/miss table, and the
+  diagnosis sentences.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-2.html">&larr; Lesson 2</a> <a href="lesson-ask-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 3 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-3';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 3 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CHUNKS=[
+   ['\u00a74.2: This policy applies to final exams only. Students receive one retake per semester\u2026','handbook \u00a74.2'],
+   ['Wednesday schedule: dismissal at 1:30 PM every Wednesday for staff development\u2026','handbook \u00a72.1'],
+   ['Robotics club meets Tuesdays; bring your permission form for the regional trip\u2026','robotics minutes'],
+   ['Bus routes 12 and 15 serve the north side; final pickup at 4:45\u2026','transport doc']];
+  const CASES=[
+   [['final','exam','retake','retakes','exams'],[ [3,'wins \u2014 three rare words shared'],[0,''],[0,''],[1,'\u201cfinal\u201d appears \u2014 but in \u201cfinal pickup\u201d. Words, not meanings, cut both ways.']],
+    '<b>Word match works here.</b> The question and \u00a74.2 use the same rare words \u2014 \u201cretake\u201d practically points at the answer. Note the bus chunk scoring on \u201cfinal\u201d for the wrong reason.'],
+   [['get','out','early','wednesday'],[ [0,''],[1,'only \u201cWednesday\u201d matches \u2014 the answer chunk, barely scoring'],[0,''],[0,'']],
+    '<b>Silent failure.</b> The answer is chunk 2 \u2014 \u201cdismissal at 1:30\u201d IS getting out early \u2014 but they share one word. Ranked this low, it won\u2019t be retrieved. No error message. Just a worse answer downstream.']];
+  let q=0;
+  function render(){
+    document.querySelectorAll('.wqbtn').forEach(b=>b.className='wbtn wqbtn'+(+b.dataset.q===q?'':' alt'));
+    const[words,rows,note]=CASES[q];
+    $('wqlist').innerHTML=rows.map((r,i)=>{
+      let txt=CHUNKS[i][0];
+      words.forEach(w=>{txt=txt.replace(new RegExp('\\b('+w+')','gi'),'\u0001$1\u0002');});
+      txt=txt.replace(/\u0001/g,'<mark style="background:#fde68a">').replace(/\u0002/g,'</mark>');
+      const bar='\u2588'.repeat(r[0])+'\u2591'.repeat(3-Math.min(3,r[0]));
+      return '<div style="padding:6px 0;border-bottom:1px dashed #d8e4ee">'+
+        '<span style="font-family:monospace">'+bar+'</span> score '+r[0]+' \u00b7 <i>'+CHUNKS[i][1]+'</i><br>'+txt+
+        (r[1]?'<br><span style="font-size:12.5px;color:var(--ink2)">'+r[1]+'</span>':'')+'</div>';
+    }).join('');
+    $('wqnote').innerHTML=note;
+  }
+  document.querySelectorAll('.wqbtn').forEach(b=>b.addEventListener('click',()=>{q=+b.dataset.q;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

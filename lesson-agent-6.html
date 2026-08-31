@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification: try to kill every claim · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Verification: try to kill every claim</h1>
+<p class="lede">Sources disagree, pages go stale, and models invent. Before a claim reaches the report, a verifier reads the sources trying to refute it — and the claim survives on evidence, not on confidence.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The adversarial check</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-6-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Three claims face the verifier. Two survive on agreeing sources; one dies when the checker notices its only support is a blog post contradicted by two better pages.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Verification is not re-asking 'is this right?' — it is hunting for the evidence that would make it wrong.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Guilty until sourced</h2>
+
+
+  <p>Everything upstream of this stage can lie politely. A page can be
+  stale — the garden's own history page still says 48 plots, because nobody
+  updated it. A page can be wrong — the mini-web's blog post says the
+  garden has <i>600</i> plots, a typo that survived because blogs have no
+  editor. And the model that extracted your claims can invent — a plausible
+  date, a rounded number the source never said. If you took Document
+  Pipelines, this is the validation gate again, rebuilt for research: the
+  place where the lying stops.</p>
+  <p><b>The adversarial move.</b> Asking the model "is this claim right?"
+  invites agreement — models like to say yes. So the verifier is prompted
+  the opposite way: <i>here is a claim and here are the sources; find the
+  evidence that contradicts it.</i> Trying to kill the claim and failing
+  is what support means. This one prompt-design choice — refute, don't
+  confirm — is most of what makes verification real.</p>
+  <p><b>The vote.</b> One verification pass can itself be wrong, so each
+  claim gets three independent passes, and the majority decides. Sources
+  get weighed while they're at it: two independent pages agreeing beat one
+  blog post, a 2026 census beats a 2023 sign, and a source that copied
+  another source counts once, not twice — the dedup receipts from lesson 4
+  are what make that visible.</p>
+  <p><b>What survives.</b> Each claim leaves this stage labeled:
+  <b>confirmed</b> (survived all three passes), <b>plausible</b> (survived
+  with a caveat worth keeping), or <b>refuted</b> (killed, with the
+  evidence that killed it kept on file). Refuted claims are never deleted —
+  they are quarantined with their reason, because "what the agent decided
+  not to believe, and why" is part of an honest report.</p>
+
+  <!-- ============ FIGURE 1: Run the vote ============ -->
+  <div class="fig" id="figvote">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Three claims, three verdicts</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Press the button to run the
+    three-pass verification on each claim.</p>
+    <div class="figtabs"><button class="wbtn" id="vtrun">Run verification</button>
+    <button class="wbtn alt" id="vtreset">Reset</button></div>
+    <div id="vtlist" style="font-size:14px;line-height:1.7"></div>
+    <p class="fignote" id="vtnote">The verifier hunts for contradictions,
+    then the majority decides. Confidence comes out the other side.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the verifier</h2>
+  <p>The notebook writes the refutation prompt, runs three passes per claim over the garden claim table (class API key; a fully scripted offline verifier included so the vote mechanics run keyless), catches the 600-plot typo against two agreeing sources, and labels every claim confirmed, plausible, or refuted.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent6-verify.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent6-verify.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why is the verifier prompted to refute rather than confirm?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Refutation prompts are shorter</button>
+    <button class="choice" data-ok="1">Models lean toward agreement; hunting for contradictions is what makes support meaningful</button>
+    <button class="choice" data-ok="0">Confirming is impossible for models</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why three passes with a majority vote instead of one?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">A single verification pass can itself be wrong</button>
+    <button class="choice" data-ok="0">Three passes are free</button>
+    <button class="choice" data-ok="0">The API requires an odd number of calls</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 5 — a refuted claim is quarantined with its reason, never deleted. Why does that echo the claim record's exact-quote rule?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">Both keep the evidence inspectable instead of asking anyone to trust a memory of it</button>
+    <button class="choice" data-ok="0">Both make the files bigger, which looks thorough</button>
+    <button class="choice" data-ok="0">Neither matters once the report is written</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Break the verifier</h2>
+  <div class="buildtask">
+
+
+  <p>The notebook's mini-web has one contradiction seeded on purpose. Add a
+  second: edit one page in the corpus to plant a wrong fact that the current
+  claim table depends on, rerun the pipeline from gather through verify, and
+  report what happened. Did the vote catch your plant? If it survived,
+  explain what property of your edit slipped past the checks — that
+  explanation is the real lesson.</p>
+  <p><b>Turn-in:</b> your planted edit, the rerun verdicts, and three
+  sentences on why it was caught or missed.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-5.html">&larr; Lesson 5</a> <a href="lesson-agent-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 6 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-6';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 6 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 6';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 6 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CLAIMS=[
+   ['Plots grew 48 \u2192 60 (2023\u20132026)',
+    ['pass \u2014 census (2026) and news page agree','pass \u2014 old sign (48, 2023) matches the start point','pass \u2014 no contradicting source found'],
+    'CONFIRMED','3 of 3. Two independent sources, endpoints checked.'],
+   ['The garden has 600 plots',
+    ['REFUTED \u2014 census says 60','REFUTED \u2014 news says \u201cnow 60 plots\u201d','pass \u2014 blog post does say 600'],
+    'REFUTED','1 of 3. The blog\u2019s 600 loses to two better sources agreeing on 60 \u2014 a typo caught by the vote, kept on file with its reason.'],
+   ['The lease runs out in 2028',
+    ['pass \u2014 city grants page implies a 2028 term','REFUTED \u2014 no second source states it','pass \u2014 nothing contradicts it'],
+    'PLAUSIBLE','2 of 3 with a caveat: single-source. It enters the report hedged, not asserted.']];
+  let run=false;
+  function render(){
+    $('vtlist').innerHTML=CLAIMS.map(c=>{
+      let h='<div style="padding:7px 0;border-bottom:1px dashed #d8e4ee"><b>\u201c'+c[0]+'\u201d</b>';
+      if(run){
+        h+='<br>'+c[1].map(p=>'<span style="font-size:13px">\u2022 '+p+'</span>').join('<br>');
+        const col=c[2]==='CONFIRMED'?'var(--navy)':(c[2]==='REFUTED'?'var(--star)':'#8a6d1a');
+        h+='<br><b style="color:'+col+'">'+c[2]+'</b> <span style="font-size:13px">\u2014 '+c[3]+'</span>';
+      }
+      return h+'</div>';}).join('');
+    $('vtnote').innerHTML=run?
+      '<b>One claim died, one got hedged.</b> Without this stage all three would have reached the report sounding equally sure.':
+      'The verifier hunts for contradictions, then the majority decides. Confidence comes out the other side.';
+  }
+  $('vtrun').addEventListener('click',()=>{run=true;render();});
+  $('vtreset').addEventListener('click',()=>{run=false;render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

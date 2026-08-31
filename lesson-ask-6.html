@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grounded or invented · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Grounded or invented</h1>
+<p class="lede">When retrieval hands the model the wrong chunks, the model's failure mode is fluency. This lesson trains your eye: check every claim against the provided text, and treat refusals as the system working.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The invention, caught</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-6-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Two runs of the same question — good retrieval and failed retrieval — produce two confident answers, and only the grounding check tells them apart.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Fluency is not evidence. The only test of an answer is whether its claims appear in the chunks it was given.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The check that matters</h2>
+
+
+  <p>Here is the uncomfortable truth at the center of every
+  ask-your-documents system: <b>the model's answer sounds exactly as good
+  when the retrieval failed.</b> Handed the right chunk, it writes a
+  fluent, correct answer. Handed the wrong chunks — because the question
+  used odd words, or the answer straddled two pieces, or it simply isn't
+  in the pile — it writes a fluent answer anyway, assembled from whatever
+  it got plus the shape of what such answers usually look like. The
+  contract's refusal clause catches much of this, but not all: a chunk
+  that is <i>nearly</i> relevant is the dangerous case, close enough that
+  the model answers, wrong enough that the answer is subtly off.</p>
+  <p>So professionals run a <b>grounding check</b>: take each factual
+  claim in the answer and find it in the provided chunks. Present — the
+  claim is <b>grounded</b>; you can point at its support. Absent — it is
+  <b>invented</b>, no matter how reasonable it sounds, and no matter that
+  it might even be true. "True but ungrounded" still fails, because your
+  system can't tell it from confident fiction — you'd be grading luck.</p>
+  <p>The check can be run by eye (the notebook trains you on five
+  answers), and it can be run by a second model call: <i>"here are the
+  chunks and the answer; list every claim not supported by the chunks."</i>
+  A model checking text against text is on solid ground — that's reading,
+  not remembering. If you took Research Agents, this is verification
+  wearing a different shirt: same adversarial stance, same rule that
+  support means surviving a hunt for the miss.</p>
+  <p>And one reframe to carry out of the lesson: when your system says
+  <b>"that's not in the provided documents" — that is a success.</b> The
+  pile has edges; a system that knows where they are is trustworthy at
+  the edge, and one that papers over them is not trustworthy anywhere.</p>
+
+  <!-- ============ FIGURE 1: Two runs, one lie ============ -->
+  <div class="fig" id="figgnd">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Which answer is grounded?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Same question, two
+    retrieval outcomes. Click each claim to check it against the chunks.</p>
+    <div class="figtabs">
+      <button class="wbtn gdbtn" data-g="0">run A</button>
+      <button class="wbtn alt gdbtn" data-g="1">run B</button>
+    </div>
+    <div class="prefix" id="gdctx" style="font-size:12.5px;white-space:pre-wrap;line-height:1.6"></div>
+    <div id="gdans" style="font-size:14.5px;line-height:1.9;margin-top:6px"></div>
+    <p class="fignote" id="gdnote">The chunks are the whole truth available.
+    Click claims in the answer to test them.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the grounding check</h2>
+  <p>The notebook runs questions with deliberately sabotaged retrieval to generate near-miss answers, then builds the checker — the second model call that lists unsupported claims (class API key; precomputed checks included) — and scores the answer set for grounded, invented, and correctly-refused.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask6-grounding.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask6-grounding.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why can't you judge an answer by how good it sounds?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Fluency is constant — the model sounds equally confident on grounded and invented answers</button>
+    <button class="choice" data-ok="0">Good-sounding answers are usually right</button>
+    <button class="choice" data-ok="0">Sound quality varies by API tier</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. A claim in the answer is true, but appears nowhere in the provided chunks. Verdict?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Grounded — truth is what matters</button>
+    <button class="choice" data-ok="1">Invented — your system can't distinguish it from confident fiction, so it fails the check</button>
+    <button class="choice" data-ok="0">Skip it</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 5 — 'that's not in the provided documents' is a success because:</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Refusals are cheaper than answers</button>
+    <button class="choice" data-ok="1">The pile has edges, and a system that knows its edges is the one you can trust inside them</button>
+    <button class="choice" data-ok="0">It ends the conversation faster</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Audit your own answers</h2>
+  <div class="buildtask">
+
+
+  <p>Take your ten graded answers from lesson 5. Run the grounding check
+  on each — by eye or with the notebook's checker — and mark every claim
+  grounded or invented. Then the sentence that matters: for each invented
+  claim, was it caused by retrieval (wrong chunks arrived) or by the model
+  ignoring the contract? The fix is different for each, and lesson 7 is
+  about the first kind.</p>
+  <p><b>Turn-in:</b> the claim-level audit and the cause sentences.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-5.html">&larr; Lesson 5</a> <a href="lesson-ask-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 6 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-6';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 6 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 6';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 6 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CTX_A='RETRIEVED CHUNKS (run A \u2014 retrieval worked):\n[\u00a75.1] Field trips require a signed permission form\nsubmitted five school days in advance.\n[\u00a75.2] Costs above $20 qualify for the activity fund.';
+  const CTX_B='RETRIEVED CHUNKS (run B \u2014 retrieval missed; these are\nthe nearest chunks that arrived instead):\n[\u00a75.4] Chaperones must be approved district volunteers.\n[\u00a75.5] Athletic travel uses the district bus contract.';
+  const RUNS=[
+   [CTX_A,[
+    ['Permission forms are due five school days ahead [\u00a75.1].',true,'In \u00a75.1, nearly verbatim. Grounded.'],
+    ['Trips costing over $20 can use the activity fund [\u00a75.2].',true,'In \u00a75.2. Grounded.']],
+    'Both claims trace to the chunks. This answer earns its confidence.'],
+   [CTX_B,[
+    ['Permission forms are typically due one week before the trip.',false,'\u201cTypically\u201d is the tell \u2014 no chunk says this. The model reached for what handbooks usually say. Invented, and PLAUSIBLE, which is the danger.'],
+    ['Chaperones must be approved district volunteers [\u00a75.4].',true,'This one IS in \u00a75.4 \u2014 an invented answer often has real fragments mixed in, which is why you check claim by claim, not answer by answer.']],
+    'One grounded claim, one invention, one confident paragraph. The right output for run B was: \u201cthe form deadline isn\u2019t in the provided sections.\u201d']];
+  let g=0;
+  function render(){
+    document.querySelectorAll('.gdbtn').forEach(b=>b.className='wbtn gdbtn'+(+b.dataset.g===g?'':' alt'));
+    $('gdctx').textContent=RUNS[g][0];
+    $('gdans').innerHTML='<b>ANSWER:</b> '+RUNS[g][1].map((c,i)=>
+      '<span class="gdc" data-i="'+i+'" style="cursor:pointer;border-bottom:1px dotted #999">'+c[0]+'</span>').join(' ');
+    $('gdnote').innerHTML=RUNS[g][2];
+    document.querySelectorAll('.gdc').forEach(el=>el.addEventListener('click',()=>{
+      const c=RUNS[g][1][+el.dataset.i];
+      el.style.background=c[1]?'#e8f2e8':'#fde8e6';
+      $('gdnote').innerHTML=(c[1]?'<b style="color:var(--navy)">Grounded.</b> ':'<b style="color:var(--star)">Invented.</b> ')+c[2];
+    }));
+  }
+  document.querySelectorAll('.gdbtn').forEach(b=>b.addEventListener('click',()=>{g=+b.dataset.g;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

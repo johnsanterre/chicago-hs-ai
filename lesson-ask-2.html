@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chunking: cut the pile into pieces · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="ask-your-documents.html">Ask Your Documents</a> / Lesson 2</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Ask Your Documents · Lesson 2 of 8 · about 2–4 hours</p>
+<h1>Chunking: cut the pile into pieces</h1>
+<p class="lede">Retrieval finds pieces, so the pile must become pieces first. Chunk size is a real decision: too small orphans the meaning, too big buries it. This lesson cuts the corpus and shows both failures.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>How to cut a document</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-ask-2-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">One handbook section gets chunked three ways, and the same question succeeds or fails purely on where the knife fell.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>A chunk is the unit of retrieval: what gets found, and what gets handed to the model. Cut on meaning, not on length alone.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-ask-2-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The unit of retrieval</h2>
+
+
+  <p>Store, retrieve, ask — and retrieval finds <i>pieces</i>. Before
+  anything can be found, the pile has to be cut into them. Those pieces
+  are called <b>chunks</b>, and a chunk is the atom of this whole system:
+  it is what gets scored against your question, what gets retrieved, and
+  what lands in front of the model. Cut badly and every later stage
+  inherits it.</p>
+  <p><b>Too small, and meaning gets orphaned.</b> Cut every two sentences
+  and the retake policy shatters: the chunk that says "one retake per
+  semester" no longer contains "for final exams" — that was two sentences
+  up, in a different chunk. The retrieved piece is true and useless,
+  because the condition and the rule live in separate atoms now.</p>
+  <p><b>Too big, and the answer gets buried.</b> Cut by whole document and
+  you're back to lesson 1's paste-everything problem in miniature: the
+  chunk containing the answer is forty paragraphs of dress code with one
+  relevant line inside. It scores poorly against the question (mostly
+  noise), and if retrieved anyway, it spends your context on padding.</p>
+  <p><b>The working answer: cut on structure, not just length.</b>
+  Documents come with seams — headings, sections, paragraph breaks — and
+  those seams are where meaning already separates. A few hundred words per
+  chunk, aligned to sections where they exist, with a sentence or two of
+  <b>overlap</b> at each cut so a rule and its condition never end up
+  strangers. And every chunk keeps a receipt — which document, which
+  section — because "the answer, and where it came from" is the shape of
+  everything this course returns. If you took Research Agents, that's the
+  same law that governed gathering.</p>
+
+  <!-- ============ FIGURE 1: The chunk knife ============ -->
+  <div class="fig" id="figchunk">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Three cuts, one question</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Q: <i>"How many final-exam
+    retakes do I get?"</i> Pick a chunking and see what retrieval would
+    hand the model.</p>
+    <div class="figtabs">
+      <button class="wbtn chbtn" data-k="0">tiny chunks</button>
+      <button class="wbtn alt chbtn" data-k="1">whole document</button>
+      <button class="wbtn alt chbtn" data-k="2">by section + overlap</button>
+    </div>
+    <div class="prefix" id="chout" style="font-size:13.5px;white-space:pre-wrap;line-height:1.65"></div>
+    <p class="fignote" id="chnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Chunk the corpus</h2>
+  <p>The notebook cuts the Jefferson pile three ways — fixed tiny, whole-document, and section-aligned with overlap — attaches the source receipt to every chunk, and runs the same five questions against each cut so the trade-off shows up as numbers, not opinions.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/ask2-chunking.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/ask2-chunking.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is a chunk, in this system?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">The unit of retrieval — what gets scored, found, and handed to the model</button>
+    <button class="choice" data-ok="0">A compressed copy of the pile</button>
+    <button class="choice" data-ok="0">A model parameter</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What goes wrong with very small chunks?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">They cost more per word</button>
+    <button class="choice" data-ok="1">Meaning gets orphaned — a rule and its condition end up in separate pieces</button>
+    <button class="choice" data-ok="0">Nothing; smaller is always sharper</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Why does every chunk carry its document and section receipt?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="1">So answers can say where they came from — the receipt survives into the citation</button>
+    <button class="choice" data-ok="0">File systems require it</button>
+    <button class="choice" data-ok="0">To make chunks bigger</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Cut your own pile</h2>
+  <div class="buildtask">
+
+
+  <p>Chunk the pile you chose in lesson 1 using the notebook's
+  section-aligned cutter. Report: how many chunks, their size range, and —
+  by reading ten random chunks — two you'd call well-cut and one that got
+  hurt by the knife (a rule separated from its condition, a table split
+  mid-row). Propose the fix for the hurt one.</p>
+  <p><b>Turn-in:</b> the chunk counts, the three examples, and your fix.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 2</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-ask-1.html">&larr; Lesson 1</a> <a href="lesson-ask-3.html">Lesson 3 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Ask Your Documents, lesson 2 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-ask-2';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 2 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 2 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 2';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 2 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const CASES=[
+   ['RETRIEVED (best-scoring tiny chunk):\n\n\u201cStudents receive one retake per semester. The higher\nscore stands.\u201d  [handbook \u00a74.2, piece 3 of 7]\n\nRetake of WHAT? \u201cThis policy applies to final exams\nonly\u201d is in piece 2 \u2014 which didn\u2019t score well enough\nto be retrieved.',
+    '<b>True and useless.</b> The condition lives two sentences up, in a different atom. The knife cut through the meaning.'],
+   ['RETRIEVED (best-scoring document):\n\n\u201cJEFFERSON HIGH HANDBOOK, SECTION 4 \u2014 Academic\nPolicies. 4.1 Grading scale\u2026 [38 paragraphs] \u2026dress\ncode reminders\u2026 4.2 Exam retakes: one per semester,\nfinals only, within ten school days\u2026 [19 more paragraphs]\u201d',
+    '<b>Buried.</b> The answer is in there \u2014 line 41 of 60. The chunk barely outscored unrelated documents (it\u2019s mostly noise), and it spends your whole context budget to deliver one line.'],
+   ['RETRIEVED (section chunk with overlap):\n\n\u201c\u00a74.2 Exam Retake Policy. This policy applies to final\nexams only. Students receive one retake per semester,\nrequested within ten school days. The higher score\nstands. (\u00a74.3 covers grade appeals.)\u201d  [handbook \u00a74.2]',
+    '<b>The whole rule, nothing else.</b> Cut on the section seam, condition and rule together, receipt attached. This is what lesson 5 will hand the model.']];
+  let k=0;
+  function render(){
+    document.querySelectorAll('.chbtn').forEach(b=>b.className='wbtn chbtn'+(+b.dataset.k===k?'':' alt'));
+    $('chout').textContent=CASES[k][0];
+    $('chnote').innerHTML=CASES[k][1];
+  }
+  document.querySelectorAll('.chbtn').forEach(b=>b.addEventListener('click',()=>{k=+b.dataset.k;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

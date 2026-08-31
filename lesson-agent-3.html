@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One question becomes five searches · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="research-agents.html">Research Agents</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Research Agents · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>One question becomes five searches</h1>
+<p class="lede">Real questions are too big for one search. A research agent decomposes the question into angles — separate searches that each cover a different part — because coverage, not luck, is what finds the answer.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Decomposing a question</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-agent-3-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">'Is the garden growing?' fans out into four angles, and the facts each angle reaches light up — including the ones a single search would never touch.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Angles are the difference between searching and researching. Each angle is a claim about where the answer might live.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-agent-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Coverage beats luck</h2>
+
+
+  <p>Type one search for "is the Riverside garden growing?" and you get
+  whatever that one query happens to hit. Maybe the news story. Maybe the
+  garden's own page. Whatever it is, you have one keyhole view — and no way
+  to know what you missed, because missing things is silent.</p>
+  <p>A research agent's first real move is not searching. It is
+  <b>decomposition</b>: turning the question into 4&ndash;6 <b>angles</b>,
+  each one a separate search aimed at a different part of the answer.
+  For the garden question:</p>
+  <p><b>Plot history</b> — has the number of plots changed over the years?<br>
+  <b>Membership</b> — are more families joining or leaving?<br>
+  <b>Funding</b> — is money coming in — grants, city support?<br>
+  <b>Coverage</b> — is anyone outside the garden writing about it?</p>
+  <p>Each angle is a small bet about <i>where evidence might live</i>, and
+  together they cover the question the way one query never can. This is
+  also the first place the LLM earns its seat in a research agent: writing
+  good angles takes reading the question for what it actually asks, and
+  that is meaning-work, the kind rules can't do — the same boundary you saw
+  if you took Document Pipelines. In the notebook the model proposes the
+  angles; you count what each one reaches.</p>
+  <p>One honest caution before the figure: more angles is not free. Every
+  angle costs searches, fetches, and reading time, and past a point new
+  angles just re-find the same pages. The skill is <b>enough angles to
+  cover, few enough to afford</b> — professionals usually land near five.</p>
+
+  <!-- ============ FIGURE 1: Angle coverage ============ -->
+  <div class="fig" id="figang">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Toggle the angles</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Six facts about the garden
+    exist in the mini-web. Turn angles on and off and watch which facts
+    become reachable.</p>
+    <div class="figtabs">
+      <button class="wbtn agbtn" data-a="0">plot history</button>
+      <button class="wbtn alt agbtn" data-a="1">membership</button>
+      <button class="wbtn alt agbtn" data-a="2">funding</button>
+      <button class="wbtn alt agbtn" data-a="3">news coverage</button>
+    </div>
+    <div id="aglist" style="font-size:14.5px;line-height:1.8"></div>
+    <p class="fignote" id="agnote"></p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Let the model write the angles</h2>
+  <p>The notebook sends the research question to the model and gets back 4-6 angles as JSON (class API key; precomputed outputs included), then runs each angle as a search over the mini-web and measures coverage: how many of the corpus's known facts each angle set reaches.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/agent3-angles.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/agent3-angles.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why decompose a question instead of searching it directly?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Search engines charge per word</button>
+    <button class="choice" data-ok="1">One query gives one keyhole view; angles cover the question's separate parts</button>
+    <button class="choice" data-ok="0">Models refuse to answer undreamt questions</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What is an angle, concretely?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">A separate search aimed at one part of the answer — a bet about where evidence lives</button>
+    <button class="choice" data-ok="0">A synonym swapped into the same query</button>
+    <button class="choice" data-ok="0">A follow-up question asked after the answer</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. Why not run twenty angles instead of five?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">More than six is illegal in most APIs</button>
+    <button class="choice" data-ok="1">Angles past coverage just re-find the same pages while costing search, fetch, and reading time</button>
+    <button class="choice" data-ok="0">Models can only count to six</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Decompose two questions</h2>
+  <div class="buildtask">
+
+
+  <p>Take two real questions you actually care about — one local ("should
+  our school start later?"), one bigger. For each, write 4&ndash;6 angles
+  by hand, each with one sentence on where you expect that evidence to
+  live. Then run the notebook's decomposer on the same questions and
+  compare: which angles did the model find that you missed, and which of
+  yours beat the model's?</p>
+  <p><b>Turn-in:</b> both angle sets, yours and the model's, with your
+  comparison sentences.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-agent-2.html">&larr; Lesson 2</a> <a href="lesson-agent-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Research Agents, lesson 3 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-agent-3';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 3 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const FACTS=[
+   ['Plots grew 48 \u2192 60 between 2023 and 2026',[0]],
+   ['Member families grew 31 \u2192 48 since 2023',[1]],
+   ['A $15,000 city grant arrived in 2025',[2]],
+   ['The waitlist for plots is 22 families long',[1,3]],
+   ['Lakeview News covered the 12-plot expansion',[0,3]],
+   ['The garden\u2019s lease runs out in 2028',[2,3]]];
+  const on=[true,false,false,false];
+  function render(){
+    document.querySelectorAll('.agbtn').forEach(b=>{
+      const i=+b.dataset.a;b.className='wbtn agbtn'+(on[i]?'':' alt');});
+    let found=0;
+    $('aglist').innerHTML=FACTS.map(f=>{
+      const hit=f[1].some(i=>on[i]);if(hit)found++;
+      return '<div style="padding:3px 0;'+(hit?'':'opacity:.35')+'">'+
+        (hit?'\u2713 ':'\u2717 ')+f[0]+'</div>';}).join('');
+    const nOn=on.filter(x=>x).length;
+    $('agnote').innerHTML=nOn===0?
+      'No angles, no facts. Searching has to start somewhere.':
+      found===FACTS.length?
+      '<b>All six facts reached with '+nOn+' angles.</b> Notice no single angle finds them alone \u2014 coverage is a team property.':
+      '<b>'+found+' of 6 facts reachable</b> with '+nOn+' angle'+(nOn===1?'':'s')+'. The missing ones are silent \u2014 nothing tells you they exist.';
+  }
+  document.querySelectorAll('.agbtn').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.a;on[i]=!on[i];render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
