@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capstone — your pile · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 8</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 8 of 8 · about 2–4 hours</p>
+<h1>Capstone — your pile</h1>
+<p class="lede">The drawer you chose in lesson 1 meets the pipeline you built in lessons 2 through 7. The deliverable is the table, the answers, and the pipeline report a stranger could trust.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>A real pile, end to end</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-8-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A student runs a semester of club minutes through all seven stages and hands the club a table, three answers, and an honest report.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>The capstone: your documents, every stage, and the report that makes the work trustworthy.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-8-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Ship the pipeline</h2>
+
+
+  <p>Everything assembles. Your pile from lesson 1 — minutes, reports,
+  flyers, whatever drawer you claimed — goes through every stage, and you
+  ship four things:</p>
+  <p><b>The table</b> (CSV + JSON), with the quarantine file and cleaning
+  log beside it.<br>
+  <b>Three answered questions</b> — the ones you promised in lesson 1, each
+  answer pointing at its rows.<br>
+  <b>The pipeline report</b> — one page: what went in (how many documents,
+  which formats), what each stage did (with log lines), the routing choice
+  (which documents went to rules, which to the LLM, and why), the measured
+  error rate, what's in quarantine and what those rows turned out to be,
+  and the spot-check verdict.<br>
+  <b>The handoff note</b> — three sentences a non-programmer can follow:
+  what this table is, what it's safe to use it for, and what it must not be
+  used for. ("Amounts marked approximate are approximate. The two
+  quarantined months need the paper originals. Don't cite this for tax
+  purposes.")</p>
+  <p><b>Privacy, before anything runs:</b> if your pile contains real
+  people's information — names, addresses, phone numbers — you need
+  permission from whoever owns the documents, and anything sent to an LLM
+  leaves your machine. When in doubt: use rules locally for the sensitive
+  fields, or choose a public pile. A pipeline that leaks its documents has
+  failed at the only stage that can't be rerun.</p>
+  <p>The report is the grade, because the report is the professional
+  artifact: anyone can produce a table; the report is what lets a stranger
+  decide how far to trust it. That's the difference between data and a
+  rumor with columns — and it's the exact skill the practicum clients will
+  need from you.</p>
+
+  <!-- ============ FIGURE 1: Assemble the pipeline ============ -->
+  <div class="fig" id="figasm">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Assemble your pipeline</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Click the stages in the
+    order they run. The checker knows the two classic mistakes.</p>
+    <div class="figtabs" id="asmpool"></div>
+    <p style="font-size:13.5px;margin:10px 0 4px;font-weight:700;color:var(--ink2)">YOUR PIPELINE:</p>
+    <p id="asmline" style="font-size:14.5px;min-height:1.8em"></p>
+    <p id="asmfb" style="font-size:14.5px;min-height:2.5em"></p>
+    <div class="figtabs"><button class="wbtn alt" id="asmreset">Reset</button></div>
+    <p class="fignote">Order is architecture: clean before structure or the
+    rules meet the junk; validate before store or the table inherits the
+    lies.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>The capstone notebook</h2>
+  <p>The capstone workspace: load your pile, run every stage you built, write the outputs, and fill in the pipeline-report template — with the privacy checklist first, before any document touches an API.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs8-your-pile.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs8-your-pile.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why is the pipeline report the grade, rather than the table?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Reports are longer</button>
+    <button class="choice" data-ok="1">The report is what lets a stranger decide how far to trust the table</button>
+    <button class="choice" data-ok="0">Tables can't be graded</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Your pile has donors' names and addresses. What happens before any document reaches an LLM?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Nothing — extraction is extraction</button>
+    <button class="choice" data-ok="1">Permission from the documents' owner, and sensitive fields handled by local rules when in doubt</button>
+    <button class="choice" data-ok="0">The names are replaced with emoji</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From the whole course — a teammate proposes: “skip validation this once, the deadline is tight.” The one-sentence answer is…</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">“Fine, but note it in the report” — deadlines are real</button>
+    <button class="choice" data-ok="1">“Then the table inherits every upstream lie, and we'd ship a rumor with columns.”</button>
+    <button class="choice" data-ok="0">“Validation is optional for small piles.”</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Ship it</h2>
+  <div class="buildtask">
+
+
+  <p>Turn in the full capstone: table + quarantine + log, the three answered
+  questions, the one-page pipeline report, and the three-sentence handoff
+  note. Present five minutes: the pile, one thing a stage caught, the error
+  rate, and one question the table answered that the drawer never could.</p>
+  <p><b>Turn-in:</b> all four artifacts. The pipeline report is the course
+  grade — and if you processed a real organization's pile, deliver them
+  the CSV and the handoff note. That delivery is the practicum, in
+  miniature.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 8</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-7.html">&larr; Lesson 7</a> <a href="document-pipelines.html">Course home &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 8 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-8';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 8 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 8 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 8';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 8 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const STAGES=["collect","extract","clean","structure","validate","store","ask"];
+  let picked=[];
+  function render(){
+    $('asmpool').innerHTML=STAGES.filter(s=>!picked.includes(s)).map(s=>
+      '<button class="wbtn alt asmb" data-s="'+s+'">'+s+'</button>').join('');
+    $('asmline').textContent=picked.length?picked.join(' \u2192 '):'(empty)';
+    document.querySelectorAll('.asmb').forEach(b=>b.addEventListener('click',()=>{
+      picked.push(b.dataset.s);check();render();}));
+  }
+  function check(){
+    const i=picked.length-1,s=picked[i];
+    const correct=STAGES[i];
+    if(s!==correct){
+      let msg='';
+      if(s==='structure'&&picked.indexOf('clean')===-1)
+        msg='Structure before clean: your rules just met the raw junk — headers inside amounts, dates in four formats. The patterns will miss and mismatch.';
+      else if(s==='store'&&picked.indexOf('validate')===-1)
+        msg='Store before validate: the table just inherited every upstream lie, and it is downstream from nothing that could catch them.';
+      else msg='That stage is early — '+correct+' comes next. Each stage feeds the one after it.';
+      $('asmfb').innerHTML='<b style="color:var(--star)">'+msg+'</b>';
+      picked.pop();
+    }else if(picked.length===STAGES.length){
+      $('asmfb').innerHTML='<b style="color:var(--navy)">Assembled.</b> Seven stages, right order, each one checkable. Now do it with your real pile — that\'s the capstone.';
+    }else{
+      $('asmfb').textContent='';
+    }
+  }
+  $('asmreset').addEventListener('click',()=>{picked=[];$('asmfb').textContent='';render();});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

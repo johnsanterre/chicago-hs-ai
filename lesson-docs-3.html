@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cleaning at scale · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 3</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 3 of 8 · about 2–4 hours</p>
+<h1>Cleaning at scale</h1>
+<p class="lede">One document, you'd fix by hand. Forty documents need cleaning functions — small, composable, and logged, so you always know what was changed and can prove it.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Fix it once, apply it everywhere</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-3-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Four small cleaning functions run in sequence over a whole folder, and a log records every change they made.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Composable cleaners, the fix-the-function habit, and why the cleaning log is your alibi.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-3-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Small functions, big pile</h2>
+
+
+  <p>Extraction left junk in your text: headers mid-sentence, tripled spaces,
+  smart quotes turned into <b>&acirc;&#128;&#153;</b> garbage, dates written
+  four different ways. For one document you'd fix it by hand. You have forty
+  documents this month and forty more next month — so you write <b>cleaning
+  functions</b> instead, and you follow three rules:</p>
+  <p><b>One fix per function.</b> <code>strip_headers()</code> removes page
+  headers and nothing else. <code>fix_spacing()</code> collapses runs of
+  whitespace and nothing else. Small functions are checkable — you can test
+  each on a sample and see exactly what it does.</p>
+  <p><b>Compose them in order.</b> Cleaning is a mini-pipeline inside the
+  pipeline: each function takes text, returns text, and hands off to the
+  next. Order matters and is worth a comment: strip headers <i>before</i>
+  fixing spacing, or the header's leftover blank lines survive.</p>
+  <p><b>Log every change.</b> Each function reports what it did: "removed 3
+  header lines," "collapsed 17 whitespace runs." The log is your alibi. When
+  a number in the final table looks wrong, the log tells you whether cleaning
+  touched it — and when someone asks "did processing alter the documents?",
+  you have an answer instead of a shrug. Organizations that trust you with
+  their documents deserve that answer.</p>
+  <p>And the habit from lesson 2 carries forward: when you find a new kind of
+  junk, you don't fix that one document — you add one more small function,
+  test it, and rerun the pile.</p>
+
+  <!-- ============ FIGURE 1: Cleaning toggles ============ -->
+  <div class="fig" id="figclean">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Compose the cleaners</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">One extracted report, four
+    cleaning functions. Toggle them and watch the text and the log.</p>
+    <div class="figtabs">
+      <button class="wbtn alt clbtn" data-c="0">strip_headers()</button>
+      <button class="wbtn alt clbtn" data-c="1">fix_spacing()</button>
+      <button class="wbtn alt clbtn" data-c="2">fix_encoding()</button>
+      <button class="wbtn alt clbtn" data-c="3">standardize_dates()</button>
+    </div>
+    <div class="prefix" id="cldoc" style="font-size:13.5px;white-space:pre-wrap;line-height:1.6"></div>
+    <p style="font-size:13px;color:var(--ink2);margin:10px 0 4px;font-weight:700">THE LOG:</p>
+    <div class="prefix" id="cllog" style="font-size:13px;line-height:1.6;white-space:pre-wrap"></div>
+    <p class="fignote">Four small functions, each checkable alone, composed in
+    order, every change on the record. That's cleaning at scale.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the cleaning stage</h2>
+  <p>The notebook builds the four cleaners as real functions, composes them into clean(), runs the pile through, and prints the log — then hands you a document with a new kind of junk, so you add a fifth function yourself.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs3-cleaning.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs3-cleaning.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why one fix per function instead of one big clean_everything()?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Small functions run faster</button>
+    <button class="choice" data-ok="1">Each one is checkable alone — you can test exactly what it does and fix it alone</button>
+    <button class="choice" data-ok="0">Python limits function length</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why does the cleaning log matter to the organization that gave you the documents?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">It proves the pipeline ran quickly</button>
+    <button class="choice" data-ok="1">It answers “did processing alter our documents?” with a record instead of a shrug</button>
+    <button class="choice" data-ok="0">Logs are required by Colab</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 2 — extraction collapsed “served 212 families” into “served212families”. Which stage owns that repair, and how?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Extract — rerun it until spacing is right</button>
+    <button class="choice" data-ok="1">Clean — a spacing function, tested and logged, rerun over the pile</button>
+    <button class="choice" data-ok="0">Validate — delete rows with joined words</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Your fifth cleaner</h2>
+  <div class="buildtask">
+
+
+  <p>The notebook's mystery document has junk none of the four functions
+  handle. Diagnose it, write <code>your_cleaner()</code> — one fix, tested on
+  a sample, logged — and slot it into the right position in clean().</p>
+  <p><b>Turn-in:</b> the function, one sentence on why it sits where it does
+  in the order, and the log line it produced on the pile.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 3</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-2.html">&larr; Lesson 2</a> <a href="lesson-docs-4.html">Lesson 4 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 3 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-3';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 3 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 3 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 3';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 3 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const RAW="COMMUNITY CENTER \u2014 WEEKLY  REPORT\nPage 1 of 1   CC-APR-DRAFT\nWeek of Apr 7, 2026\nAttendance:   184 people\nDonations: $312.75\nNotes: Youth night\u00e2\u20ac\u2122s turnout was huge \u2014 3/14/26 planning meeting moved to 04/02/2026.\nPage 1 of 1   CC-APR-DRAFT";
+  let on=[false,false,false,false];
+  function apply(){
+    let t=RAW,log=[];
+    if(on[0]){
+      const before=t.split('\n').length;
+      t=t.split('\n').filter(l=>!/^Page \d+ of \d+/.test(l)).join('\n');
+      log.push('strip_headers(): removed '+(before-t.split('\n').length)+' header lines');
+    }
+    if(on[1]){
+      const runs=(t.match(/  +/g)||[]).length;
+      t=t.replace(/  +/g,' ');
+      log.push('fix_spacing(): collapsed '+runs+' whitespace runs');
+    }
+    if(on[2]){
+      const hits=(t.match(/\u00e2\u20ac\u2122/g)||[]).length;
+      t=t.replace(/\u00e2\u20ac\u2122/g,"'");
+      log.push('fix_encoding(): repaired '+hits+' mangled characters');
+    }
+    if(on[3]){
+      let n=0;
+      t=t.replace(/\b(\d{1,2})\/(\d{1,2})\/(\d{2,4})\b/g,(m,mo,d,y)=>{
+        n++;y=y.length===2?'20'+y:y;
+        return y+'-'+mo.padStart(2,'0')+'-'+d.padStart(2,'0');});
+      t=t.replace(/\bWeek of Apr (\d+), (\d{4})\b/g,(m,d,y)=>{n++;return 'Week of '+y+'-04-'+String(d).padStart(2,'0');});
+      log.push('standardize_dates(): rewrote '+n+' dates to YYYY-MM-DD');
+    }
+    return [t,log];
+  }
+  function render(){
+    document.querySelectorAll('.clbtn').forEach((b,j)=>{
+      b.className='wbtn clbtn'+(on[j]?'':' alt');
+      b.textContent=(on[j]?'\u2713 ':'')+['strip_headers()','fix_spacing()','fix_encoding()','standardize_dates()'][j];
+    });
+    const [t,log]=apply();
+    $('cldoc').textContent=t;
+    $('cllog').textContent=log.length?log.join('\n'):'(no cleaners active \u2014 raw extraction shown)';
+  }
+  document.querySelectorAll('.clbtn').forEach(b=>b.addEventListener('click',()=>{
+    const j=+b.dataset.c;on[j]=!on[j];render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

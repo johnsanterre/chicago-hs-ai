@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Store and ask · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 7</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 7 of 8 · about 2–4 hours</p>
+<h1>Store and ask</h1>
+<p class="lede">The pile is now a validated table. Store it in a format other tools can read, and the questions that took an afternoon of drawer-digging take a line of code — with the answer showing its work.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The payoff stage</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-7-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A year of pantry reports becomes one CSV, and four board-meeting questions get answered in four lines — each answer pointing at its rows.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>CSV and JSON, questions as code, and when to hand the table to an LLM for the phrasing.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-7-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Now questions are cheap</h2>
+
+
+  <p>Two storage formats cover nearly everything. <b>CSV</b> — one row per
+  line, commas between fields — opens in Excel and Google Sheets, which
+  means the organization can use it without you. <b>JSON</b> keeps nesting
+  and nulls intact for the next program. Write both; they're three lines
+  each. And keep the quarantine file and cleaning log beside them — the
+  table's paperwork travels with the table.</p>
+  <p>Then the stage the whole pipeline existed for. Questions against
+  structured rows are one line each: filter the rows, sum a column, group by
+  month. "How many families this spring?" — filter dates, sum the column,
+  done, <b>and the answer shows its work</b>: which rows, which column,
+  reproducible by anyone who runs the line again.</p>
+  <p>Where does an LLM fit here? <b>Not in the arithmetic.</b> Adding a
+  column with an LLM is paying for the chance of a wrong sum when code sums
+  perfectly. The LLM earns its place at the edges: turning a stakeholder's
+  vague question into the right filter ("spring-ish? let's say March
+  through May"), and phrasing the computed result as a readable sentence
+  for the newsletter. Compute with code; converse with the model. The
+  moment an answer's number comes from anywhere but the table, you've built
+  a very elaborate rumor machine.</p>
+
+  <!-- ============ FIGURE 1: The question machine ============ -->
+  <div class="fig" id="figq">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Question the table</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Twelve validated rows from
+    a year of reports. Every answer names the rows it used.</p>
+    <div class="figtabs">
+      <button class="wbtn alt qbtn" data-q="0">Total donations, spring?</button>
+      <button class="wbtn alt qbtn" data-q="1">Busiest month?</button>
+      <button class="wbtn alt qbtn" data-q="2">Average families/month?</button>
+      <button class="wbtn alt qbtn" data-q="3">Which months dipped?</button>
+    </div>
+    <div id="qtable" style="margin:10px 0;overflow-x:auto"></div>
+    <p style="font-size:14.5px;min-height:2.5em" id="qans"></p>
+    <p class="fignote">Each answer is one line of code over validated rows —
+    and it can point at exactly the rows it used. That property is what the
+    whole pipeline was for.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Store it, then interrogate it</h2>
+  <p>The notebook writes the CSV and JSON, answers a board meeting's worth of questions in code, and then uses the LLM only at the edges — translating a vague question into a filter, and a computed number into a newsletter sentence.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs7-store-and-ask.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs7-store-and-ask.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why CSV for the organization's copy?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">It's the smallest format</button>
+    <button class="choice" data-ok="1">It opens in Excel and Sheets — they can use it without you</button>
+    <button class="choice" data-ok="0">CSV files can't contain errors</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Where does the LLM belong in the ask stage?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Summing the columns — it's good at math</button>
+    <button class="choice" data-ok="1">At the edges: vague question to filter, computed number to sentence — never the arithmetic</button>
+    <button class="choice" data-ok="0">Nowhere — models are banned after lesson 5</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 6 — why does “the answer shows its work” depend on validation having run?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">It doesn't — unvalidated rows show work too</button>
+    <button class="choice" data-ok="1">Pointing at your rows only helps if the rows deserve to be pointed at</button>
+    <button class="choice" data-ok="0">Validation makes the code shorter</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The board packet</h2>
+  <div class="buildtask">
+
+
+  <p>From the notebook's table: answer four questions of your own in code
+  (each answer naming its rows), then produce one newsletter paragraph where
+  every number came from the table and the LLM only did the phrasing.</p>
+  <p><b>Turn-in:</b> the four answers with their code, and the paragraph with
+  each number traced to its line.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 7</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-6.html">&larr; Lesson 6</a> <a href="lesson-docs-8.html">Lesson 8 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 7 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-7';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 7 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 7 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 7';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 7 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const R=[["2026-01",167,1210.00],["2026-02",174,1385.50],["2026-03",212,1847.50],
+   ["2026-04",198,2210.00],["2026-05",241,1655.25],["2026-06",188,1502.00],
+   ["2026-07",176,980.00],["2026-08",205,1344.75],["2026-09",189,1760.10],
+   ["2026-10",214,1922.40],["2026-11",232,2455.00],["2026-12",251,3010.75]];
+  const money=n=>'$'+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  function table(hl){
+    let h='<table class="wtable" style="font-size:13px"><tr><th>month</th><th>families</th><th>donations</th></tr>';
+    R.forEach((r,i)=>{h+='<tr'+(hl.includes(i)?' style="background:#fde68a"':'')+'><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+money(r[2])+'</td></tr>';});
+    $('qtable').innerHTML=h+'</table>';
+  }
+  const QS=[
+   function(){const idx=[2,3,4];const s=idx.reduce((a,i)=>a+R[i][2],0);
+     table(idx);return '<b>'+money(s)+'</b> — sum of donations over rows Mar–May (highlighted). Code: <code>sum(r.donations for March–May)</code>.';},
+   function(){let bi=0;R.forEach((r,i)=>{if(r[1]>R[bi][1])bi=i;});
+     table([bi]);return '<b>'+R[bi][0]+'</b>, with '+R[bi][1]+' families — the max of the families column (highlighted).';},
+   function(){const s=R.reduce((a,r)=>a+r[1],0);table(R.map((_,i)=>i));
+     return '<b>'+Math.round(s/12)+' families</b> — mean of the families column across all 12 rows.';},
+   function(){const avg=R.reduce((a,r)=>a+r[1],0)/12;const idx=R.map((r,i)=>[r,i]).filter(([r])=>r[1]<avg*0.92).map(([_,i])=>i);
+     table(idx);return '<b>'+idx.map(i=>R[i][0]).join(', ')+'</b> ran well under the yearly average (highlighted) — January cold and July vacation, says the director. The table found the pattern; the human explains it.';}];
+  document.querySelectorAll('.qbtn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.qbtn').forEach((x,j)=>x.className='wbtn qbtn'+(+x.dataset.q===+b.dataset.q?'':' alt'));
+    $('qans').innerHTML=QS[+b.dataset.q]();}));
+  table([]);
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

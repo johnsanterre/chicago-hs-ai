@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fields from an LLM · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 5</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 5 of 8 · about 2–4 hours</p>
+<h1>Fields from an LLM</h1>
+<p class="lede">On the other side of the rules boundary: documents where every author formatted things their own way. An LLM reads meaning — and everything it returns gets validated, because it can also invent.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Extraction that reads meaning</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-5-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A rambling thank-you letter defeats every rule; one schema prompt turns it into a clean row — and one invented field shows why the checking never stops.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Schema prompts, the JSON retry pattern, and the two-sided trade: rules never invent, LLMs never quit.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-5-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The other extractor</h2>
+
+
+  <p>Lesson 4 ended at the boundary: "we raised around two grand at youth
+  night." No pattern matches that — but an LLM reads it fine, because an LLM
+  matches meaning, not shape. So the varied end of the pile goes to a second
+  extractor, and you already know its habits if you've met the Build with
+  LLMs course; if not, everything you need is here.</p>
+  <p><b>The schema prompt.</b> You don't ask "what does this say?" — you ask
+  for exactly the row you want: <i>"Extract as JSON with keys date, amount,
+  families, contact. Use null for anything not stated. Reply with ONLY the
+  JSON object."</i> The schema is the contract; every document gets the same
+  one, so every answer lands in the same table.</p>
+  <p><b>The retry pattern.</b> Models sometimes wrap JSON in chatter.
+  Professionals parse, catch the failure, and re-ask — a five-line loop, not
+  a crisis.</p>
+  <p><b>The two-sided trade, stated honestly.</b> Rules never invent — they
+  can only find what's literally there — but they quit the moment format
+  varies. LLMs never quit — they'll return a confident row for anything —
+  but they can invent: a plausible date that isn't in the document, "about
+  two grand" recorded as exactly 2000. Neither extractor is trustworthy
+  alone. Rules where format is fixed, LLM where it varies, and <b>every row
+  from either one goes through validation</b> — which is the whole next
+  lesson.</p>
+  <p><b>No class API key?</b> The notebook shows every model response
+  precomputed, so the pattern is fully learnable without one — you just
+  won't be able to point it at new documents until a key exists.</p>
+
+  <!-- ============ FIGURE 1: Route the documents ============ -->
+  <div class="fig" id="figroute">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Rules or LLM?</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Three documents from one
+    pile. Route each to an extractor, then see how the choice went.</p>
+    <div id="rtlist"></div>
+    <p class="fignote" id="rtnote">Fixed format: rules win on cost and trust.
+    Varied format: the LLM is the only game. Both feed the same validator.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the LLM extractor</h2>
+  <p>The notebook builds the schema prompt and the JSON retry loop with the class API key (precomputed outputs included for keyless study), extracts rows from the documents that defeated lesson 4's rules — and then catches the model inventing a field.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs5-llm-extraction.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs5-llm-extraction.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What makes a schema prompt different from just asking about the document?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">It's longer</button>
+    <button class="choice" data-ok="1">It demands the exact row shape with fixed keys, so every document lands in the same table</button>
+    <button class="choice" data-ok="0">It runs without an API key</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Rules never invent; LLMs never quit. Why does that mean BOTH need validation?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">Rules can miss what's there; LLMs can add what isn't — either way the table can be wrong</button>
+    <button class="choice" data-ok="0">Validation makes extraction faster</button>
+    <button class="choice" data-ok="0">It doesn't — LLM rows can be trusted as-is</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 4 — “Donations: $312.75” on a fixed-format weekly report. Which extractor, and why?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">LLM — it's smarter</button>
+    <button class="choice" data-ok="1">Rules — fixed format, zero cost, and a rule can't invent a different number</button>
+    <button class="choice" data-ok="0">Neither — retype it by hand</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The invention hunt</h2>
+  <div class="buildtask">
+
+
+  <p>Run the LLM extractor on the notebook's five varied documents. For each
+  row, mark every field as <b>stated</b> (you can point at the words),
+  <b>inferred</b> (reasonable reading), or <b>invented</b> (not in the
+  document at all). At least one invention is hiding in the batch.</p>
+  <p><b>Turn-in:</b> the five rows with your three-way marks, and the
+  invention you caught, quoted against the document.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 5</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-4.html">&larr; Lesson 4</a> <a href="lesson-docs-6.html">Lesson 6 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 5 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-5';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 5 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 5 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 5';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 5 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const DOCS=[
+   ["Weekly report, same form every week: \u201cAttendance: 184. Donations: $312.75. Date: 2026-04-07.\u201d",1,
+    "Rules. Fixed form, three patterns, done in a millisecond for free — and no chance of an invented number. Sending this to an LLM works too, but you'd be paying to add risk.",
+    "The LLM extracts it fine — but it cost money, took a second, and you now have to check for inventions on a document a rule handled perfectly. Wrong tool, right answer, worse deal."],
+   ["Thank-you letter: \u201cWhat a month! Between the bake sale and Friday's drive we cleared around two grand, and I counted at least sixty families at the tables.\u201d",0,
+    "A rule finds nothing here — no dollar sign, no fixed labels. Wrong tool, empty row.",
+    "The LLM. It reads meaning: amount \u2248 2000 (flagged approximate), families \u2265 60. Note what it must NOT do: record \u201cexactly $2,000\u201d as if stated. That flag is validation's job to demand."],
+   ["Board minutes, rambling: \u201cRosa mentioned the permit fee went up to $85 — or was it $95? — and we agreed to revisit the budget at the May meeting.\u201d",0,
+    "Rules grab $85 and $95 — but which is the fee? A rule can't tell; it matches shapes, not the argument between them.",
+    "The LLM — with the schema demanding a null when the document itself is unsure. \u201cfee: null, note: 85 or 95, unresolved\u201d is the honest row. An extractor that forces an answer here is inventing certainty."]];
+  let done=[false,false,false];
+  function render(){
+    $('rtlist').innerHTML=DOCS.map((d,i)=>{
+      return '<div style="border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0">'+
+        '<p style="margin:0 0 6px;font-size:14.5px">'+d[0]+'</p>'+
+        '<button class="wbtn rt alt" data-i="'+i+'" data-c="1" style="font-size:13px;padding:4px 12px">Rules</button> '+
+        '<button class="wbtn rt alt" data-i="'+i+'" data-c="0" style="font-size:13px;padding:4px 12px">LLM</button>'+
+        '<p style="font-size:14px;margin:6px 0 0;min-height:1em" id="rtfb'+i+'"></p></div>';
+    }).join('');
+    document.querySelectorAll('.rt').forEach(b=>b.addEventListener('click',()=>{
+      const i=+b.dataset.i,c=+b.dataset.c,d=DOCS[i];
+      done[i]=true;
+      const goodPick=(c===1)===(d[1]===1);
+      document.getElementById('rtfb'+i).innerHTML=(goodPick?'<b style="color:var(--navy)">Good routing.</b> ':'<b style="color:var(--star)">It ran — read the bill.</b> ')+(goodPick?d[2]:d[3]);
+      if(done.every(x=>x))$('rtnote').innerHTML='<b>All three routed.</b> Fixed format: rules. Varied format: LLM. Documents that are unsure of themselves: LLM with permission to say null. And every row — from either extractor — goes through lesson 6.';
+    }));
+  }
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

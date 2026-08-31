@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trust but verify · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 6</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 6 of 8 · about 2–4 hours</p>
+<h1>Trust but verify</h1>
+<p class="lede">Extraction produces rows. Validation decides which rows deserve the table. Bad rows go to quarantine with a reason — and the error rate you measure is the honest number your whole pipeline reports.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>The gate before the table</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-6-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">Eight extracted rows hit four checks; two bounce to quarantine, and one of them is an OCR casualty from lesson 2, caught at last.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Checks, quarantine, spot-checks, and the error rate — the number that makes your table trustworthy.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-6-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The gate</h2>
+
+
+  <p>Everything upstream can lie to you politely: OCR swaps characters, rules
+  match the wrong thing, LLMs invent. The validate stage is the gate where
+  lying stops, and it runs four kinds of check on every row:</p>
+  <p><b>Type checks</b> — is the date a real date, the amount a number?
+  $l,847 fails here, caught at last.<br>
+  <b>Range checks</b> — is it plausible? A pantry serving 21,200 families in
+  a month didn't; someone's comma moved.<br>
+  <b>Required fields</b> — a row with no date can't join a table sorted by
+  time.<br>
+  <b>Cross-checks</b> — do fields agree? Sixty-three donations totaling
+  $0.00 is a contradiction wearing a straight face.</p>
+  <p>A failing row is <b>not deleted</b> — deletion hides problems. It goes
+  to <b>quarantine</b> with its reason attached: the row, the check it
+  failed, the document it came from. Quarantine is a to-do list for human
+  eyes, and it's where the interesting discoveries live — half the time a
+  quarantined row means the document itself has a story.</p>
+  <p>Then the two numbers that make you credible. The <b>error rate</b>:
+  what fraction of rows failed validation — measured, not guessed, and
+  reported with the table ("214 rows, 9 quarantined, 4.2%"). And the
+  <b>spot-check</b>: pull five random rows that PASSED and verify them
+  against the original documents by hand, because a gate only catches what
+  it was built to catch. A table with a measured error rate and a passed
+  spot-check is data. Anything else is a rumor with columns.</p>
+
+  <!-- ============ FIGURE 1: The validation gate ============ -->
+  <div class="fig" id="figgate">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Run the gate</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Eight extracted rows, four
+    checks. Toggle checks off and watch what sneaks into the table.</p>
+    <div class="figtabs">
+      <button class="wbtn gtbtn" data-g="0">types</button>
+      <button class="wbtn gtbtn" data-g="1">ranges</button>
+      <button class="wbtn gtbtn" data-g="2">required</button>
+      <button class="wbtn gtbtn" data-g="3">cross-checks</button>
+    </div>
+    <div id="gtrows" style="margin:10px 0;overflow-x:auto"></div>
+    <p style="font-size:14px" id="gtstats"></p>
+    <p class="fignote" id="gtnote">Every check you turn off lets a specific
+    lie into the table. The error rate isn't a grade — it's information.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the gate</h2>
+  <p>The notebook builds the four validators, runs a pile with seeded errors through them, writes quarantine with reasons, computes the error rate — and then has you spot-check five passing rows against the source documents.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs6-validation.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs6-validation.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why quarantine instead of delete?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Deletion hides problems; quarantine keeps the row, its reason, and its source for human eyes</button>
+    <button class="choice" data-ok="0">Deleting rows is slower</button>
+    <button class="choice" data-ok="0">Quarantine improves the error rate</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why spot-check rows that PASSED validation?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">To double the work</button>
+    <button class="choice" data-ok="1">A gate only catches what it was built to catch — passing isn't proof</button>
+    <button class="choice" data-ok="0">Because passing rows are usually wrong</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 5 — the LLM recorded “around two grand” as exactly 2000.00. Which check family should flag it, and what does the row need?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Types — 2000.00 is not a number</button>
+    <button class="choice" data-ok="1">A cross-check against the document's wording — the row needs an approximate flag, not false precision</button>
+    <button class="choice" data-ok="0">None — 2000 is close enough</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The validation report</h2>
+  <div class="buildtask">
+
+
+  <p>From the notebook's pile: your error rate, the quarantine file with
+  reasons, what each quarantined row turned out to be (trace it to its
+  document), and your five-row spot-check verdict.</p>
+  <p><b>Turn-in:</b> the report. If your spot-check found a bad row that
+  passed the gate, that's the best possible outcome — say which check was
+  missing.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 6</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-5.html">&larr; Lesson 5</a> <a href="lesson-docs-7.html">Lesson 7 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 6 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-6';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 6 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 6 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 6';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 6 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const ROWS=[
+   ["2026-03-14","$1,847.50","212","ok",[]],
+   ["2026-04-11","$2,210.00","198","ok",[]],
+   ["2026-05-09","$l,655.25","241","OCR swapped a character",[0]],
+   ["2026-06-13","$1,502.00","21200","a comma moved: 212 became 21200",[1]],
+   ["","$980.00","176","no date — can't join a time-sorted table",[2]],
+   ["2026-07-11","$0.00","63 donations","63 donations totaling zero — a contradiction",[3]],
+   ["2026-08-08","$1,344.75","205","ok",[]],
+   ["2026-09-12","$1,760.10","189","ok",[]]];
+  let on=[true,true,true,true];
+  function render(){
+    document.querySelectorAll('.gtbtn').forEach((b,j)=>{
+      b.className='wbtn gtbtn'+(on[j]?'':' alt');
+      b.textContent=(on[j]?'\u2713 ':'\u2717 ')+['types','ranges','required','cross-checks'][j];
+    });
+    let passed=0,caught=0,sneaked=0;
+    let h='<table class="wtable" style="font-size:13px"><tr><th>date</th><th>amount</th><th>families</th><th>verdict</th></tr>';
+    ROWS.forEach(r=>{
+      const fails=r[4].filter(g=>on[g]);
+      const bad=r[4].length>0;
+      let verdict,style;
+      if(fails.length){verdict='quarantine: '+r[3];style='background:#fff3f3';caught++;}
+      else if(bad){verdict='PASSED (check is off) \u2014 '+r[3];style='background:#fde68a';sneaked++;passed++;}
+      else{verdict='into the table';style='';passed++;}
+      h+='<tr style="'+style+'"><td>'+(r[0]||'\u2014')+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td>'+verdict+'</td></tr>';
+    });
+    $('gtrows').innerHTML=h+'</table>';
+    $('gtstats').innerHTML='<span class="statebox">into the table: <b>'+passed+'</b></span> <span class="statebox">quarantined: <b>'+caught+'</b></span> <span class="statebox">error rate: <b>'+Math.round(caught/8*100)+'%</b></span>'+(sneaked?' <b style="color:var(--star)">'+sneaked+' bad row'+(sneaked>1?'s':'')+' sneaked through.</b>':'');
+    $('gtnote').innerHTML=sneaked?'<b>Look at the yellow rows.</b> Each disabled check is a specific lie with a hall pass. Turn the checks back on.':'Every check you turn off lets a specific lie into the table. The error rate isn\'t a grade — it\'s information.';
+  }
+  document.querySelectorAll('.gtbtn').forEach(b=>b.addEventListener('click',()=>{
+    const j=+b.dataset.g;on[j]=!on[j];render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

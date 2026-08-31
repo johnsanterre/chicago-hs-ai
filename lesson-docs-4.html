@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fields from rules · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 4</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 4 of 8 · about 2–4 hours</p>
+<h1>Fields from rules</h1>
+<p class="lede">Clean text still isn't data. Rules — patterns that match dates, amounts, emails — pull the fields out, and they're sharp exactly where formats are fixed, brittle exactly where humans got creative.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Patterns that grab fields</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-4-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A pattern sweeps a report and every date lights up; then a document written by a human being breaks it, on schedule.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Pattern matching for the three workhorse fields, and the honest boundary where rules stop working.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-4-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Sharp and brittle</h2>
+
+
+  <p>The structure stage begins with <b>rules</b>: text patterns that match
+  the shape of what you want. Three workhorses cover most organizational
+  documents:</p>
+  <p><b>Amounts:</b> a dollar sign, digits, maybe commas and cents —
+  <code>\$[\d,]+(\.\d\d)?</code> grabs $312.75 and $1,847.50 from any
+  report you'll meet.<br>
+  <b>Dates:</b> after lesson 3 standardized them, one pattern matches every
+  date in the pile — this is why cleaning came first.<br>
+  <b>Emails:</b> something, an @, something, a dot, something. Contact info
+  practically extracts itself.</p>
+  <p>Where formats are <b>fixed</b>, rules are unbeatable: fast, free,
+  perfectly consistent, and they never invent anything — a rule can only
+  find what's literally there. A form that always says "Families served:"
+  followed by a number will yield to one rule, forever.</p>
+  <p>Where humans got <b>creative</b>, rules crumble. "Due: next Tuesday."
+  "We raised around two grand." "Contact Rosa — she knows." No pattern
+  matches meaning; rules match shapes, and these have the wrong shape. You
+  can add rules for a while — then the rulebook itself becomes the mess.
+  Knowing where that boundary sits is the skill, and the next lesson is what
+  lives on the other side of it.</p>
+
+  <!-- ============ FIGURE 1: The pattern machine ============ -->
+  <div class="fig" id="figrx">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Sweep the document</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">Pick a pattern; matches
+    light up. Then read the last paragraph — written by a human.</p>
+    <div class="figtabs">
+      <button class="wbtn rxbtn" data-r="0">amounts</button>
+      <button class="wbtn alt rxbtn" data-r="1">dates</button>
+      <button class="wbtn alt rxbtn" data-r="2">emails</button>
+    </div>
+    <div class="prefix" id="rxdoc" style="font-size:14px;white-space:pre-wrap;line-height:1.7"></div>
+    <p class="fignote" id="rxnote">Rules are sharp where the format is fixed
+    and blind where it isn't. The last paragraph is lesson 5's job.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build the rules extractor</h2>
+  <p>The notebook extracts amounts, dates, and emails from a pile of twenty reports into rows, measures how many fields each rule found — and then meets the documents where the rules come back empty.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs4-rules.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs4-rules.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Where do rules beat every other extraction method?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="1">Fixed formats — fast, free, consistent, and they never invent anything</button>
+    <button class="choice" data-ok="0">Creative writing — rules understand meaning</button>
+    <button class="choice" data-ok="0">Scanned documents — rules fix OCR errors</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. What can a rule never do, for better and worse?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Match a dollar amount with commas in it</button>
+    <button class="choice" data-ok="1">Find something that isn't literally there — no matching on meaning, and no inventing</button>
+    <button class="choice" data-ok="0">Run on more than one document</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 3 — why did standardize_dates() make the date rule dramatically better?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">It deleted all the dates</button>
+    <button class="choice" data-ok="1">One pattern now matches every date, because cleaning gave them one shape</button>
+    <button class="choice" data-ok="0">Rules only work on weekdays</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The rulebook and its limits</h2>
+  <div class="buildtask">
+
+
+  <p>From the notebook's pile: your extraction table (twenty rows), the find
+  rate per rule (dates found in 18 of 20, etc.), and — the honest part —
+  the three passages where rules failed, quoted, with one sentence each on
+  why no pattern could match them.</p>
+  <p><b>Turn-in:</b> the table, the rates, and the three failures. The
+  failures are lesson 5's shopping list.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 4</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-3.html">&larr; Lesson 3</a> <a href="lesson-docs-5.html">Lesson 5 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 4 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-4';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 4 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 4 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 4';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 4 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const DOC="WEEKLY REPORT \u2014 2026-04-07\nAttendance: 184 people\nDonations: $312.75 (goal was $500.00)\nNext meeting: 2026-04-02, contact rosa@center.org\nEquipment fund: $1,847.50 \u2014 questions to finance@center.org\n\nAlso \u2014 Marcus says we raised around two grand at youth night, the permit is due next Tuesday, and if you need the storage code, contact Rosa \u2014 she knows.";
+  const RX=[
+   [/\$[\d,]+(?:\.\d\d)?/g,'amounts','Three amounts found instantly \u2014 and \u201caround two grand\u201d ignored completely. A rule cannot hear meaning.'],
+   [/\b\d{4}-\d{2}-\d{2}\b/g,'dates','Every standardized date found \u2014 thanks to lesson 3. And \u201cnext Tuesday\u201d? Invisible. Wrong shape.'],
+   [/[\w.]+@[\w.]+\.\w+/g,'emails','Both addresses found. \u201cContact Rosa \u2014 she knows\u201d matches nothing, because it is knowledge, not a shape.']];
+  let r=0;
+  function render(){
+    document.querySelectorAll('.rxbtn').forEach((b,j)=>b.className='wbtn rxbtn'+(+b.dataset.r===r?'':' alt'));
+    const [rx,name,note]=RX[r];
+    let n=0;
+    $('rxdoc').innerHTML=DOC.replace(rx,m=>{n++;return '<mark style="background:#fde68a">'+m+'</mark>';});
+    $('rxnote').innerHTML='<b>'+n+' match'+(n===1?'':'es')+'.</b> '+note;
+  }
+  document.querySelectorAll('.rxbtn').forEach(b=>b.addEventListener('click',()=>{r=+b.dataset.r;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

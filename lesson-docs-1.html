@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documents in, answers out · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 1</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 1 of 8 · about 2–4 hours</p>
+<h1>Documents in, answers out</h1>
+<p class="lede">Every organization drowns in documents — flyers, reports, forms, minutes. A pipeline turns the pile into a table you can question. This course builds one, stage by stage.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>What a pipeline is</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-1-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">A messy food-pantry report travels the whole pipeline: raw bytes to clean text to structured row to an answered question.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Stages, not magic: why one giant step fails and small checked steps win.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-1-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>The assembly line</h2>
+
+
+  <p>Ask a food pantry how many families they served last year and someone opens
+  a drawer: monthly reports, some typed, some scanned, some in emails. The
+  answer exists — spread across forty documents in forty formats. That drawer
+  is where this course lives, because every school club, church, and nonprofit
+  in Chicago has one.</p>
+  <p>The tempting move is one giant step: "computer, read all this and tell me
+  the answer." Sometimes that even appears to work — and you have no idea
+  whether to trust it, because you can't see where anything came from. The
+  professional move is an <b>assembly line</b>, and it has the same stages
+  every time:</p>
+  <p><b>Collect</b> — gather the files, list what you have.<br>
+  <b>Extract</b> — get the text out of each format.<br>
+  <b>Clean</b> — fix the junk extraction leaves behind.<br>
+  <b>Structure</b> — pull the fields you need into rows: date, amount, name.<br>
+  <b>Validate</b> — check every row before trusting it.<br>
+  <b>Store</b> — write a clean table.<br>
+  <b>Ask</b> — now questions are cheap, and answers show their work.</p>
+  <p>Two properties make the staged version win. Each stage is <b>small enough
+  to check</b> — you can look at its output and see whether it's right. And
+  each stage is <b>fixable alone</b> — when page headers pollute your text,
+  you fix the clean stage and rerun; nothing else changes. One giant step has
+  neither property. That's the whole argument, and the figure lets you feel
+  it.</p>
+
+  <!-- ============ FIGURE 1: The pipeline stepper ============ -->
+  <div class="fig" id="figpipe">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>Walk one document through</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">A pantry report enters the
+    pipeline. Step it through and watch what each stage does — and what each
+    stage would let you check.</p>
+    <div class="figtabs">
+      <button class="wbtn" id="pstep">Next stage</button>
+      <button class="wbtn alt" id="preset">Start over</button>
+    </div>
+    <p style="font-size:13.5px;margin:10px 0 4px" id="pstages"></p>
+    <div class="prefix" id="pdoc" style="font-size:13.5px;white-space:pre-wrap;line-height:1.5"></div>
+    <p class="fignote" id="pnote">Seven stages, each checkable, each fixable
+    alone. The pile becomes a table, and the table answers questions.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Tour the pipeline in miniature</h2>
+  <p>The notebook runs a tiny complete pipeline on three embedded documents — messy in, table out, one question answered — so you hold the whole shape in your head before building each stage for real.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs1-pipeline-tour.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs1-pipeline-tour.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. Why do staged pipelines beat one giant “read it all” step?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Stages run faster than one big step</button>
+    <button class="choice" data-ok="1">Each stage is small enough to check and fixable alone</button>
+    <button class="choice" data-ok="0">Computers can't read more than one file at a time</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Page headers are polluting your extracted text. In a staged pipeline, what do you do?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="0">Start the whole project over</button>
+    <button class="choice" data-ok="1">Fix the clean stage and rerun — nothing else changes</button>
+    <button class="choice" data-ok="0">Add a disclaimer to the final answers</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. What does the structure stage produce?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">A summary paragraph of each document</button>
+    <button class="choice" data-ok="1">Rows with named fields — date, amount, name — one per document</button>
+    <button class="choice" data-ok="0">A backup copy of the files</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>Find a real drawer</h2>
+  <div class="buildtask">
+
+
+  <p>Identify a real document pile you could process by the end of this course:
+  a club's meeting minutes, a team's game reports, a family business's
+  receipts, a nonprofit's public newsletters. List what's in it, what formats,
+  and three questions the pile could answer if it were a table.</p>
+  <p><b>Turn-in:</b> the pile description and the three questions. This becomes
+  your lesson-8 capstone material — choose something you actually care
+  about.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 1</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="document-pipelines.html">&larr; Course home</a> <a href="lesson-docs-2.html">Lesson 2 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 1 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-1';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 1 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 1 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 1';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 1 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const STAGES=["collect","extract","clean","structure","validate","store","ask"];
+  const VIEWS=[
+   ["A folder arrives:\n\n  pantry_mar.pdf   (typed report)\n  pantry_apr.pdf   (typed report)\n  may_notes.txt    (an email, pasted)\n\n3 files, 2 formats. Listed, named, counted.",
+    "Collect: before anything clever, know exactly what you have."],
+   ["COMMUNITY FOOD PANTRY \u2014 MONTHLY REPORT\nPage 1 of 1        CONFIDENTIAL DRAFT\nDate:  March 14, 2026\nFamilies served:212\nDonations received : $1,847.50\ncontact: pantry@example.org",
+    "Extract: the text is out of the PDF \u2014 with junk riding along: a page header, broken spacing, inconsistent punctuation."],
+   ["Date: March 14, 2026\nFamilies served: 212\nDonations received: $1,847.50\nContact: pantry@example.org",
+    "Clean: headers stripped, spacing repaired. Same information, fit for the next stage \u2014 and you can SEE it is right."],
+   ["{ date: \"2026-03-14\",\n  families: 212,\n  donations: 1847.50,\n  contact: \"pantry@example.org\" }",
+    "Structure: prose becomes named fields. This row is what every later question will stand on."],
+   ["date 2026-03-14      \u2713 valid date\nfamilies 212         \u2713 plausible (0\u20135000)\ndonations 1847.50    \u2713 positive amount\ncontact              \u2713 looks like an email",
+    "Validate: every field checked against what is plausible. A row that fails goes to quarantine, not into the table."],
+   ["pantry.csv \u2014 3 rows\n\ndate,families,donations\n2026-03-14,212,1847.50\n2026-04-11,198,2210.00\n2026-05-09,241,1655.25",
+    "Store: one clean table for the whole pile. The drawer is now data."],
+   ["Q: How many families this spring?\nA: 651 \u2014 sum of the families column,\n   3 rows, March through May.\n\nThe answer shows its work: which rows, which column.",
+    "Ask: questions are cheap now, and every answer can point at the rows it came from."]];
+  let i=-1;
+  function render(){
+    $('pstages').innerHTML=STAGES.map((s,j)=>
+      '<span style="padding:3px 9px;border-radius:999px;margin-right:4px;font-weight:600;'+
+      (j===i?'background:var(--navy);color:#fff':'border:1px solid var(--line);color:var(--ink2)')+'">'+s+'</span>').join('');
+    if(i<0){$('pdoc').textContent='(press Next stage)';return;}
+    $('pdoc').textContent=VIEWS[i][0];
+    $('pnote').innerHTML='<b>'+STAGES[i].charAt(0).toUpperCase()+STAGES[i].slice(1)+':</b> '+VIEWS[i][1].split(': ').slice(1).join(': ');
+    if(i===STAGES.length-1)$('pnote').innerHTML+=' <b>Seven stages, each checkable, each fixable alone.</b>';
+  }
+  $('pstep').addEventListener('click',()=>{if(i<STAGES.length-1){i++;render();}});
+  $('preset').addEventListener('click',()=>{i=-1;render();$('pnote').textContent='Seven stages, each checkable, each fixable alone. The pile becomes a table, and the table answers questions.';});
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

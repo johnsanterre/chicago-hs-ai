@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Getting the text out · Chicago HS AI</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Chicago HS AI <span class="star">&#x2739;</span></a>
+  <span class="crumb"><a href="index.html">Catalog</a> / <a href="document-pipelines.html">Document Pipelines</a> / Lesson 2</span>
+</div></header>
+
+<div class="wrap">
+<p class="kicker">Document Pipelines · Lesson 2 of 8 · about 2–4 hours</p>
+<h1>Getting the text out</h1>
+<p class="lede">A PDF is not text — it's a file format with text trapped inside. Extraction gets it out, and extraction is lossy. The habit that saves you: always inspect what survived.</p>
+
+<div class="progresswrap">
+  <div class="progressbar"><div id="pbar"></div></div>
+  <div class="plabel"><span id="pdone">0</span> of 7 segments complete</div>
+</div>
+
+<section class="seg" data-seg="watch">
+  <div class="stype">1 · Watch</div>
+  <h2>Three formats, three fights</h2>
+  <video controls preload="metadata" style="width:100%;border-radius:8px;background:#000"
+    src="video/chsai-docs-2-watch.mp4"></video>
+  <p style="font-size:13px;color:var(--ink2);margin:6px 0 0">The same letter as a text file, a PDF, and a scan — and what each one does to the text on the way out.
+  <span style="color:var(--ink2)">(Animated explainer with narration; a recorded version can replace it later.)</span></p>
+  <button class="mark" data-for="watch">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="listen">
+  <div class="stype">2 · Listen</div>
+  <h2>Listen: two minutes before you go on</h2>
+  <p>Formats from easy to hostile, why extraction loses things, and the inspect-first habit.</p>
+  <audio controls preload="none" style="width:100%" src="audio/chsai-docs-2-listen.m4a"></audio>
+  <button class="mark" data-for="listen">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="read">
+  <div class="stype">3 · Read &amp; play</div>
+  <h2>Trapped text</h2>
+
+
+  <p>Documents arrive in formats, and the formats form a ladder of difficulty.
+  A <b>.txt</b> file or pasted email is already text — read it and go. A
+  <b>.csv</b> is already structured — even better. A <b>PDF</b> looks like
+  text but isn't: inside, it's drawing instructions — "place these characters
+  at these coordinates" — and extraction must rebuild lines and paragraphs
+  from character positions. It mostly works. Mostly.</p>
+  <p>A <b>scan or photo</b> is the hostile end: just pixels. Getting text out
+  needs OCR — optical character recognition — which is a prediction system,
+  and it makes prediction mistakes: <b>l</b> becomes <b>1</b>, <b>O</b>
+  becomes <b>0</b>, and a coffee stain becomes a word.</p>
+  <p>So the rule that runs this whole course: <b>extraction is lossy, and you
+  inspect what survived before building on it.</b> The classic casualties:
+  page headers and footers interleaved mid-sentence, columns read in the
+  wrong order, spacing collapsed or doubled, and characters silently
+  swapped. None of these announce themselves. All of them poison every later
+  stage if they get through — the structure stage will happily extract a
+  donation amount of $1,847 from a document where OCR read $l,847.</p>
+  <p>In the notebook you'll build a PDF from raw bytes yourself — 700
+  bytes, and suddenly the format stops being magic — then extract your text
+  back out of it and inspect the result.</p>
+
+  <!-- ============ FIGURE 1: What survived ============ -->
+  <div class="fig" id="figext">
+    <div class="figlabel">Interactive · Figure 1</div>
+    <h3>The same letter, three ways</h3>
+    <p style="font-size:15px;margin:.2em 0 .6em">One donation letter arrived
+    three ways. Flip between them — damage is <mark style="background:#fde68a">highlighted</mark>.</p>
+    <div class="figtabs">
+      <button class="wbtn exbtn" data-s="0">.txt (pasted email)</button>
+      <button class="wbtn alt exbtn" data-s="1">PDF, extracted</button>
+      <button class="wbtn alt exbtn" data-s="2">scan, OCR</button>
+    </div>
+    <div class="prefix" id="exdoc" style="font-size:14px;white-space:pre-wrap;line-height:1.6"></div>
+    <p class="fignote" id="exnote">Same letter, three survival rates. The
+    structure stage downstream can only be as good as what got through this
+    one — inspect first, always.</p>
+  </div>
+
+  <button class="mark" data-for="read">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="code">
+  <div class="stype">4 · Code</div>
+  <h2>Build a PDF, then crack it open</h2>
+  <p>The notebook writes a real PDF by hand — about 700 bytes, no libraries — then uses pypdf to extract the text back out, and finishes with an inspection checklist you'll reuse on every real file.</p>
+  <p style="margin:14px 0 6px">
+    <a class="colab-btn" href="https://colab.research.google.com/github/johnsanterre/chicago-hs-ai/blob/main/notebooks/docs2-extraction.ipynb" target="_blank" rel="noopener">&#9654;&nbsp;Open in Colab</a>
+    <a href="notebooks/docs2-extraction.ipynb" download style="font-size:13.5px">or download the .ipynb</a>
+  </p>
+  <details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">First time in Colab?</summary>
+    <ol style="font-size:14.5px">
+      <li>The button opens the notebook directly in Colab — sign in with your school Google account.</li>
+      <li><b>File &rarr; Save a copy in Drive</b> right away, so your work is yours.</li>
+      <li>Run cells top to bottom with the ▶ button or <b>Shift+Enter</b>.</li>
+    </ol>
+  </details>
+  <button class="mark" data-for="code">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="check">
+  <div class="stype">5 · Quick check</div>
+  <h2>Check yourself</h2>
+  <p><b>1. What is a PDF, on the inside?</b></p>
+  <div data-q="1">
+    <button class="choice" data-ok="0">Plain text with styling attached</button>
+    <button class="choice" data-ok="1">Drawing instructions — characters placed at coordinates</button>
+    <button class="choice" data-ok="0">A compressed photo of the page</button>
+  </div>
+  <p class="feedback" id="fb1"></p>
+  <p style="margin-top:1.2em"><b>2. Why is OCR output especially dangerous to trust unchecked?</b></p>
+  <div data-q="2">
+    <button class="choice" data-ok="1">It's a prediction system — it swaps characters silently, like l to 1</button>
+    <button class="choice" data-ok="0">It only works in English</button>
+    <button class="choice" data-ok="0">It refuses to read handwriting</button>
+  </div>
+  <p class="feedback" id="fb2"></p>
+  <p style="margin-top:1.2em"><b>3. From lesson 1 — OCR read a donation as $l,847 and it slipped through. Which stage exists to catch that before the table?</b></p>
+  <div data-q="3">
+    <button class="choice" data-ok="0">Collect</button>
+    <button class="choice" data-ok="1">Validate</button>
+    <button class="choice" data-ok="0">Ask</button>
+  </div>
+  <p class="feedback" id="fb3"></p>
+</section>
+
+<section class="seg" data-seg="build">
+  <div class="stype">6 · Build</div>
+  <h2>The inspection report</h2>
+  <div class="buildtask">
+
+
+  <p>Take two real documents from your lesson-1 pile (or any two PDFs you can
+  legally use). Extract their text in the notebook and write the inspection
+  report: what survived cleanly, what got damaged, and which of the classic
+  casualties (headers, spacing, swapped characters, column order) you found.</p>
+  <p><b>Turn-in:</b> the report. "Nothing was damaged" is a suspicious
+  finding — look harder or say how you checked.</p>
+
+  </div>
+  <button class="mark" data-for="build">Mark complete</button>
+</section>
+
+<section class="seg" data-seg="done">
+  <div class="stype">7 · Done</div>
+  <h2 id="doneHead">Finish the lesson</h2>
+  <p id="doneMsg">Complete the segments above, then claim the finish here.</p>
+  <p style="font-size:14.5px;color:var(--ink2)">Pace: one lesson a week when you're
+  locked in finishes this course in two months. One every two weeks still finishes it
+  in a semester. Both count.</p>
+  <button class="mark" id="finishBtn" data-for="done" disabled>Complete lesson 2</button>
+</section>
+
+<p style="margin:30px 0;display:flex;justify-content:space-between"><a href="lesson-docs-1.html">&larr; Lesson 1</a> <a href="lesson-docs-3.html">Lesson 3 &rarr;</a></p>
+</div>
+
+<footer class="site"><div class="wrap">Chicago HS AI &middot; a Free Focus program &middot; Document Pipelines, lesson 2 of 8
+&middot; watch &rarr; listen &rarr; read &rarr; code &rarr; check &rarr; build &rarr; done.</div></footer>
+
+<script>
+(function(){
+  const KEY='chsai-docs-2';
+  const SEGS=['watch','listen','read','code','check','build','done'];
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function segEl(id){return document.querySelector('.seg[data-seg="'+id+'"]')}
+  function render(){
+    let n=0;
+    for(const s of SEGS){
+      const done=!!state[s]; if(done)n++;
+      const el=segEl(s); el.classList.toggle('done',done);
+      const b=el.querySelector('button.mark[data-for="'+s+'"]');
+      if(b&&s!=='done'){b.disabled=false;b.textContent=done?'✓ Complete — undo':'Mark complete'}
+    }
+    document.getElementById('pbar').style.width=(n/SEGS.length*100)+'%';
+    document.getElementById('pdone').textContent=n;
+    const others=SEGS.slice(0,-1).every(s=>state[s]);
+    const fin=document.getElementById('finishBtn');
+    if(state.done){fin.disabled=false;fin.textContent='✓ Lesson 2 complete — undo';
+      document.getElementById('doneHead').textContent='Lesson 2 complete';
+      document.getElementById('doneMsg').textContent='Nice work. The next lesson is waiting when you are.';}
+    else{fin.disabled=!others;fin.textContent='Complete lesson 2';
+      document.getElementById('doneHead').textContent='Finish the lesson';
+      document.getElementById('doneMsg').textContent=others?
+        'Everything above is done — claim it.':'Complete the segments above, then claim the finish here.'}
+  }
+  document.querySelectorAll('button.mark').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const sg=b.dataset.for;state[sg]=!state[sg];save();render();
+      if(sg==='done'&&state.done&&!state._counted){state._counted=true;save();
+        if(window.goatcounter&&window.goatcounter.count){
+          window.goatcounter.count({path:'complete/'+KEY,event:true});}}})
+  });
+  const groups=[...document.querySelectorAll('[data-q]')];
+  const right={};
+  groups.forEach(g=>{
+    const q=g.dataset.q;
+    g.querySelectorAll('.choice').forEach(c=>{
+      c.addEventListener('click',()=>{
+        const ok=c.dataset.ok==='1';
+        g.querySelectorAll('.choice').forEach(x=>x.classList.remove('right','wrong'));
+        c.classList.add(ok?'right':'wrong');
+        document.getElementById('fb'+q).textContent=ok?
+          'Right.':'Not quite — the Read segment has what you need. Try again.';
+        right[q]=ok;
+        if(groups.every(x=>right[x.dataset.q])){state.check=true;save();render()}
+      })
+    })
+  });
+  render();
+})();
+</script>
+<script>
+
+/* ---- Lesson 2 figure ---- */
+(function(){
+  const $=id=>document.getElementById(id);
+  const M=s=>'<mark style="background:#fde68a">'+s+'</mark>';
+  const DOCS=[
+   ["Dear Friends of the Pantry,\n\nThank you for March! Your gifts totaled $1,847.50 across 63 donations, and we served 212 families.\n\nWith gratitude,\nRosa Delgado, Director",
+    "Pasted text: everything survived. When you can get a document this way, take it."],
+   ["Dear Friends of the Pantry,"+M("\nPage 1 of 1    PANTRY-MAR-FINAL")+"\n\nThank you for March! Your gifts totaled $1,847.50 across 63 donations, and we"+M("served212families")+".\n\nWith gratitude,\nRosa Delgado, Director",
+    "PDF extraction: the page header landed mid-letter, and some spacing collapsed. Fixable — in the clean stage — but only if you noticed."],
+   ["Dear Friends of the "+M("Pantrv")+",\n\nThank you for March! Your gifts totaled "+M("$l,847.SO")+" across "+M("b3")+" donations, and we served 212 "+M("famil1es")+".\n\nWith gratitude,\n"+M("R0sa De1gado")+", Director",
+    "OCR: character-level damage — l for 1, O for 0, rv for w. The amount is wrong now. This is why validation exists."]];
+  let s=0;
+  function render(){
+    document.querySelectorAll('.exbtn').forEach((b,j)=>b.className='wbtn exbtn'+(+b.dataset.s===s?'':' alt'));
+    $('exdoc').innerHTML=DOCS[s][0];
+    $('exnote').innerHTML='<b>'+['Pasted text','PDF extraction','OCR'][s]+':</b> '+DOCS[s][1].split(': ')[1];
+  }
+  document.querySelectorAll('.exbtn').forEach(b=>b.addEventListener('click',()=>{s=+b.dataset.s;render();}));
+  render();
+})();
+</script>
+<script data-goatcounter="https://johnsanterre.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

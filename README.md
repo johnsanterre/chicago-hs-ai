@@ -1,6 +1,6 @@
 # Chicago HS AI
 
-Seven independent courses that teach Chicago high-schoolers to build
+Eight independent courses that teach Chicago high-schoolers to build
 with AI — and then to put that skill to work for local nonprofits.
 
 **Live site:** https://johnsanterre.github.io/chicago-hs-ai/
@@ -31,6 +31,11 @@ one and begin.
    models, temperature, context windows, a learner with a falling
    loss, a BPE tokenizer, and a capstone model trained on a corpus
    the student curated.
+8. **Document Pipelines** — the drawer every organization has
+   becomes a validated table: extraction, cleaning, rules vs LLM
+   extraction, a validation gate with quarantine, storage, and
+   questions that show their work. Capstone: a real pile, end to
+   end, with a pipeline report.
 
 ## How a lesson works
 
@@ -63,6 +68,6 @@ folder anywhere.
 
 ## Status
 
-Draft in active development (started 2026-08-30). All seven courses
+Draft in active development (started 2026-08-30). All eight courses
 are built — 40 lessons, 24 notebooks. Feedback from real classrooms
 is the next input.
