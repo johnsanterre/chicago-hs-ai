@@ -1,4 +1,4 @@
-# Chicago HS AI
+# Chicago First
 
 Ten independent courses that teach Chicago high-schoolers to build
 with AI — and then to put that skill to work for local nonprofits.
